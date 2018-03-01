@@ -1,5 +1,5 @@
 defmodule ExAch.Ach do
-  defstruct []
+  defstruct [:file_header]
 
   def new, do: %__MODULE__{}
 end
