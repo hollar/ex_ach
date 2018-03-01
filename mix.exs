@@ -27,7 +27,8 @@ defmodule ExAch.MixProject do
   defp deps do
     [
       {:ex_doc, "~> 0.16", only: :dev, runtime: false},
-      {:earmark, "~> 1.2", only: :dev}
+      {:earmark, "~> 1.2", only: :dev},
+      {:mix_test_watch, "~> 0.5", only: :dev, runtime: false}
     ]
   end
 
