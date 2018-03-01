@@ -19,7 +19,7 @@ defmodule ExAch.FileHeaderTest do
     test "add record_type_code", %{file_header: new_file_header, params: params} do
       file_header = FileHeader.add_fields(new_file_header, params)
 
-      assert file_header.record_type_code.name == "Record Type Code"
+      assert file_header.record_type_code.name == :record_type_code
       assert file_header.record_type_code.content == "1"
       assert file_header.record_type_code.length == 1
       assert file_header.record_type_code.position == 1
@@ -29,7 +29,7 @@ defmodule ExAch.FileHeaderTest do
     test "add priority_code", %{file_header: new_file_header, params: params} do
       file_header = FileHeader.add_fields(new_file_header, params)
 
-      assert file_header.priority_code.name == "Priority Code"
+      assert file_header.priority_code.name == :priority_code
       assert file_header.priority_code.content == "01"
       assert file_header.priority_code.length == 2
       assert file_header.priority_code.position == 2
@@ -41,7 +41,7 @@ defmodule ExAch.FileHeaderTest do
       updated_params = Map.merge(params, %{immediate_destination: content})
       file_header = FileHeader.add_fields(new_file_header, updated_params)
 
-      assert file_header.immediate_destination.name == "Immediate Destination"
+      assert file_header.immediate_destination.name == :immediate_destination
       assert file_header.immediate_destination.content == content
       assert file_header.immediate_destination.length == 10
       assert file_header.immediate_destination.position == 4
@@ -53,7 +53,7 @@ defmodule ExAch.FileHeaderTest do
       updated_params = Map.merge(params, %{immediate_origin: content})
       file_header = FileHeader.add_fields(new_file_header, updated_params)
 
-      assert file_header.immediate_origin.name == "Immediate Origin"
+      assert file_header.immediate_origin.name == :immediate_origin
       assert file_header.immediate_origin.content == content
       assert file_header.immediate_origin.length == 10
       assert file_header.immediate_origin.position == 14
@@ -65,7 +65,7 @@ defmodule ExAch.FileHeaderTest do
       updated_params = Map.merge(params, %{file_creation_date: content})
       file_header = FileHeader.add_fields(new_file_header, updated_params)
 
-      assert file_header.file_creation_date.name == "File Creation Date"
+      assert file_header.file_creation_date.name == :file_creation_date
       assert file_header.file_creation_date.content == content
       assert file_header.file_creation_date.length == 6
       assert file_header.file_creation_date.position == 24
@@ -77,7 +77,7 @@ defmodule ExAch.FileHeaderTest do
       updated_params = Map.merge(params, %{file_creation_time: content})
       file_header = FileHeader.add_fields(new_file_header, updated_params)
 
-      assert file_header.file_creation_time.name == "File Creation Time"
+      assert file_header.file_creation_time.name == :file_creation_time
       assert file_header.file_creation_time.content == content
       assert file_header.file_creation_time.length == 4
       assert file_header.file_creation_time.position == 30
@@ -89,7 +89,7 @@ defmodule ExAch.FileHeaderTest do
       updated_params = Map.merge(params, %{file_id_modifier: content})
       file_header = FileHeader.add_fields(new_file_header, updated_params)
 
-      assert file_header.file_id_modifier.name == "File ID modifier"
+      assert file_header.file_id_modifier.name == :file_id_modifier
       assert file_header.file_id_modifier.content == content
       assert file_header.file_id_modifier.length == 1
       assert file_header.file_id_modifier.position == 34
@@ -99,7 +99,7 @@ defmodule ExAch.FileHeaderTest do
     test "add record_size", %{file_header: new_file_header, params: params} do
       file_header = FileHeader.add_fields(new_file_header, params)
 
-      assert file_header.record_size.name == "Record Size"
+      assert file_header.record_size.name == :record_size
       assert file_header.record_size.content == "094"
       assert file_header.record_size.length == 3
       assert file_header.record_size.position == 35
@@ -109,7 +109,7 @@ defmodule ExAch.FileHeaderTest do
     test "add blocking_factor", %{file_header: new_file_header, params: params} do
       file_header = FileHeader.add_fields(new_file_header, params)
 
-      assert file_header.blocking_factor.name == "Blocking Factor"
+      assert file_header.blocking_factor.name == :blocking_factor
       assert file_header.blocking_factor.content == "10"
       assert file_header.blocking_factor.length == 2
       assert file_header.blocking_factor.position == 38
@@ -119,7 +119,7 @@ defmodule ExAch.FileHeaderTest do
     test "add format_code", %{file_header: new_file_header, params: params} do
       file_header = FileHeader.add_fields(new_file_header, params)
 
-      assert file_header.format_code.name == "Format Code"
+      assert file_header.format_code.name == :format_code
       assert file_header.format_code.content == "1"
       assert file_header.format_code.length == 1
       assert file_header.format_code.position == 40
@@ -131,7 +131,7 @@ defmodule ExAch.FileHeaderTest do
       updated_params = Map.merge(params, %{immediate_destination_name: content})
       file_header = FileHeader.add_fields(new_file_header, updated_params)
 
-      assert file_header.immediate_destination_name.name == "Immediate Destination Name"
+      assert file_header.immediate_destination_name.name == :immediate_destination_name
       assert file_header.immediate_destination_name.content == content
       assert file_header.immediate_destination_name.length == 23
       assert file_header.immediate_destination_name.position == 41
@@ -143,7 +143,7 @@ defmodule ExAch.FileHeaderTest do
       updated_params = Map.merge(params, %{immediate_origin_name: content})
       file_header = FileHeader.add_fields(new_file_header, updated_params)
 
-      assert file_header.immediate_origin_name.name == "Immediate Origin Name"
+      assert file_header.immediate_origin_name.name == :immediate_origin_name
       assert file_header.immediate_origin_name.content == content
       assert file_header.immediate_origin_name.length == 23
       assert file_header.immediate_origin_name.position == 64
@@ -155,7 +155,7 @@ defmodule ExAch.FileHeaderTest do
       updated_params = Map.merge(params, %{reference_code: content})
       file_header = FileHeader.add_fields(new_file_header, updated_params)
 
-      assert file_header.reference_code.name == "Reference Code"
+      assert file_header.reference_code.name == :reference_code
       assert file_header.reference_code.content == "REFCODE"
       assert file_header.reference_code.length == 8
       assert file_header.reference_code.position == 87
