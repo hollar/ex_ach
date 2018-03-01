@@ -1,8 +1,9 @@
 defmodule ExAchTest do
   use ExUnit.Case
-  doctest ExAch
 
-  test "greets the world" do
-    assert ExAch.hello() == :world
+  describe "creating an ACH record" do
+    test "record created successfully" do
+      assert ExAch.new == %ExAch.Ach{}
+    end
   end
 end

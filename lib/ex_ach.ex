@@ -3,16 +3,7 @@ defmodule ExAch do
   Documentation for ExAch.
   """
 
-  @doc """
-  Hello world.
+  alias ExAch.Ach
 
-  ## Examples
-
-      iex> ExAch.hello
-      :world
-
-  """
-  def hello do
-    :world
-  end
+  def new, do: Ach.new
 end
