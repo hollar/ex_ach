@@ -46,7 +46,7 @@ defmodule ExAch.MixProject do
 
   defp package do
     [
-      maintainers: ["Hollar team"],
+      maintainers: ["Nicolas Charlery", "Nicholas Henry", "Tetiana Dushenkivska"],
       licenses: ["Apache 2.0"],
       links: %{"GitHub" => "https://github.com/hollar/ex_ach"}
     ]
