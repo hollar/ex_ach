@@ -42,7 +42,7 @@ defmodule ExAch.FileHeader do
         name: "Record Type Code",
         content: "1",
         length: 1,
-        position: {1, 1}
+        position: 1
       )
 
     %{file_header | record_type_code: field}
@@ -54,7 +54,7 @@ defmodule ExAch.FileHeader do
         name: "Priority Code",
         content: "01",
         length: 2,
-        position: {2, 3}
+        position: 2
       )
 
     %{file_header | priority_code: field}
@@ -66,7 +66,7 @@ defmodule ExAch.FileHeader do
         name: "Immediate Destination",
         content: immediate_destination,
         length: 10,
-        position: {4, 13}
+        position: 4
       )
 
     %{file_header | immediate_destination: field}
@@ -78,7 +78,7 @@ defmodule ExAch.FileHeader do
         name: "Immediate Origin",
         content: immediate_origin,
         length: 10,
-        position: {14, 23}
+        position: 14
       )
 
     %{file_header | immediate_origin: field}
@@ -90,7 +90,7 @@ defmodule ExAch.FileHeader do
         name: "File Creation Date",
         content: file_creation_date,
         length: 6,
-        position: {24, 29}
+        position: 24
       )
 
     %{file_header | file_creation_date: field}
@@ -102,7 +102,7 @@ defmodule ExAch.FileHeader do
         name: "File Creation Time",
         content: file_creation_time,
         length: 4,
-        position: {30, 33},
+        position: 30,
         is_mandatory: false
       )
 
@@ -115,7 +115,7 @@ defmodule ExAch.FileHeader do
         name: "File ID modifier",
         content: file_id_modifier,
         length: 1,
-        position: {34, 34}
+        position: 34
       )
 
     %{file_header | file_id_modifier: field}
@@ -127,7 +127,7 @@ defmodule ExAch.FileHeader do
         name: "Record Size",
         content: "094",
         length: 3,
-        position: {35, 37}
+        position: 35
       )
 
     %{file_header | record_size: field}
@@ -139,7 +139,7 @@ defmodule ExAch.FileHeader do
         name: "Blocking Factor",
         content: "10",
         length: 2,
-        position: {38, 39}
+        position: 38
       )
 
     %{file_header | blocking_factor: field}
@@ -151,7 +151,7 @@ defmodule ExAch.FileHeader do
         name: "Format Code",
         content: "1",
         length: 1,
-        position: {40, 40}
+        position: 40
       )
 
     %{file_header | format_code: field}
@@ -163,7 +163,7 @@ defmodule ExAch.FileHeader do
         name: "Immediate Destination Name",
         content: immediate_destination_name,
         length: 23,
-        position: {41, 63},
+        position: 41,
         is_mandatory: false
       )
 
@@ -176,7 +176,7 @@ defmodule ExAch.FileHeader do
         name: "Immediate Origin Name",
         content: immediate_origin_name,
         length: 23,
-        position: {64, 86},
+        position: 64,
         is_mandatory: false
       )
 
@@ -189,7 +189,7 @@ defmodule ExAch.FileHeader do
         name: "Reference Code",
         content: reference_code,
         length: 8,
-        position: {87, 94}
+        position: 87
       )
 
     %{file_header | reference_code: field}

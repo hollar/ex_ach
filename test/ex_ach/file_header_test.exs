@@ -22,7 +22,7 @@ defmodule ExAch.FileHeaderTest do
       assert file_header.record_type_code.name == "Record Type Code"
       assert file_header.record_type_code.content == "1"
       assert file_header.record_type_code.length == 1
-      assert file_header.record_type_code.position == {1, 1}
+      assert file_header.record_type_code.position == 1
       assert file_header.record_type_code.is_mandatory == true
     end
 
@@ -32,7 +32,7 @@ defmodule ExAch.FileHeaderTest do
       assert file_header.priority_code.name == "Priority Code"
       assert file_header.priority_code.content == "01"
       assert file_header.priority_code.length == 2
-      assert file_header.priority_code.position == {2, 3}
+      assert file_header.priority_code.position == 2
       assert file_header.priority_code.is_mandatory == true
     end
 
@@ -44,7 +44,7 @@ defmodule ExAch.FileHeaderTest do
       assert file_header.immediate_destination.name == "Immediate Destination"
       assert file_header.immediate_destination.content == content
       assert file_header.immediate_destination.length == 10
-      assert file_header.immediate_destination.position == {4, 13}
+      assert file_header.immediate_destination.position == 4
       assert file_header.immediate_destination.is_mandatory == true
     end
 
@@ -56,7 +56,7 @@ defmodule ExAch.FileHeaderTest do
       assert file_header.immediate_origin.name == "Immediate Origin"
       assert file_header.immediate_origin.content == content
       assert file_header.immediate_origin.length == 10
-      assert file_header.immediate_origin.position == {14, 23}
+      assert file_header.immediate_origin.position == 14
       assert file_header.immediate_origin.is_mandatory == true
     end
 
@@ -68,7 +68,7 @@ defmodule ExAch.FileHeaderTest do
       assert file_header.file_creation_date.name == "File Creation Date"
       assert file_header.file_creation_date.content == content
       assert file_header.file_creation_date.length == 6
-      assert file_header.file_creation_date.position == {24, 29}
+      assert file_header.file_creation_date.position == 24
       assert file_header.file_creation_date.is_mandatory == true
     end
 
@@ -80,7 +80,7 @@ defmodule ExAch.FileHeaderTest do
       assert file_header.file_creation_time.name == "File Creation Time"
       assert file_header.file_creation_time.content == content
       assert file_header.file_creation_time.length == 4
-      assert file_header.file_creation_time.position == {30, 33}
+      assert file_header.file_creation_time.position == 30
       assert file_header.file_creation_time.is_mandatory == false
     end
 
@@ -92,7 +92,7 @@ defmodule ExAch.FileHeaderTest do
       assert file_header.file_id_modifier.name == "File ID modifier"
       assert file_header.file_id_modifier.content == content
       assert file_header.file_id_modifier.length == 1
-      assert file_header.file_id_modifier.position == {34, 34}
+      assert file_header.file_id_modifier.position == 34
       assert file_header.file_id_modifier.is_mandatory == true
     end
 
@@ -102,7 +102,7 @@ defmodule ExAch.FileHeaderTest do
       assert file_header.record_size.name == "Record Size"
       assert file_header.record_size.content == "094"
       assert file_header.record_size.length == 3
-      assert file_header.record_size.position == {35, 37}
+      assert file_header.record_size.position == 35
       assert file_header.record_size.is_mandatory == true
     end
 
@@ -112,7 +112,7 @@ defmodule ExAch.FileHeaderTest do
       assert file_header.blocking_factor.name == "Blocking Factor"
       assert file_header.blocking_factor.content == "10"
       assert file_header.blocking_factor.length == 2
-      assert file_header.blocking_factor.position == {38, 39}
+      assert file_header.blocking_factor.position == 38
       assert file_header.blocking_factor.is_mandatory == true
     end
 
@@ -122,7 +122,7 @@ defmodule ExAch.FileHeaderTest do
       assert file_header.format_code.name == "Format Code"
       assert file_header.format_code.content == "1"
       assert file_header.format_code.length == 1
-      assert file_header.format_code.position == {40, 40}
+      assert file_header.format_code.position == 40
       assert file_header.format_code.is_mandatory == true
     end
 
@@ -134,7 +134,7 @@ defmodule ExAch.FileHeaderTest do
       assert file_header.immediate_destination_name.name == "Immediate Destination Name"
       assert file_header.immediate_destination_name.content == content
       assert file_header.immediate_destination_name.length == 23
-      assert file_header.immediate_destination_name.position == {41, 63}
+      assert file_header.immediate_destination_name.position == 41
       assert file_header.immediate_destination_name.is_mandatory == false
     end
 
@@ -146,7 +146,7 @@ defmodule ExAch.FileHeaderTest do
       assert file_header.immediate_origin_name.name == "Immediate Origin Name"
       assert file_header.immediate_origin_name.content == content
       assert file_header.immediate_origin_name.length == 23
-      assert file_header.immediate_origin_name.position == {64, 86}
+      assert file_header.immediate_origin_name.position == 64
       assert file_header.immediate_origin_name.is_mandatory == false
     end
 
@@ -158,7 +158,7 @@ defmodule ExAch.FileHeaderTest do
       assert file_header.reference_code.name == "Reference Code"
       assert file_header.reference_code.content == "REFCODE"
       assert file_header.reference_code.length == 8
-      assert file_header.reference_code.position == {87, 94}
+      assert file_header.reference_code.position == 87
       assert file_header.reference_code.is_mandatory == true
     end
   end
