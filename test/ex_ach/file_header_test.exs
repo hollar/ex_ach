@@ -6,14 +6,11 @@ defmodule ExAch.FileHeaderTest do
   describe "adding file header fields" do
     setup do
       params = %{
-        immediate_destination: %{content: "b071000505"},
-        immediate_origin: %{content: "012345679"},
-        file_creation_date: %{content: "180415"},
-        file_creation_time: %{content: "1205"},
-        file_id_modifier: %{content: "1"},
-        immediate_destination_name: %{content: "RBC ROYAL Bank"},
-        immediate_origin_name: %{content: "ORIGIN Bank"},
-        reference_code: %{content: "refcode"}
+        immediate_destination: "b071000505",
+        immediate_origin: "012345679",
+        file_creation_date: "180415",
+        file_id_modifier: "1",
+        reference_code: "refcode"
       }
 
       [file_header: FileHeader.new(), params: params]
@@ -41,7 +38,7 @@ defmodule ExAch.FileHeaderTest do
 
     test "add immediate_destination", %{file_header: new_file_header, params: params} do
       content = "b071000505"
-      updated_params = Map.merge(params, %{immediate_destination: %{content: content}})
+      updated_params = Map.merge(params, %{immediate_destination: content})
       file_header = FileHeader.add_fields(new_file_header, updated_params)
 
       assert file_header.immediate_destination.name == "Immediate Destination"
@@ -53,7 +50,7 @@ defmodule ExAch.FileHeaderTest do
 
     test "add immediate_origin", %{file_header: new_file_header, params: params} do
       content = "012345679"
-      updated_params = Map.merge(params, %{immediate_origin: %{content: content}})
+      updated_params = Map.merge(params, %{immediate_origin: content})
       file_header = FileHeader.add_fields(new_file_header, updated_params)
 
       assert file_header.immediate_origin.name == "Immediate Origin"
@@ -65,7 +62,7 @@ defmodule ExAch.FileHeaderTest do
 
     test "add file_creation_date", %{file_header: new_file_header, params: params} do
       content = "180325"
-      updated_params = Map.merge(params, %{file_creation_date: %{content: content}})
+      updated_params = Map.merge(params, %{file_creation_date: content})
       file_header = FileHeader.add_fields(new_file_header, updated_params)
 
       assert file_header.file_creation_date.name == "File Creation Date"
@@ -77,7 +74,7 @@ defmodule ExAch.FileHeaderTest do
 
     test "add file_creation_time", %{file_header: new_file_header, params: params} do
       content = "1103"
-      updated_params = Map.merge(params, %{file_creation_time: %{content: content}})
+      updated_params = Map.merge(params, %{file_creation_time: content})
       file_header = FileHeader.add_fields(new_file_header, updated_params)
 
       assert file_header.file_creation_time.name == "File Creation Time"
@@ -89,7 +86,7 @@ defmodule ExAch.FileHeaderTest do
 
     test "add file_id_modifier", %{file_header: new_file_header, params: params} do
       content = "3"
-      updated_params = Map.merge(params, %{file_id_modifier: %{content: content}})
+      updated_params = Map.merge(params, %{file_id_modifier: content})
       file_header = FileHeader.add_fields(new_file_header, updated_params)
 
       assert file_header.file_id_modifier.name == "File ID modifier"
@@ -131,7 +128,7 @@ defmodule ExAch.FileHeaderTest do
 
     test "add immediate_destination_name", %{file_header: new_file_header, params: params} do
       content = "LaSalle Bank N.A"
-      updated_params = Map.merge(params, %{immediate_destination_name: %{content: content}})
+      updated_params = Map.merge(params, %{immediate_destination_name: content})
       file_header = FileHeader.add_fields(new_file_header, updated_params)
 
       assert file_header.immediate_destination_name.name == "Immediate Destination Name"
@@ -143,7 +140,7 @@ defmodule ExAch.FileHeaderTest do
 
     test "add immediate_origin_name", %{file_header: new_file_header, params: params} do
       content = "CIVILCODE"
-      updated_params = Map.merge(params, %{immediate_origin_name: %{content: content}})
+      updated_params = Map.merge(params, %{immediate_origin_name: content})
       file_header = FileHeader.add_fields(new_file_header, updated_params)
 
       assert file_header.immediate_origin_name.name == "Immediate Origin Name"
@@ -155,7 +152,7 @@ defmodule ExAch.FileHeaderTest do
 
     test "add reference_code", %{file_header: new_file_header, params: params} do
       content = "REFCODE"
-      updated_params = Map.merge(params, %{reference_code: %{content: content}})
+      updated_params = Map.merge(params, %{reference_code: content})
       file_header = FileHeader.add_fields(new_file_header, updated_params)
 
       assert file_header.reference_code.name == "Reference Code"

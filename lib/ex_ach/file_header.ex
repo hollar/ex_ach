@@ -26,13 +26,13 @@ defmodule ExAch.FileHeader do
     |> build_immediate_destination(params.immediate_destination)
     |> build_immediate_origin(params.immediate_origin)
     |> build_file_creation_date(params.file_creation_date)
-    |> build_file_creation_time(params.file_creation_time)
-    |> build_file_id_modifier(params.file_id_modifier)
+    |> build_file_creation_time(params[:file_creation_time])
+    |> build_file_id_modifier(params[:file_id_modifier])
     |> build_record_size
     |> build_blocking_factor
     |> build_format_code
-    |> build_immediate_destination_name(params.immediate_destination_name)
-    |> build_immediate_origin_name(params.immediate_origin_name)
+    |> build_immediate_destination_name(params[:immediate_destination_name])
+    |> build_immediate_origin_name(params[:immediate_origin_name])
     |> build_reference_code(params.reference_code)
   end
 
@@ -60,11 +60,11 @@ defmodule ExAch.FileHeader do
     %{file_header | priority_code: field}
   end
 
-  defp build_immediate_destination(file_header, immediate_destination_params) do
+  defp build_immediate_destination(file_header, immediate_destination) do
     field =
       Field.create(
         name: "Immediate Destination",
-        content: immediate_destination_params.content,
+        content: immediate_destination,
         length: 10,
         position: {4, 13}
       )
@@ -72,11 +72,11 @@ defmodule ExAch.FileHeader do
     %{file_header | immediate_destination: field}
   end
 
-  defp build_immediate_origin(file_header, immediate_origin_params) do
+  defp build_immediate_origin(file_header, immediate_origin) do
     field =
       Field.create(
         name: "Immediate Origin",
-        content: immediate_origin_params.content,
+        content: immediate_origin,
         length: 10,
         position: {14, 23}
       )
@@ -84,11 +84,11 @@ defmodule ExAch.FileHeader do
     %{file_header | immediate_origin: field}
   end
 
-  defp build_file_creation_date(file_header, file_creation_date_params) do
+  defp build_file_creation_date(file_header, file_creation_date) do
     field =
       Field.create(
         name: "File Creation Date",
-        content: file_creation_date_params.content,
+        content: file_creation_date,
         length: 6,
         position: {24, 29}
       )
@@ -96,11 +96,11 @@ defmodule ExAch.FileHeader do
     %{file_header | file_creation_date: field}
   end
 
-  defp build_file_creation_time(file_header, file_creation_time_params) do
+  defp build_file_creation_time(file_header, file_creation_time) do
     field =
       Field.create(
         name: "File Creation Time",
-        content: file_creation_time_params.content,
+        content: file_creation_time,
         length: 4,
         position: {30, 33},
         is_mandatory: false
@@ -109,14 +109,13 @@ defmodule ExAch.FileHeader do
     %{file_header | file_creation_time: field}
   end
 
-  defp build_file_id_modifier(file_header, file_id_modifier_params) do
+  defp build_file_id_modifier(file_header, file_id_modifier) do
     field =
       Field.create(
         name: "File ID modifier",
-        content: file_id_modifier_params.content,
+        content: file_id_modifier,
         length: 1,
-        position: {34, 34},
-        is_mandatory: true
+        position: {34, 34}
       )
 
     %{file_header | file_id_modifier: field}
@@ -128,8 +127,7 @@ defmodule ExAch.FileHeader do
         name: "Record Size",
         content: "094",
         length: 3,
-        position: {35, 37},
-        is_mandatory: true
+        position: {35, 37}
       )
 
     %{file_header | record_size: field}
@@ -141,8 +139,7 @@ defmodule ExAch.FileHeader do
         name: "Blocking Factor",
         content: "10",
         length: 2,
-        position: {38, 39},
-        is_mandatory: true
+        position: {38, 39}
       )
 
     %{file_header | blocking_factor: field}
@@ -154,18 +151,17 @@ defmodule ExAch.FileHeader do
         name: "Format Code",
         content: "1",
         length: 1,
-        position: {40, 40},
-        is_mandatory: true
+        position: {40, 40}
       )
 
     %{file_header | format_code: field}
   end
 
-  defp build_immediate_destination_name(file_header, immediate_destination_name_params) do
+  defp build_immediate_destination_name(file_header, immediate_destination_name) do
     field =
       Field.create(
         name: "Immediate Destination Name",
-        content: immediate_destination_name_params.content,
+        content: immediate_destination_name,
         length: 23,
         position: {41, 63},
         is_mandatory: false
@@ -174,11 +170,11 @@ defmodule ExAch.FileHeader do
     %{file_header | immediate_destination_name: field}
   end
 
-  defp build_immediate_origin_name(file_header, immediate_origin_name_params) do
+  defp build_immediate_origin_name(file_header, immediate_origin_name) do
     field =
       Field.create(
         name: "Immediate Origin Name",
-        content: immediate_origin_name_params.content,
+        content: immediate_origin_name,
         length: 23,
         position: {64, 86},
         is_mandatory: false
@@ -187,11 +183,11 @@ defmodule ExAch.FileHeader do
     %{file_header | immediate_origin_name: field}
   end
 
-  defp build_reference_code(file_header, reference_code_params) do
+  defp build_reference_code(file_header, reference_code) do
     field =
       Field.create(
         name: "Reference Code",
-        content: reference_code_params.content,
+        content: reference_code,
         length: 8,
         position: {87, 94}
       )

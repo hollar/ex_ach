@@ -4,14 +4,14 @@ defmodule ExAchTest do
   describe "creating an ACH record" do
     setup do
       file_header_params = %{
-        immediate_destination: %{content: "b071000505"},
-        immediate_origin: %{content: "012345679"},
-        file_creation_date: %{content: "180415"},
-        file_creation_time: %{content: "1205"},
-        file_id_modifier: %{content: "1"},
-        immediate_destination_name: %{content: "RBC ROYAL Bank"},
-        immediate_origin_name: %{content: "ORIGIN Bank"},
-        reference_code: %{content: "refcode"}
+        immediate_destination: "b071000505",
+        immediate_destination_name: "RBC ROYAL Bank",
+        immediate_origin: "012345679",
+        immediate_origin_name: "ORIGIN Bank",
+        file_creation_date: "180415",
+        file_creation_time: "1205",
+        file_id_modifier: "1",
+        reference_code: "refcode"
       }
 
       [file_header_params: file_header_params]
