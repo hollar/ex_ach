@@ -88,13 +88,13 @@ defmodule ExAch.FileHeader do
     add_field(file_header, :reference_code, reference_code, 87, 8)
   end
 
-  defp add_field(file_header, field_name, content, position, length, is_mandatory \\ true) do
+  defp add_field(file_header, field_name, content, position, length, required \\ true) do
     field = Field.create(
       name: field_name,
       content: content,
       length: length,
       position: position,
-      is_mandatory: is_mandatory
+      required: required
     )
 
     Map.put(file_header, field_name, field)

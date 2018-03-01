@@ -1,5 +1,5 @@
 defmodule ExAch.Field do
-  defstruct [:name, :content, :length, :position, :is_mandatory]
+  defstruct [:name, :content, :length, :position, :required]
 
   def create(params) do
     %__MODULE__{
@@ -7,7 +7,7 @@ defmodule ExAch.Field do
       content: Keyword.get(params, :content),
       length: Keyword.get(params, :length),
       position: Keyword.get(params, :position),
-      is_mandatory: Keyword.get(params, :is_mandatory, true)
+      required: Keyword.get(params, :required, true)
     }
   end
 end
