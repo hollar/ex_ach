@@ -1,13 +1,13 @@
 defmodule ExAch.Field do
   defstruct [:name, :content, :length, :position, :is_mandatory]
 
-  def create(name, content, length, position, is_mandatory \\ true) do
+  def create(params) do
     %__MODULE__{
-      name: name,
-      content: content,
-      length: length,
-      position: position,
-      is_mandatory: is_mandatory
+      name: Keyword.get(params, :name),
+      content: Keyword.get(params, :content),
+      length: Keyword.get(params, :length),
+      position: Keyword.get(params, :position),
+      is_mandatory: Keyword.get(params, :is_mandatory, true)
     }
   end
 end
