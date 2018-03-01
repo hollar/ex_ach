@@ -26,13 +26,13 @@ defmodule ExAch.FileHeader do
     |> build_immediate_destination(params.immediate_destination)
     |> build_immediate_origin(params.immediate_origin)
     |> build_file_creation_date(params.file_creation_date)
-    |> build_file_creation_time(params[:file_creation_time])
-    |> build_file_id_modifier(params[:file_id_modifier])
+    |> build_file_creation_time(params.file_creation_time)
+    |> build_file_id_modifier(params.file_id_modifier)
     |> build_record_size
     |> build_blocking_factor
     |> build_format_code
-    |> build_immediate_destination_name(params[:immediate_destination_name])
-    |> build_immediate_origin_name(params[:immediate_origin_name])
+    |> build_immediate_destination_name(params.immediate_destination_name)
+    |> build_immediate_origin_name(params.immediate_origin_name)
     |> build_reference_code(params.reference_code)
   end
 

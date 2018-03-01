@@ -1,17 +1,17 @@
 defmodule ExAch.FileHeaderTest do
   use ExUnit.Case
 
-  alias ExAch.FileHeader
+  alias ExAch.{FileHeader, FileHeaderParams}
 
   describe "adding file header fields" do
     setup do
-      params = %{
+      params = FileHeaderParams.new(%{
         immediate_destination: "b071000505",
         immediate_origin: "012345679",
         file_creation_date: "180415",
         file_id_modifier: "1",
         reference_code: "refcode"
-      }
+      })
 
       [file_header: FileHeader.new(), params: params]
     end

@@ -1,6 +1,8 @@
 defmodule ExAchTest do
   use ExUnit.Case
 
+  alias ExAch.{FileHeader, Field}
+
   describe "creating an ACH record" do
     setup do
       file_header_params = %{
@@ -26,8 +28,8 @@ defmodule ExAchTest do
         ExAch.new()
         |> ExAch.add_file_header(file_header_params)
 
-      assert is_type_of?(ach.file_header, ExAch.FileHeader)
-      assert is_type_of?(ach.file_header.record_type_code, ExAch.Field)
+      assert is_type_of?(ach.file_header, FileHeader)
+      assert is_type_of?(ach.file_header.record_type_code, Field)
     end
   end
 
