@@ -1,13 +1,16 @@
 defmodule ExAch.MixProject do
   use Mix.Project
 
+  @version "0.1.0"
+
   def project do
     [
       app: :ex_ach,
-      version: "0.1.0",
+      version: @version,
       elixir: "~> 1.6",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      docs: docs()
     ]
   end
 
@@ -23,6 +26,13 @@ defmodule ExAch.MixProject do
     [
       {:ex_doc, "~> 0.16", only: :dev, runtime: false},
       {:earmark, "~> 1.2", only: :dev}
+    ]
+  end
+
+  defp docs do
+    [
+      source_url: "https://github.com/hollar/ex_ach",
+      source_ref: "v#{@version}"
     ]
   end
 end
