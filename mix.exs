@@ -10,7 +10,9 @@ defmodule ExAch.MixProject do
       elixir: "~> 1.6",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      docs: docs()
+      docs: docs(),
+      description: description(),
+      package: package()
     ]
   end
 
@@ -33,6 +35,20 @@ defmodule ExAch.MixProject do
     [
       source_url: "https://github.com/hollar/ex_ach",
       source_ref: "v#{@version}"
+    ]
+  end
+
+  defp description do
+    """
+    ACH (Automated Clearing House) file builder.
+    """
+  end
+
+  defp package do
+    [
+      maintainers: ["Hollar team"],
+      licenses: ["Apache 2.0"],
+      links: %{"GitHub" => "https://github.com/hollar/ex_ach"}
     ]
   end
 end
