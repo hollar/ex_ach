@@ -1,4 +1,5 @@
 defmodule ExAch.FileHeaderParams do
+  use Vex.Struct
   defstruct [
     :immediate_destination,
     :immediate_destination_name,
@@ -9,6 +10,17 @@ defmodule ExAch.FileHeaderParams do
     :file_id_modifier,
     :reference_code
   ]
+
+  validates :immediate_destination,
+    presence: true
+  validates :immediate_origin,
+    presence: true
+  validates :file_creation_date,
+    presence: true
+  validates :file_id_modifier,
+    presence: true
+  validates :reference_code,
+    presence: true
 
   def new(params) do
     %__MODULE__{
