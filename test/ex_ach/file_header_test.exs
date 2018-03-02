@@ -5,13 +5,14 @@ defmodule ExAch.FileHeaderTest do
 
   describe "adding file header fields" do
     setup do
-      params = FileHeaderParams.new(%{
-        immediate_destination: "b071000505",
-        immediate_origin: "012345679",
-        file_creation_date: "180415",
-        file_id_modifier: "1",
-        reference_code: "refcode"
-      })
+      params =
+        FileHeaderParams.new(%{
+          immediate_destination: "b071000505",
+          immediate_origin: "012345679",
+          file_creation_date: "180415",
+          file_id_modifier: "1",
+          reference_code: "refcode"
+        })
 
       [file_header: FileHeader.new(), params: params]
     end

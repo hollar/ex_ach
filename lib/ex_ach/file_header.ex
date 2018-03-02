@@ -1,7 +1,7 @@
 defmodule ExAch.FileHeader do
   alias ExAch.Field
 
-  defstruct [
+  @fields [
     :record_type_code,
     :priority_code,
     :immediate_destination,
@@ -16,6 +16,8 @@ defmodule ExAch.FileHeader do
     :immediate_origin_name,
     :reference_code
   ]
+
+  defstruct @fields
 
   def new, do: %__MODULE__{}
 
@@ -88,14 +90,16 @@ defmodule ExAch.FileHeader do
     add_field(file_header, :reference_code, reference_code, 87, 8)
   end
 
-  defp add_field(file_header, field_name, content, position, length, required \\ true) do
-    field = Field.create(
-      name: field_name,
-      content: content,
-      length: length,
-      position: position,
-      required: required
-    )
+  defp add_field(file_header, field_name, content, position, length, required \\ true)
+       when field_name in @fields do
+    field =
+      Field.create(
+        name: field_name,
+        content: content,
+        length: length,
+        position: position,
+        required: required
+      )
 
     Map.put(file_header, field_name, field)
   end

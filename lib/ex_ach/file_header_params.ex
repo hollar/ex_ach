@@ -1,5 +1,4 @@
 defmodule ExAch.FileHeaderParams do
-
   defstruct [
     :immediate_destination,
     :immediate_destination_name,
