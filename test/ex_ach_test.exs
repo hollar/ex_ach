@@ -8,7 +8,7 @@ defmodule ExAchTest do
       file_header_params = %{
         immediate_destination: "b071000505",
         immediate_destination_name: "RBC ROYAL Bank",
-        immediate_origin: "012345679",
+        immediate_origin: "0123456789",
         immediate_origin_name: "ORIGIN Bank",
         file_creation_date: "180415",
         file_creation_time: "1205",
