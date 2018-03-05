@@ -5,8 +5,31 @@ defmodule ExAch do
 
   alias ExAch.{Ach, FileHeader, FileHeaderParams}
 
+  @type file_header_params :: %{
+    immediate_destination: String.t,
+    immediate_destination_name: String.t,
+    immediate_origin: String.t,
+    immediate_origin_name: String.t,
+    file_creation_date: String.t,
+    file_creation_time: String.t,
+    file_id_modifier: String.t,
+    reference_code: String.t
+  }
+
+  @doc """
+  Create new ach file struct
+  ## Examples
+
+    iex> ExAch.new()
+    %ExAch.Ach{}
+  """
+  @spec new :: Ach.t
   def new, do: Ach.new()
 
+  @doc """
+  Add file header to ach
+  """
+  @spec add_file_header(Ach.t, file_header_params) :: {:ok, Ach.t} | {:error, [Tuple.t]}
   def add_file_header(ach, file_header_params) do
     file_header_params_struct = FileHeaderParams.new(file_header_params)
 

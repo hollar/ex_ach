@@ -1,5 +1,7 @@
 defmodule ExAchTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
+
+  doctest ExAch
 
   alias ExAch.{FileHeader, Field}
 
