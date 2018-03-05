@@ -14,15 +14,42 @@ defmodule ExAch.BatchHeaderParams do
     :batch_number
   ]
 
-  validates :company_name, presence: true, length: [max: 16], format: ~r/^[[:alnum:]]+$/
-  validates :company_discretionary_data, length: [max: 20], format: ~r/^[[:alnum:] ]+$/
-  validates :company_identification, presence: true, length: [max: 10], format: ~r/^[[:digit:]]+$/
-  validates :standard_entry_class_code, presence: true, length: 3, inclusion: ["CCD", "WEB"], format: ~r/^[[:alpha:]]+$/
-  validates :company_entry_description, presence: true, length: [max: 10], format: ~r/^[[:alnum:] ]+$/
-  validates :company_descriptive_date,  length: 6, format: ~r/^[[:digit:]]+$/
-  validates :effective_entry_date, presence: true, length: 6, format: ~r/^[[:digit:]]+$/
-  validates :originating_dfi_identification, presence: true, length: 8, format: ~r/^[[:digit:]]+$/
-  validates :batch_number, presence: true, length: [max: 7], format: ~r/^[[:digit:]]+$/
+  validates(:company_name, presence: true, length: [max: 16], format: ~r/^[[:alnum:]]+$/)
+  validates(:company_discretionary_data, length: [max: 20], format: ~r/^[[:alnum:] ]+$/)
+
+  validates(
+    :company_identification,
+    presence: true,
+    length: [max: 10],
+    format: ~r/^[[:digit:]]+$/
+  )
+
+  validates(
+    :standard_entry_class_code,
+    presence: true,
+    length: 3,
+    inclusion: ["CCD", "WEB"],
+    format: ~r/^[[:alpha:]]+$/
+  )
+
+  validates(
+    :company_entry_description,
+    presence: true,
+    length: [max: 10],
+    format: ~r/^[[:alnum:] ]+$/
+  )
+
+  validates(:company_descriptive_date, length: 6, format: ~r/^[[:digit:]]+$/)
+  validates(:effective_entry_date, presence: true, length: 6, format: ~r/^[[:digit:]]+$/)
+
+  validates(
+    :originating_dfi_identification,
+    presence: true,
+    length: 8,
+    format: ~r/^[[:digit:]]+$/
+  )
+
+  validates(:batch_number, presence: true, length: [max: 7], format: ~r/^[[:digit:]]+$/)
 
   @spec new(map) :: %__MODULE__{}
   def new(params) do

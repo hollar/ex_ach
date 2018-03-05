@@ -14,6 +14,7 @@ defmodule ExAch.BatchTest do
       originating_dfi_identification: "12345678",
       batch_number: "0123456"
     }
+
     batch = Batch.new()
     [batch_header_params: batch_header_params, batch: batch]
   end
@@ -30,7 +31,8 @@ defmodule ExAch.BatchTest do
 
   test "add service_class_code", %{batch_header_params: batch_header_params, batch: batch} do
     {:ok, batch} = Batch.add_header(batch, batch_header_params)
-    expected_result = %{content: "220", position: 2, length: 3, required: true} # TODO: Check value for content
+    # TODO: Check value for content
+    expected_result = %{content: "220", position: 2, length: 3, required: true}
     assert_field(batch.header, :service_class_code, expected_result)
   end
 
@@ -43,7 +45,9 @@ defmodule ExAch.BatchTest do
   end
 
   test "add company_discretionary_data", %{batch_header_params: batch_header_params, batch: batch} do
-    batch_header_params = Map.merge(batch_header_params, %{company_discretionary_data: "some data"})
+    batch_header_params =
+      Map.merge(batch_header_params, %{company_discretionary_data: "some data"})
+
     {:ok, batch} = Batch.add_header(batch, batch_header_params)
 
     expected_result = %{content: "some data", position: 21, length: 20, required: false}
@@ -59,7 +63,8 @@ defmodule ExAch.BatchTest do
   end
 
   test "add standard_entry_class_code", %{batch_header_params: batch_header_params, batch: batch} do
-    batch_header_params = Map.merge(batch_header_params, %{standard_entry_class_code: "CCD"}) #TODO: check value
+    # TODO: check value
+    batch_header_params = Map.merge(batch_header_params, %{standard_entry_class_code: "CCD"})
     {:ok, batch} = Batch.add_header(batch, batch_header_params)
 
     expected_result = %{content: "CCD", position: 51, length: 3, required: true}
@@ -67,7 +72,9 @@ defmodule ExAch.BatchTest do
   end
 
   test "add company_entry_description", %{batch_header_params: batch_header_params, batch: batch} do
-    batch_header_params = Map.merge(batch_header_params, %{company_entry_description: "PAY RES 3"})
+    batch_header_params =
+      Map.merge(batch_header_params, %{company_entry_description: "PAY RES 3"})
+
     {:ok, batch} = Batch.add_header(batch, batch_header_params)
 
     expected_result = %{content: "PAY RES 3", position: 54, length: 10, required: true}
@@ -105,8 +112,13 @@ defmodule ExAch.BatchTest do
     assert_field(batch.header, :originator_status_code, expected_result)
   end
 
-  test "add originating_dfi_identification", %{batch_header_params: batch_header_params, batch: batch} do
-    batch_header_params = Map.merge(batch_header_params, %{originating_dfi_identification: "07100050"})
+  test "add originating_dfi_identification", %{
+    batch_header_params: batch_header_params,
+    batch: batch
+  } do
+    batch_header_params =
+      Map.merge(batch_header_params, %{originating_dfi_identification: "07100050"})
+
     {:ok, batch} = Batch.add_header(batch, batch_header_params)
 
     expected_result = %{content: "07100050", position: 80, length: 8, required: true}
