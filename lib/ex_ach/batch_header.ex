@@ -1,5 +1,7 @@
 defmodule ExAch.BatchHeader do
-  alias ExAch.Field
+  alias ExAch.{Field, BatchHeaderParams}
+
+  @type t :: %__MODULE__{}
 
   @fields [
     :record_type_code,
@@ -20,6 +22,7 @@ defmodule ExAch.BatchHeader do
 
   def new, do: %__MODULE__{}
 
+  @spec add_header(t(), BatchHeaderParams.t()) :: t()
   def add_header(header, batch_header_params) do
     header
     |> add_record_type_code

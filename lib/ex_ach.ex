@@ -29,7 +29,7 @@ defmodule ExAch do
   @doc """
   Add file header to ach
   """
-  @spec add_file_header(Ach.t(), file_header_params) :: {:ok, Ach.t()} | {:error, [Tuple.t()]}
+  @spec add_file_header(Ach.t(), map) :: {:ok, Ach.t()} | {:error, list(tuple)}
   def add_file_header(ach, file_header_params) do
     file_header_params_struct = FileHeaderParams.new(file_header_params)
 

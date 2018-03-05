@@ -1,5 +1,8 @@
 defmodule ExAch.Field do
   @moduledoc false
+
+  @type t :: %__MODULE__{}
+
   defstruct [:name, :content, :length, :position, :required]
 
   @spec create(Keyword.t()) :: %__MODULE__{}

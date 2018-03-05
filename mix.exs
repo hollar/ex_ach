@@ -12,8 +12,11 @@ defmodule ExAch.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       docs: docs(),
+      aliases: aliases(),
       description: description(),
-      package: package()
+      package: package(),
+      dialyzer: [plt_add_deps: :transitive, ignore_warnings: "dialyzer.ignore-warnings"],
+      preferred_cli_env: ["project.check": :test]
     ]
   end
 
@@ -30,6 +33,7 @@ defmodule ExAch.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:dialyxir, "~> 0.5", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.16", only: :dev, runtime: false},
       {:earmark, "~> 1.2", only: :dev},
       {:mix_test_watch, "~> 0.5", only: :dev, runtime: false},
@@ -48,6 +52,16 @@ defmodule ExAch.MixProject do
     """
     ACH (Automated Clearing House) file builder.
     """
+  end
+
+  defp aliases do
+    [
+      "project.check": [
+        "compile --force --warnings-as-errors",
+        "dialyzer",
+        "test"
+      ]
+    ]
   end
 
   defp package do

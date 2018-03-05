@@ -2,6 +2,8 @@ defmodule ExAch.BatchHeaderParams do
   @moduledoc false
   use Vex.Struct
 
+  @type t :: %__MODULE__{}
+
   defstruct [
     :company_name,
     :company_discretionary_data,
@@ -51,7 +53,7 @@ defmodule ExAch.BatchHeaderParams do
 
   validates(:batch_number, presence: true, length: [max: 7], format: ~r/^[[:digit:]]+$/)
 
-  @spec new(map) :: %__MODULE__{}
+  @spec new(map) :: t()
   def new(params) do
     %__MODULE__{
       company_name: params.company_name,
