@@ -42,4 +42,8 @@ defmodule ExAch do
         {:error, Vex.errors(file_header_params_struct)}
     end
   end
+
+  def add_batch(ach, batch) do
+    {:ok, %{ach | batches: [batch | ach.batches]}}
+  end
 end

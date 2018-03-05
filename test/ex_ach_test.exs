@@ -1,5 +1,5 @@
 defmodule ExAchTest do
-  use ExUnit.Case, async: true
+  use ExAch.TestCase
 
   doctest ExAch
 
@@ -39,9 +39,20 @@ defmodule ExAchTest do
       assert :error == elem(result, 0)
       assert {:error, :immediate_destination, :presence, "must be present"} in elem(result, 1)
     end
-  end
 
-  defp is_type_of?(struct, expected_struct) do
-    struct.__struct__ == expected_struct
+    test "adds a batch header fields" do
+      batch = ExAch.Batch.new()
+      {:ok, ach} = ExAch.add_batch(ExAch.new(), batch)
+      assert Enum.count(ach.batches) == 1
+    end
+
+    test "add two batches" do
+      batch = ExAch.Batch.new()
+      ach = ExAch.new()
+      {:ok, ach} = ExAch.add_batch(ach, batch)
+      {:ok, ach} = ExAch.add_batch(ach, batch)
+
+      assert Enum.count(ach.batches) == 2
+    end
   end
 end

@@ -8,6 +8,7 @@ defmodule ExAch.MixProject do
       app: :ex_ach,
       version: @version,
       elixir: "~> 1.6",
+      elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       docs: docs(),
@@ -15,6 +16,10 @@ defmodule ExAch.MixProject do
       package: package()
     ]
   end
+
+  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(_), do: ["lib"]
+
 
   # Run "mix help compile.app" to learn about applications.
   def application do
