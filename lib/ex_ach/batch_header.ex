@@ -1,5 +1,6 @@
 defmodule ExAch.BatchHeader do
   alias ExAch.Field
+
   @fields [
     :record_type_code,
     :service_class_code,
@@ -87,7 +88,6 @@ defmodule ExAch.BatchHeader do
   defp add_batch_number(header, batch_number) do
     add_field(header, :batch_number, batch_number, 88, 7)
   end
-
 
   defp add_field(file_header, field_name, content, position, length, required \\ true)
        when field_name in @fields do
