@@ -1,5 +1,5 @@
 defmodule ExAch.Batch do
-  alias ExAch.BatchHeader
+  alias ExAch.{BatchHeader, BatchHeaderParams}
   defstruct [:header]
 
   def new do
@@ -8,7 +8,10 @@ defmodule ExAch.Batch do
   end
 
   def add_header(batch, batch_header_params) do
-    header = BatchHeader.new() |> BatchHeader.add_header(batch_header_params)
+    header_params = BatchHeaderParams.new(batch_header_params)
+
+    header = BatchHeader.new()
+    |> BatchHeader.add_header(header_params)
 
     {:ok, %{batch | header: header}}
   end

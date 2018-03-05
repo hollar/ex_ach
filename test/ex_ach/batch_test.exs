@@ -6,7 +6,6 @@ defmodule ExAch.BatchTest do
   setup do
     batch_header_params = %{
       company_name: "CompanyName",
-      company_discretionary_data: "some optional data",  #TODO: no need to pass, as it's optional
       company_identification: "some id",
       standard_entry_class_code: "WEB",
       company_entry_description: "DESC 1",
