@@ -41,6 +41,7 @@ defmodule ExAch.FileHeaderParamsTest do
         file_id_modifier: "1",
         reference_code: "refcode"
       }
+
       [valid_params: valid_params]
     end
 
@@ -51,22 +52,20 @@ defmodule ExAch.FileHeaderParamsTest do
     end
 
     test "missing params value returns error", %{valid_params: valid_params} do
-      fields =
-        [
-          :immediate_destination,
-          :immediate_origin,
-          :file_creation_date,
-          :file_id_modifier,
-          :reference_code
-        ]
-      Enum.map(fields,
-        fn(field) ->
-          missing_param_value = Map.merge(valid_params, %{field => nil})
-          file_header_params = FileHeaderParams.new(missing_param_value)
-          assert {:error, field, :presence, "must be present"} in Vex.errors(file_header_params)
-          refute FileHeaderParams.valid?(file_header_params)
-        end
-      )
+      fields = [
+        :immediate_destination,
+        :immediate_origin,
+        :file_creation_date,
+        :file_id_modifier,
+        :reference_code
+      ]
+
+      Enum.map(fields, fn field ->
+        missing_param_value = Map.merge(valid_params, %{field => nil})
+        file_header_params = FileHeaderParams.new(missing_param_value)
+        assert {:error, field, :presence, "must be present"} in Vex.errors(file_header_params)
+        refute FileHeaderParams.valid?(file_header_params)
+      end)
     end
 
     test "invalid immediate origin length returns error", %{valid_params: valid_params} do
@@ -88,8 +87,11 @@ defmodule ExAch.FileHeaderParamsTest do
     end
 
     test "invalid immediate origin name length returns error", %{valid_params: valid_params} do
-      invalid_params = Map.merge(valid_params, %{immediate_origin_name: "123456789012345678901234"})
+      invalid_params =
+        Map.merge(valid_params, %{immediate_origin_name: "123456789012345678901234"})
+
       file_header_params = FileHeaderParams.new(invalid_params)
+
       expected_error =
         {:error, :immediate_origin_name, :length, "must have a length of no more than 23"}
 
