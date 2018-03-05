@@ -1,5 +1,5 @@
 defmodule ExAch.Batch do
-  alias ExAch.{BatchHeader, Field}
+  alias ExAch.BatchHeader
   defstruct [:header]
 
   def new do
