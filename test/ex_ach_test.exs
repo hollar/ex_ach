@@ -34,9 +34,10 @@ defmodule ExAchTest do
 
     test "invalid file header params returns error", %{file_header_params: file_header_params} do
       invalid_file_header_params = Map.merge(file_header_params, %{immediate_destination: nil})
-      ach = ExAch.add_file_header(ExAch.new(), invalid_file_header_params)
+      result = ExAch.add_file_header(ExAch.new(), invalid_file_header_params)
 
-      assert ach == {:error, [{:error, :immediate_destination, :presence, "must be present"}]}
+      assert :error == elem(result, 0)
+      assert {:error, :immediate_destination, :presence, "must be present"} in elem(result, 1)
     end
   end
 
