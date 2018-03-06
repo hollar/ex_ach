@@ -20,44 +20,43 @@ and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at [https://hexdocs.pm/ex_ach](https://hexdocs.pm/ex_ach).
 
 ## Usage
+Create a file header:
+```elixir
+alias ExAch.File.Header
+
+{:ok, immediate_destination} = File.Header.Fields.ImmediateDestination.new("b071000505")
+{:ok, immediate_origin} = File.Header.Fields.ImmediateOrigin.new("b071000505")
+{:ok, creation_date} = File.Header.Fields.CreateDate.new(~D[2018-01-25])
+{:ok, reference_code} = File.Header.Fields.ReferenceCode.new("refcode"
+{:ok, file_id_modifier} = File.Header.Fields.FileIdModifier.new("1")
+
+{:ok, immediate_origin_name} = File.Header.Fields.ImmediateOriginName.new("RBC ROYAL Bank"),
+{:ok, immediate_destination_name} = File.Header.Fields.ImmediateDestinationName.new("RBC ROYAL Bank"),
+{:ok, file_creation_time} = File.Header.Fields.FileCreationTime.new(~T[23:00:07.000])
+
+{:ok, %ExAch.File.Header{blocking_factor: %ExAch.Fields.BlockingFactor{...}, ...}} =
+  FileHeader.new(
+    immediate_destination,
+    immediate_origin,
+    create_date,
+    reference_code,
+    file_id_modifier,
+    immediate_destination_name: immediate_destination_name,
+    immediate_origin_name: immediate_origin_name,
+    file_creation_time: file_creation_time
+  )
+
+```
 
 create new ach file struct:
 ```elixir
-iex> ach = ExAch.new()
-%ExAch.Ach{}
+alias ExAch.{File, Batch}
+
+{:ok, ach} = ExAch.File.new(file_header, batches)
+%ExAch.File{file_header: %FileHeader{}, batches: [%Batch]}
 ```
 
-add file header:
-```elixir
-iex> file_header_params = %{
-       immediate_destination: "b071000505",
-       immediate_destination_name: "RBC ROYAL Bank",
-       immediate_origin: "0123456789",
-       immediate_origin_name: "ORIGIN Bank",
-       file_creation_date: "180415",
-       file_creation_time: "1205",
-       file_id_modifier: "1",
-       reference_code: "refcode"
-     }
-iex> ExAch.add_file_header(ach, file_header_params)
-{:ok, %ExAch.Ach{file_header: %ExAch.FileHeader{blocking_factor: %ExAch.Field{...}, ...}}}
-```
 
-If requited parameter is missing or invalid the error is returned:
-
-```elixir
-iex> invalid_file_header_params = %{
-       immediate_destination_name: "RBC ROYAL Bank",
-       immediate_origin: "0123456789",
-       immediate_origin_name: "ORIGIN Bank",
-       file_creation_date: "180415",
-       file_creation_time: "1205",
-       file_id_modifier: "1",
-       reference_code: "refcode"
-     }
-iex> ExAch.add_file_header(ach, invalid_file_header_params)
-{:error, [{:error, :immediate_destination, :presence, "must be present"}]}
-```
 
 ## Ach file specification
 
