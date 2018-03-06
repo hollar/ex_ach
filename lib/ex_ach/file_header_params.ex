@@ -2,6 +2,8 @@ defmodule ExAch.FileHeaderParams do
   @moduledoc false
   use Vex.Struct
 
+  @type t :: %__MODULE__{}
+
   defstruct [
     :immediate_destination,
     :immediate_destination_name,
@@ -29,7 +31,7 @@ defmodule ExAch.FileHeaderParams do
   validates(:file_id_modifier, presence: true, format: ~r/^[[:alnum:]]+$/)
   validates(:reference_code, presence: true, format: ~r/^[[:alnum:]]+$/)
 
-  @spec new(ExAch.file_header_params()) :: %__MODULE__{}
+  @spec new(ExAch.file_header_params()) :: t()
   def new(params) do
     %__MODULE__{
       immediate_destination: params.immediate_destination,

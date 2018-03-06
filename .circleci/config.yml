@@ -41,4 +41,4 @@ jobs:
           key: v1-build-cache
           paths: "_build"
 
-      - run: mix test
+      - run: mix project.check

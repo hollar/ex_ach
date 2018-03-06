@@ -1,8 +1,11 @@
 defmodule ExAch.Field do
   @moduledoc false
+
+  @type t :: %__MODULE__{}
+
   defstruct [:name, :content, :length, :position, :required]
 
-  @spec create(Keyword.t()) :: %__MODULE__{}
+  @spec create(Keyword.t()) :: t
   def create(param) do
     %__MODULE__{
       name: Keyword.get(param, :name),

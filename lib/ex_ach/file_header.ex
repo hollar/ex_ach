@@ -1,6 +1,8 @@
 defmodule ExAch.FileHeader do
   @moduledoc false
-  alias ExAch.Field
+  alias ExAch.{Field, FileHeaderParams}
+
+  @type t :: %__MODULE__{}
 
   @fields [
     :record_type_code,
@@ -20,10 +22,10 @@ defmodule ExAch.FileHeader do
 
   defstruct @fields
 
-  @spec new :: %__MODULE__{}
+  @spec new :: t
   def new, do: %__MODULE__{}
 
-  @spec add_fields(ExAch.FileHeaderParams.t(), ExAch.file_header_params()) :: %__MODULE__{}
+  @spec add_fields(t(), FileHeaderParams.t()) :: t()
   def add_fields(file_header, params) do
     file_header
     |> build_record_type_code
