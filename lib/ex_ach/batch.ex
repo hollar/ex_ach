@@ -13,10 +13,13 @@ defmodule ExAch.Batch do
   def add_header(batch, batch_header_params) do
     header_params = BatchHeaderParams.new(batch_header_params)
 
-    header =
-      BatchHeader.new()
-      |> BatchHeader.add_header(header_params)
+    case BatchHeaderParams.valid?(header_params) do
+      true ->
+        header = BatchHeader.add_header(BatchHeader.new(), header_params)
+        {:ok, %{batch | header: header}}
 
-    {:ok, %{batch | header: header}}
+      false ->
+        {:error, Vex.errors(header_params)}
+    end
   end
 end

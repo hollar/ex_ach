@@ -35,10 +35,10 @@ defmodule ExAch.BatchHeaderParamsTest do
     setup do
       valid_params = %{
         company_name: "CompanyName",
-        company_identification: "12345",
+        company_identification: "1234567890",
         company_discretionary_data: "some optional data",
         standard_entry_class_code: "WEB",
-        company_entry_description: "DESC 1",
+        company_entry_description: "DESC1",
         company_descriptive_date: "180325",
         effective_entry_date: "180101",
         originating_dfi_identification: "12345678",

@@ -6,10 +6,9 @@ defmodule ExAch.BatchTest do
   setup do
     batch_header_params = %{
       company_name: "CompanyName",
-      company_identification: "some id",
+      company_identification: "1112223334",
       standard_entry_class_code: "WEB",
-      company_entry_description: "DESC 1",
-      company_descriptive_date: "180325",
+      company_entry_description: "DESC1",
       effective_entry_date: "180101",
       originating_dfi_identification: "12345678",
       batch_number: "0123456"
@@ -72,12 +71,11 @@ defmodule ExAch.BatchTest do
   end
 
   test "add company_entry_description", %{batch_header_params: batch_header_params, batch: batch} do
-    batch_header_params =
-      Map.merge(batch_header_params, %{company_entry_description: "PAY RES 3"})
+    batch_header_params = Map.merge(batch_header_params, %{company_entry_description: "PAYRES3"})
 
     {:ok, batch} = Batch.add_header(batch, batch_header_params)
 
-    expected_result = %{content: "PAY RES 3", position: 54, length: 10, required: true}
+    expected_result = %{content: "PAYRES3", position: 54, length: 10, required: true}
     assert_field(batch.header, :company_entry_description, expected_result)
   end
 
@@ -131,6 +129,16 @@ defmodule ExAch.BatchTest do
 
     expected_result = %{content: "1234567", position: 88, length: 7, required: true}
     assert_field(batch.header, :batch_number, expected_result)
+  end
+
+  test "invalid params returns errors", %{batch_header_params: batch_header_params, batch: batch} do
+    batch_header_params = Map.merge(batch_header_params, %{batch_number: nil})
+    {:error, errors} = Batch.add_header(batch, batch_header_params)
+    presence_error = {:error, :batch_number, :presence, "must be present"}
+    format_error = {:error, :batch_number, :format, "must have the correct format"}
+
+    assert presence_error in errors
+    assert format_error in errors
   end
 
   defp assert_field(header, field_name, expected_result) do

@@ -22,7 +22,7 @@ defmodule ExAch.FileHeader do
 
   defstruct @fields
 
-  @spec new :: %__MODULE__{}
+  @spec new :: t
   def new, do: %__MODULE__{}
 
   @spec add_fields(t(), FileHeaderParams.t()) :: t()

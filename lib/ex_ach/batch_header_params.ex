@@ -17,12 +17,12 @@ defmodule ExAch.BatchHeaderParams do
   ]
 
   validates(:company_name, presence: true, length: [max: 16], format: ~r/^[[:alnum:]]+$/)
-  validates(:company_discretionary_data, length: [max: 20], format: ~r/^[[:alnum:] ]+$/)
+  validates(:company_discretionary_data, length: [max: 20])
 
   validates(
     :company_identification,
     presence: true,
-    length: [max: 10],
+    length: 10,
     format: ~r/^[[:digit:]]+$/
   )
 
@@ -38,10 +38,10 @@ defmodule ExAch.BatchHeaderParams do
     :company_entry_description,
     presence: true,
     length: [max: 10],
-    format: ~r/^[[:alnum:] ]+$/
+    format: ~r/^[[:alnum:]]+$/
   )
 
-  validates(:company_descriptive_date, length: 6, format: ~r/^[[:digit:]]+$/)
+  validates(:company_descriptive_date, length: 6)
   validates(:effective_entry_date, presence: true, length: 6, format: ~r/^[[:digit:]]+$/)
 
   validates(
@@ -61,10 +61,20 @@ defmodule ExAch.BatchHeaderParams do
       company_identification: params.company_identification,
       standard_entry_class_code: params.standard_entry_class_code,
       company_entry_description: params.company_entry_description,
-      company_descriptive_date: params[:company_descriptive_date],
+      company_descriptive_date: company_descriptive_date(params),
       effective_entry_date: params.effective_entry_date,
       originating_dfi_identification: params.originating_dfi_identification,
       batch_number: params.batch_number
     }
+  end
+
+  defp company_descriptive_date(params) do
+    [<<_first::binary-size(2), last::binary-size(2)>>, month, day] =
+      Date.utc_today()
+      |> to_string()
+      |> String.split("-")
+
+    date = last <> month <> day
+    params[:company_descriptive_date] || date
   end
 end

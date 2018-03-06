@@ -58,8 +58,8 @@ defmodule ExAch.MixProject do
     [
       "project.check": [
         "compile --force --warnings-as-errors",
-        "dialyzer",
-        "test"
+        "test",
+        "dialyzer"
       ]
     ]
   end
