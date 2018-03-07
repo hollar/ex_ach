@@ -31,7 +31,6 @@ defmodule ExAch.Batch.HeaderTest do
       {:ok, company_descriptive_date} = CompanyDescriptiveDate.new(~D[2000-01-01])
       {:ok, company_discretionary_data} = CompanyDiscretionaryData.new("Data1")
 
-      assert service_class_code.content == 220
       assert company_name.content == "CompanyName"
       assert company_identification.content == 1112223334
       assert standard_entry_class_code.content == "WEB"
