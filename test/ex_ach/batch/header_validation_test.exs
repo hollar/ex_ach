@@ -3,7 +3,8 @@ defmodule ExAch.Batch.HeaderValidationTest do
 
   alias ExAch.Batch.Header.Fields.{
     ServiceClassCode,
-    CompanyName
+    CompanyName,
+    CompanyIdentification
   }
 
   describe "validating service_class_code" do
@@ -19,7 +20,7 @@ defmodule ExAch.Batch.HeaderValidationTest do
 
   describe "validating company_name" do
     test "an invalid value returns an error" do
-      assert {:error, [{:company_name, :length, "Must be less than 16 character"}]} =
+      assert {:error, [{:company_name, :max_length, "Must be less than 16 character"}]} =
          CompanyName.new("company name too long")
     end
 
@@ -32,11 +33,23 @@ defmodule ExAch.Batch.HeaderValidationTest do
       {:error, errors} = CompanyName.new("company_name too long")
 
       assert {:company_name, :format, "Must be alphanum"} in errors
-      assert {:company_name, :length, "Must be less than 16 character"} in errors
+      assert {:company_name, :max_length, "Must be less than 16 character"} in errors
     end
 
     test "valid value returns successfully" do
       {:ok, %CompanyName{content: "CompanyName"}} = CompanyName.new("CompanyName")
+    end
+  end
+
+  describe "validating company_identification" do
+    test "an invalid value returns an error" do
+      assert {:error, [{:company_identification, :length, "Must be 10 digits" }]} =
+        CompanyIdentification.new(12345678900)
+    end
+
+    test "valid value returns successfully" do
+      {:ok, %CompanyIdentification{content: 1112223334}} =
+        CompanyIdentification.new(1112223334)
     end
   end
 end
