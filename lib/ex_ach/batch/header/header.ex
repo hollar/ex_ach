@@ -13,33 +13,33 @@ defmodule ExAch.Batch.Header do
     OriginatorStatusCode
   }
 
-defstruct [
-  :service_class_code,
-  :company_name,
-  :company_identification,
-  :standard_entry_class_code,
-  :company_entry_description,
-  :effective_entry_date,
-  :batch_number,
-  :originating_dfi_identification,
-  :company_descriptive_date,
-  :company_discretionary_data,
-  :record_type_code,
-  :settlement_date,
-  :originator_status_code
-]
+  defstruct [
+    :service_class_code,
+    :company_name,
+    :company_identification,
+    :standard_entry_class_code,
+    :company_entry_description,
+    :effective_entry_date,
+    :batch_number,
+    :originating_dfi_identification,
+    :company_descriptive_date,
+    :company_discretionary_data,
+    :record_type_code,
+    :settlement_date,
+    :originator_status_code
+  ]
 
   def new(
-    %ServiceClassCode{} = service_class_code,
-    %CompanyName{} = company_name,
-    %CompanyIdentification{} = company_identification,
-    %StandardEntryClassCode{} = standard_entry_class_code,
-    %CompanyEntryDescription{} = company_entry_description,
-    %EffectiveEntryDate{} = effective_entry_date,
-    %BatchNumber{} = batch_number,
-    %OriginatingDfiIdentification{} = originating_dfi_identification,
-    opts \\ []
-  ) do
+        %ServiceClassCode{} = service_class_code,
+        %CompanyName{} = company_name,
+        %CompanyIdentification{} = company_identification,
+        %StandardEntryClassCode{} = standard_entry_class_code,
+        %CompanyEntryDescription{} = company_entry_description,
+        %EffectiveEntryDate{} = effective_entry_date,
+        %BatchNumber{} = batch_number,
+        %OriginatingDfiIdentification{} = originating_dfi_identification,
+        opts \\ []
+      ) do
     header = %__MODULE__{
       service_class_code: service_class_code,
       company_name: company_name,
@@ -55,6 +55,7 @@ defstruct [
       settlement_date: SettlementDate.new(),
       originator_status_code: OriginatorStatusCode.new()
     }
+
     {:ok, header}
   end
 end

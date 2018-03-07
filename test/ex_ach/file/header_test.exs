@@ -2,6 +2,7 @@ defmodule ExAch.File.HeaderTest do
   use ExUnit.Case
 
   alias ExAch.File.Header
+
   alias ExAch.File.Header.Fields.{
     ImmediateDestination,
     ImmediateOrigin,
@@ -17,6 +18,7 @@ defmodule ExAch.File.HeaderTest do
     ImmediateDestinationName,
     ImmediateOriginName
   }
+
   describe "creating file header" do
     test "file header created successfully" do
       {:ok, immediate_destination} = ImmediateDestination.new("b071000505")
@@ -37,18 +39,17 @@ defmodule ExAch.File.HeaderTest do
       assert immediate_destination_name.content == "LaSalle Bank"
       assert immediate_origin_name.content == "Hollar Inc"
 
-      {:ok, file_header} = Header.new(
-        immediate_destination,
-        immediate_origin,
-        creation_date,
-        file_id_modifier,
-        [
+      {:ok, file_header} =
+        Header.new(
+          immediate_destination,
+          immediate_origin,
+          creation_date,
+          file_id_modifier,
           file_creation_time: file_creation_time,
           immediate_destination_name: immediate_destination_name,
           immediate_origin_name: immediate_origin_name,
           reference_code: reference_code
-        ]
-      )
+        )
 
       # Mandatory fields required to be passed by user
       assert file_header.immediate_destination == immediate_destination
@@ -65,7 +66,11 @@ defmodule ExAch.File.HeaderTest do
 
       # Optional fields passed by user
       assert file_header.file_creation_time == %FileCreationTime{content: ~T[23:00:00]}
-      assert file_header.immediate_destination_name == %ImmediateDestinationName{content: "LaSalle Bank"}
+
+      assert file_header.immediate_destination_name == %ImmediateDestinationName{
+               content: "LaSalle Bank"
+             }
+
       assert file_header.reference_code == reference_code
       assert file_header.immediate_origin_name == %ImmediateOriginName{content: "Hollar Inc"}
     end

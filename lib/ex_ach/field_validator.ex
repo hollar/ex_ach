@@ -4,7 +4,7 @@ defmodule ExAch.FieldValidator do
   def validate(content, validations) do
     validations
     |> Enum.map(&do_validate(content, &1))
-    |> Enum.reject(fn(value) -> value == nil end)
+    |> Enum.reject(fn value -> value == nil end)
   end
 
   defp do_validate(content, {field_name, :format, regex}) do
