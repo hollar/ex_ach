@@ -36,8 +36,7 @@ defmodule ExAch.MixProject do
       {:dialyxir, "~> 0.5", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.16", only: :dev, runtime: false},
       {:earmark, "~> 1.2", only: :dev},
-      {:mix_test_watch, "~> 0.5", only: :dev, runtime: false},
-      {:vex, "~> 0.6"}
+      {:mix_test_watch, "~> 0.5", only: :dev, runtime: false}
     ]
   end
 
