@@ -19,9 +19,26 @@ defmodule ExAch.FieldValidator do
     end
   end
 
+  defp do_validate(content, {field_name, :max_length, length}) when is_integer(content) do
+    if String.length(to_string(content)) > length do
+      {field_name, :max_length, "Must be less than #{length} digits"}
+    end
+  end
+
   defp do_validate(content, {field_name, :length, length}) when is_integer(content) do
-    if byte_size(to_string(content)) > length do
+    if String.length(to_string(content)) > length do
       {field_name, :length, "Must be #{length} digits"}
+    end
+  end
+
+  defp do_validate(content, {field_name, :inclusion, list}) when is_list(list) do
+    if !(content in list) do
+      list_s =
+        list
+        |> Enum.join(",")
+        |> to_string
+
+      {field_name, :inclusion, "Must be in [#{list_s}]"}
     end
   end
 end
