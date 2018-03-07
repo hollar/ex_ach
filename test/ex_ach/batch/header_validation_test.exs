@@ -28,6 +28,13 @@ defmodule ExAch.Batch.HeaderValidationTest do
          CompanyName.new("company_name")
     end
 
+    test "two errors get accumulated" do
+      {:error, errors} = CompanyName.new("company_name too long")
+
+      assert {:company_name, :format, "Must be alphanum"} in errors
+      assert {:company_name, :length, "Must be less than 16 character"} in errors
+    end
+
     test "valid value returns successfully" do
       {:ok, %CompanyName{content: "CompanyName"}} = CompanyName.new("CompanyName")
     end
