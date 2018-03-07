@@ -34,7 +34,7 @@ alias ExAch.File.Header
 {:ok, immediate_destination_name} = File.Header.Fields.ImmediateDestinationName.new("RBC ROYAL Bank"),
 {:ok, file_creation_time} = File.Header.Fields.FileCreationTime.new(~T[23:00:07.000])
 
-{:ok, header} =
+{:ok, file_header} =
   ExAch.File.Header.new(
     immediate_destination,
     immediate_origin,
@@ -45,6 +45,45 @@ alias ExAch.File.Header
     file_creation_time: file_creation_time,
     reference_code: reference_code
   )
+```
+
+Create a batch header
+```elixir
+alias ExAch.Batch.Header
+
+{:ok, service_class_code} = Batch.Header.Fields.ServiceClassCode.new(220)
+{:ok, company_name} = Batch.Header.Fields.CompanyName.new("CompanyName")
+{:ok, company_identification} = Batch.Header.Fields.CompanyIdentifiation.new(1112223334)
+{:ok, standard_entry_class_code} = Batch.Header.Fields.ServiceClassCode.new("WEB")
+{:ok, company_entry_description} = Batch.Header.Fields.CompanyEntryDescription.new("DESC1")
+{:ok, effective_entry_date} =  Batch.Header.Fields.EffectiveEntryDate.new(~D[2000-01-01])
+{:ok, batch_number} = Batch.Header.Fields.BatchNumber.new(0123456)
+{:ok, originating_dfi_identification} = Batch.Header.Fields.OriginatingDfiIdentification.new(12345678)
+
+#Optional
+{:ok, company_descriptive_date} = Batch.Header.Fields.CompanyDescriptiveDate.new(~D[2000-01-01])
+{:ok, company_discretionary_data} = Batch.Header.Fields.CompanyDiscretionaryData.new("Data1")
+
+{:ok, batch_header} =
+  ExAch.Batch.Header.new(
+    service_class_code
+    company_name
+    company_identification
+    standard_entry_class_code
+    company_entry_description
+    effective_entry_date
+    batch_number
+    originating_dfi_identification,
+    company_descriptive_date: company_descriptive_date,
+    company_discretionary_data: company_discretionary_data
+  )
+```
+
+Create a batch
+```elixir
+alias ExAch.Batch
+
+{:ok, batch} = ExAch.Batch.new(header)
 ```
 
 create new ach file struct:

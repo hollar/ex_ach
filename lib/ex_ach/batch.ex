@@ -22,4 +22,8 @@ defmodule ExAch.Batch do
         {:error, Vex.errors(header_params)}
     end
   end
+
+  def new(header) do
+    {:ok, %__MODULE__{header: header}}
+  end
 end
