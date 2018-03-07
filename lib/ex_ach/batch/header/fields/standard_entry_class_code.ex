@@ -10,7 +10,6 @@ defmodule ExAch.Batch.Header.Fields.StandardEntryClassCode do
 
   defstruct [:content]
 
-  @length 10
   @rules [
     {:standard_entry_class_code, :inclusion, [:web, :ccd, :ppd, :ctx, :tel, :web]}
   ]

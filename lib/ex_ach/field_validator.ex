@@ -41,4 +41,15 @@ defmodule ExAch.FieldValidator do
       {field_name, :inclusion, "Must be in [#{list_s}]"}
     end
   end
+
+  defp do_validate(content, {field_name, :type, :string}) do
+    if !Regex.match?(~r/^[0-9A-Za-z ]+$/, content) do
+      {field_name, :format, "Must be alphanum"}
+    end
+  end
+
+  defp do_validate(%Date{} = _content, {_field_name, :type, :date}), do: nil
+  defp do_validate(_content, {field_name, :type, :date}) do
+    {field_name, :type, "Must be a date"}
+  end
 end
