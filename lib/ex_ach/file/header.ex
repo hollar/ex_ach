@@ -33,7 +33,8 @@ defmodule ExAch.File.Header do
   @doc """
   Creates a new File Header Structure.
   """
-  @spec new(ImmediateDestination.t, ImmediateOrigin.t, FileIdModifier.t, Keyword.t) :: {:ok, t}
+  @spec new(ImmediateDestination.t(), ImmediateOrigin.t(), FileIdModifier.t(), Keyword.t()) ::
+          {:ok, t}
   def new(
         %ImmediateDestination{} = immediate_destination,
         %ImmediateOrigin{} = immediate_origin,

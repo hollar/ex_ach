@@ -6,7 +6,7 @@ defmodule ExAch.FileTest do
   describe "creating an ach file" do
     test "creates file with header" do
       {:ok, immediate_destination} = File.Header.Fields.ImmediateDestination.new("b071000505")
-      {:ok, immediate_origin} = File.Header.Fields.ImmediateOrigin.new(1234567890)
+      {:ok, immediate_origin} = File.Header.Fields.ImmediateOrigin.new(1_234_567_890)
       {:ok, file_id_modifier} = File.Header.Fields.FileIdModifier.new("1")
 
       {:ok, file_header} =
@@ -25,7 +25,7 @@ defmodule ExAch.FileTest do
       {:ok, batch_number} = Batch.Header.Fields.BatchNumber.new(1_234_567)
 
       {:ok, originating_dfi_identification} =
-        Batch.Header.Fields.OriginatingDfiIdentification.new(7100050)
+        Batch.Header.Fields.OriginatingDfiIdentification.new(7_100_050)
 
       {:ok, batch_header} =
         ExAch.Batch.Header.new(

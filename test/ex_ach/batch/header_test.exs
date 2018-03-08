@@ -26,7 +26,7 @@ defmodule ExAch.Batch.HeaderTest do
       {:ok, company_entry_description} = CompanyEntryDescription.new("DESC1")
       {:ok, effective_entry_date} = EffectiveEntryDate.new(~D[2000-01-01])
       {:ok, batch_number} = BatchNumber.new(1_234_567)
-      {:ok, originating_dfi_identification} = OriginatingDfiIdentification.new(7200080)
+      {:ok, originating_dfi_identification} = OriginatingDfiIdentification.new(7_200_080)
 
       # #Optional
       {:ok, company_descriptive_date} = CompanyDescriptiveDate.new(~D[2000-01-01])

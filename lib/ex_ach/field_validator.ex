@@ -52,7 +52,8 @@ defmodule ExAch.FieldValidator do
     {field_name, :type, "Must be an alphanum string"}
   end
 
-  defp do_validate(content, {field_name, :type, :strict_alpha_num_string}) when is_binary(content) do
+  defp do_validate(content, {field_name, :type, :strict_alpha_num_string})
+       when is_binary(content) do
     if !Regex.match?(~r/^[0-9A-Z]+$/, content) do
       {field_name, :type, "Must be capital letters or digits"}
     end
@@ -63,21 +64,25 @@ defmodule ExAch.FieldValidator do
   end
 
   defp do_validate(%Date{}, {_field_name, :type, :date}), do: nil
+
   defp do_validate(_content, {field_name, :type, :date}) do
     {field_name, :type, "Must be a date"}
   end
 
   defp do_validate(%Time{}, {_field_name, :type, :time}), do: nil
+
   defp do_validate(_content, {field_name, :type, :time}) do
     {field_name, :type, "Must be a time"}
   end
 
   defp do_validate(content, {_field_name, :type, :integer}) when is_integer(content), do: nil
+
   defp do_validate(_content, {field_name, :type, :integer}) do
     {field_name, :type, "Must be an integer"}
   end
 
   defp do_validate(content, {_field_name, :type, :atom}) when is_atom(content), do: nil
+
   defp do_validate(_content, {field_name, :type, :atom}) do
     {field_name, :type, "Must be an atom"}
   end

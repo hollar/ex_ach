@@ -5,8 +5,9 @@ defmodule ExAch.Batch.Header.Fields.CompanyName do
   """
 
   @type t :: %__MODULE__{}
-  use ExAch.Field, specifications: [
-    type: :alpha_num_string,
-    max_length: 16
-  ]
+  use ExAch.Field,
+    specifications: [
+      type: :alpha_num_string,
+      max_length: 16
+    ]
 end

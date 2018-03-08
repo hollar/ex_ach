@@ -7,6 +7,6 @@ defmodule ExAch.Batch do
   @doc """
   Creates a new Batch Header structure
   """
-  @spec new(Batch.Header.t) :: {:ok, t}
+  @spec new(Batch.Header.t()) :: {:ok, t}
   def new(%Batch.Header{} = header), do: {:ok, %__MODULE__{header: header}}
 end

@@ -19,7 +19,7 @@ defmodule ExAch.Batch.HeaderValidationTest do
 
     test "an invalid value returns an error" do
       assert {:error, [{:service_class_code, :inclusion, "Must be in [200,220,225]"}]} =
-        ServiceClassCode.new(345)
+               ServiceClassCode.new(345)
     end
   end
 
@@ -54,7 +54,7 @@ defmodule ExAch.Batch.HeaderValidationTest do
 
     test "an invalid type returns an error" do
       assert {:error, [{:company_identification, :type, "Must be an integer"}]} =
-        CompanyIdentification.new("1234567890")
+               CompanyIdentification.new("1234567890")
     end
 
     test "valid value returns successfully" do
@@ -66,6 +66,7 @@ defmodule ExAch.Batch.HeaderValidationTest do
   describe "validating standard_entry_class" do
     test "an invalid value returns an error" do
       {:error, errors} = StandardEntryClassCode.new(:code)
+
       assert {:standard_entry_class_code, :inclusion, "Must be in [web,ccd,ppd,ctx,tel]"} in errors
     end
 
@@ -88,9 +89,8 @@ defmodule ExAch.Batch.HeaderValidationTest do
     end
 
     test "an invalid type returns an error" do
-      assert {:error,
-              [{:company_entry_description, :type, "Must be an alphanum string"}]} =
-        CompanyEntryDescription.new(122)
+      assert {:error, [{:company_entry_description, :type, "Must be an alphanum string"}]} =
+               CompanyEntryDescription.new(122)
     end
 
     test "valid value returns successfully" do
@@ -117,12 +117,14 @@ defmodule ExAch.Batch.HeaderValidationTest do
     end
 
     test "an invalid value returns an error" do
-      assert {:error, [{:originating_dfi_identification, :max_length, "Must be less than 8 digit(s)"}]} =
-        OriginatingDfiIdentification.new(123456789)
+      assert {:error,
+              [{:originating_dfi_identification, :max_length, "Must be less than 8 digit(s)"}]} =
+               OriginatingDfiIdentification.new(123_456_789)
     end
 
     test "valid value returns successfully" do
-      {:ok, %OriginatingDfiIdentification{content: 7100050}} = OriginatingDfiIdentification.new(7100050)
+      {:ok, %OriginatingDfiIdentification{content: 7_100_050}} =
+        OriginatingDfiIdentification.new(7_100_050)
     end
   end
 
@@ -137,8 +139,7 @@ defmodule ExAch.Batch.HeaderValidationTest do
     end
 
     test "an invalid type returns an error" do
-      assert {:error, [{:batch_number, :type, "Must be an integer"}]} =
-        BatchNumber.new("1234567")
+      assert {:error, [{:batch_number, :type, "Must be an integer"}]} = BatchNumber.new("1234567")
     end
   end
 end

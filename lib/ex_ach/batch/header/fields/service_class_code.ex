@@ -6,8 +6,9 @@ defmodule ExAch.Batch.Header.Fields.ServiceClassCode do
   225 - ACH Debits Only
   """
   @type t :: %__MODULE__{}
-  use ExAch.Field, specifications: [
-    type: :integer,
-    inclusion: [200, 220, 225]
-  ]
+  use ExAch.Field,
+    specifications: [
+      type: :integer,
+      inclusion: [200, 220, 225]
+    ]
 end

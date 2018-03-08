@@ -35,16 +35,16 @@ defmodule ExAch.Batch.Header do
   Create a batch header structure
   """
   @spec new(
-    ServiceClassCode.t,
-    CompanyName.t,
-    CompanyIdentification.t,
-    StandardEntryClassCode.t,
-    CompanyEntryDescription.t,
-    EffectiveEntryDate.t,
-    BatchNumber.t,
-    OriginatingDfiIdentification.t,
-    Keyword.t
-  ) :: {:ok, t}
+          ServiceClassCode.t(),
+          CompanyName.t(),
+          CompanyIdentification.t(),
+          StandardEntryClassCode.t(),
+          CompanyEntryDescription.t(),
+          EffectiveEntryDate.t(),
+          BatchNumber.t(),
+          OriginatingDfiIdentification.t(),
+          Keyword.t()
+        ) :: {:ok, t}
   def new(
         %ServiceClassCode{} = service_class_code,
         %CompanyName{} = company_name,

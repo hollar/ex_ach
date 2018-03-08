@@ -11,11 +11,11 @@ defmodule ExAch.Field do
           __MODULE__
           |> to_string
           |> String.split(".")
-          |> List.last
-          |> Macro.underscore
-          |> String.to_existing_atom
+          |> List.last()
+          |> Macro.underscore()
+          |> String.to_existing_atom()
 
-        Enum.map(unquote(specifications), fn({key, specification})->
+        Enum.map(unquote(specifications), fn {key, specification} ->
           {field_name, key, specification}
         end)
       end
