@@ -8,7 +8,8 @@ defmodule ExAch.File.Header do
     PriorityCode,
     BlockingFactor,
     RecordSize,
-    FormatCode
+    FormatCode,
+    FileCreationTime
   }
 
   defstruct [
@@ -30,18 +31,17 @@ defmodule ExAch.File.Header do
   def new(
         %ImmediateDestination{} = immediate_destination,
         %ImmediateOrigin{} = immediate_origin,
-        %FileCreationDate{} = file_creation_date,
         %FileIdModifier{} = file_id_modifier,
         opts \\ []
       ) do
     header = %__MODULE__{
       immediate_destination: immediate_destination,
       immediate_origin: immediate_origin,
-      file_creation_date: file_creation_date,
+      file_creation_date: FileCreationDate.new(),
       file_id_modifier: file_id_modifier,
       record_type_code: RecordTypeCode.new(),
       priority_code: PriorityCode.new(),
-      file_creation_time: Keyword.get(opts, :file_creation_time),
+      file_creation_time: FileCreationTime.new(),
       record_size: RecordSize.new(),
       blocking_factor: BlockingFactor.new(),
       format_code: FormatCode.new(),
