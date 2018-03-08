@@ -9,7 +9,7 @@ defmodule ExAch.Batch do
   """
   @spec new(Batch.Header.t(), list(Batch.Entry.t())) :: {:ok, t}
   def new(%Batch.Header{} = header, entries) do
-    control = Batch.Control.new(entries)
+    control = Batch.Control.new(header, entries)
     {:ok, %__MODULE__{header: header, entries: entries, control: control}}
   end
 end

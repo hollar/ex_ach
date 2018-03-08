@@ -3,6 +3,5 @@ defmodule ExAch.Batch.Control.Fields.RecordTypeCode do
   The code identifying the Batch Control record is 8.
   """
 
-  @type t :: %__MODULE__{}
-  use ExAch.Field, default_content: 8
+  use ExAch.Field, value: 8
 end

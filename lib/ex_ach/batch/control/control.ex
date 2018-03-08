@@ -6,11 +6,15 @@ defmodule ExAch.Batch.Control do
 
   alias ExAch.Batch.Entry
   alias ExAch.Batch.Control.Fields.{
-    RecordTypeCode
+    RecordTypeCode,
+    ServiceClassCode,
+    EntryAddendaCount
   }
 
   defstruct [
-    :record_type_code
+    :record_type_code,
+    :service_class_code,
+    :entry_addenda_count
   ]
 
   @type t :: %__MODULE__{}
@@ -18,10 +22,12 @@ defmodule ExAch.Batch.Control do
   @doc """
   Create a batch control record
   """
-  @spec new(Entry.t()) :: {:ok, t()}
-  def new(entry) do
+  @spec new(Header.t(), list(Entry.t())) :: {:ok, t()}
+  def new(header, entries) do
     control = %__MODULE__{
-      record_type_code: RecordTypeCode.new()
+      record_type_code: RecordTypeCode.new(),
+      service_class_code: ServiceClassCode.new(header.service_class_code.content),
+      entry_addenda_count: EntryAddendaCount.new(entries)
     }
 
     {:ok, control}
