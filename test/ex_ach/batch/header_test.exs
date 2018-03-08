@@ -32,14 +32,6 @@ defmodule ExAch.Batch.HeaderTest do
       {:ok, company_descriptive_date} = CompanyDescriptiveDate.new(~D[2000-01-01])
       {:ok, company_discretionary_data} = CompanyDiscretionaryData.new("Data1")
 
-      assert standard_entry_class_code.content == :web
-      assert company_entry_description.content == "DESC1"
-      assert effective_entry_date.content == ~D[2000-01-01]
-      assert batch_number.content == 1_234_567
-      assert originating_dfi_identification.content == 7200080
-      assert company_descriptive_date.content == ~D[2000-01-01]
-      assert company_discretionary_data.content == "Data1"
-
       {:ok, batch_header} =
         ExAch.Batch.Header.new(
           service_class_code,

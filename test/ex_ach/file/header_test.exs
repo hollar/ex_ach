@@ -30,15 +30,6 @@ defmodule ExAch.File.HeaderTest do
       {:ok, immediate_destination_name} = ImmediateDestinationName.new("LaSalle Bank")
       {:ok, immediate_origin_name} = ImmediateOriginName.new("Hollar Inc")
 
-      assert immediate_destination.content == "b071000505"
-      assert immediate_origin.content == 1234567890
-      assert creation_date.content == ~D[2000-01-01]
-      assert reference_code.content == "refcode"
-      assert file_id_modifier.content == "1"
-      assert file_creation_time.content == ~T[23:00:00]
-      assert immediate_destination_name.content == "LaSalle Bank"
-      assert immediate_origin_name.content == "Hollar Inc"
-
       {:ok, file_header} =
         Header.new(
           immediate_destination,
