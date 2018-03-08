@@ -1,7 +1,6 @@
 defmodule ExAch.File.Header.Fields.RecordTypeCode do
-  defstruct [:content]
-
-  def new do
-    %__MODULE__{content: 1}
-  end
+  @moduledoc """
+  The code identifying the File Header Record is 1.
+  """
+  use ExAch.Field, default_content: 1
 end

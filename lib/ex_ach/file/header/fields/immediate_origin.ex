@@ -1,7 +1,7 @@
 defmodule ExAch.File.Header.Fields.ImmediateOrigin do
-  defstruct [:content]
-
-  def new(content) do
-    {:ok, %__MODULE__{content: content}}
-  end
+  @moduledoc """
+  Your 10-digit company number. The use of an IRS Federal Tax Identification Number as a company
+  identification is recommended. Otherwise, ABN AMRO will create a unique number for your company.
+  """
+  use ExAch.Field, specifications: [type: :integer, length: 10]
 end

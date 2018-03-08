@@ -1,7 +1,6 @@
 defmodule ExAch.File.Header.Fields.PriorityCode do
-  defstruct [:content]
-
-  def new do
-    %__MODULE__{content: "01"}
-  end
+  @moduledoc """
+  The lower the number, the higher processing priority. Currently, only 01 is used.
+  """
+  use ExAch.Field, default_content: "01"
 end

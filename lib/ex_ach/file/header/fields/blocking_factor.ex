@@ -1,7 +1,6 @@
 defmodule ExAch.File.Header.Fields.BlockingFactor do
-  defstruct [:content]
-
-  def new do
-    %__MODULE__{content: 10}
-  end
+  @moduledoc """
+  Block at 10
+  """
+  use ExAch.Field, default_content: 10
 end

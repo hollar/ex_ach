@@ -6,7 +6,7 @@ defmodule ExAch.FileTest do
   describe "creating an ach file" do
     test "creates file with header" do
       {:ok, immediate_destination} = File.Header.Fields.ImmediateDestination.new("b071000505")
-      {:ok, immediate_origin} = File.Header.Fields.ImmediateOrigin.new("b071000505")
+      {:ok, immediate_origin} = File.Header.Fields.ImmediateOrigin.new(1234567890)
       {:ok, creation_date} = File.Header.Fields.FileCreationDate.new(~D[2000-01-01])
       {:ok, file_id_modifier} = File.Header.Fields.FileIdModifier.new("1")
 

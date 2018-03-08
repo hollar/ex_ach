@@ -22,7 +22,7 @@ defmodule ExAch.File.HeaderTest do
   describe "creating file header" do
     test "file header created successfully" do
       {:ok, immediate_destination} = ImmediateDestination.new("b071000505")
-      {:ok, immediate_origin} = ImmediateOrigin.new("b071000505")
+      {:ok, immediate_origin} = ImmediateOrigin.new(1234567890)
       {:ok, creation_date} = FileCreationDate.new(~D[2000-01-01])
       {:ok, reference_code} = ReferenceCode.new("refcode")
       {:ok, file_id_modifier} = FileIdModifier.new("1")
@@ -31,7 +31,7 @@ defmodule ExAch.File.HeaderTest do
       {:ok, immediate_origin_name} = ImmediateOriginName.new("Hollar Inc")
 
       assert immediate_destination.content == "b071000505"
-      assert immediate_origin.content == "b071000505"
+      assert immediate_origin.content == 1234567890
       assert creation_date.content == ~D[2000-01-01]
       assert reference_code.content == "refcode"
       assert file_id_modifier.content == "1"

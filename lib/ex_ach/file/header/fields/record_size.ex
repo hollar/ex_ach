@@ -1,7 +1,6 @@
 defmodule ExAch.File.Header.Fields.RecordSize do
-  defstruct [:content]
-
-  def new do
-    %__MODULE__{content: "094"}
-  end
+  @moduledoc """
+  Number of bytes per record. Enter 094
+  """
+  use ExAch.Field, default_content: "094"
 end

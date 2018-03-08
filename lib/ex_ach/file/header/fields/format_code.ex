@@ -1,7 +1,6 @@
 defmodule ExAch.File.Header.Fields.FormatCode do
-  defstruct [:content]
-
-  def new do
-    %__MODULE__{content: 1}
-  end
+  @moduledoc """
+  Currently there is only 1 code. Enter 1.
+  """
+  use ExAch.Field, default_content: 1
 end

@@ -1,7 +1,6 @@
 defmodule ExAch.File.Header.Fields.ReferenceCode do
-  defstruct [:content]
-
-  def new(content) do
-    {:ok, %__MODULE__{content: content}}
-  end
+  @moduledoc """
+  Optional field you may use to describe input file for internal accounting purposes.
+  """
+  use ExAch.Field, specifications: [type: :string, max_length: 8]
 end

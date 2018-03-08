@@ -1,7 +1,7 @@
 defmodule ExAch.File.Header.Fields.FileCreationTime do
-  defstruct [:content]
-
-  def new(content) do
-    {:ok, %__MODULE__{content: content}}
-  end
+  @moduledoc """
+  Time of day you created the input file. This field is used to distinguish between input files
+  if you submit more than one per day. This field is optional
+  """
+  use ExAch.Field, specifications: [type: :time]
 end

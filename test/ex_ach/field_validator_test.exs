@@ -66,6 +66,22 @@ defmodule ExAch.FieldValidatorTest do
     end
   end
 
+  describe "validating time type" do
+    test "type of date returns an error" do
+      specifications = [{:field_name, :type, :time}]
+      errors = FieldValidator.validate("123", specifications)
+
+      assert errors == [{:field_name, :type, "Must be a time"}]
+    end
+
+    test "type of time does not return errors" do
+      specifications = [{:field_name, :type, :time}]
+      errors = FieldValidator.validate(~T[23:00:00], specifications)
+
+      assert Enum.empty?(errors)
+    end
+  end
+
   describe "validating max_length" do
     test "a string too long returns an error" do
       specifications = [{:field_name, :max_length, 3}]

@@ -1,7 +1,6 @@
 defmodule ExAch.File.Header.Fields.ImmediateOriginName do
-  defstruct [:content]
-
-  def new(name) do
-    {:ok, %__MODULE__{content: name}}
-  end
+  @moduledoc """
+  Your company's name, up to 23 characters. This is an optional field.
+  """
+  use ExAch.Field, specifications: [type: :string, max_length: 23]
 end
