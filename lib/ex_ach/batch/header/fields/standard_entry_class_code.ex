@@ -7,5 +7,6 @@ defmodule ExAch.Batch.Header.Fields.StandardEntryClassCode do
   for corporate transactions, TEL (Telephone initiated entries), and WEB (Authorization received
   via the Internet).
   """
+  @type t :: %__MODULE__{}
   use ExAch.Field, specifications: [type: :atom, inclusion: [:web, :ccd, :ppd, :ctx, :tel]]
 end

@@ -13,6 +13,8 @@ defmodule ExAch.Batch.Header do
     OriginatorStatusCode
   }
 
+  @type t :: %__MODULE__{}
+
   defstruct [
     :service_class_code,
     :company_name,
@@ -29,6 +31,20 @@ defmodule ExAch.Batch.Header do
     :originator_status_code
   ]
 
+  @doc """
+  Create a batch header structure
+  """
+  @spec new(
+    ServiceClassCode.t,
+    CompanyName.t,
+    CompanyIdentification.t,
+    StandardEntryClassCode.t,
+    CompanyEntryDescription.t,
+    EffectiveEntryDate.t,
+    BatchNumber.t,
+    OriginatingDfiIdentification.t,
+    Keyword.t
+  ) :: {:ok, t}
   def new(
         %ServiceClassCode{} = service_class_code,
         %CompanyName{} = company_name,
