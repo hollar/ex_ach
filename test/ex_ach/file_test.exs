@@ -27,7 +27,7 @@ defmodule ExAch.FileTest do
       {:ok, batch_number} = Batch.Header.Fields.BatchNumber.new(1_234_567)
 
       {:ok, originating_dfi_identification} =
-        Batch.Header.Fields.OriginatingDfiIdentification.new(12_345_678)
+        Batch.Header.Fields.OriginatingDfiIdentification.new(7100050)
 
       {:ok, batch_header} =
         ExAch.Batch.Header.new(

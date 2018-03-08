@@ -1,7 +1,6 @@
 defmodule ExAch.Batch.Header.Fields.RecordTypeCode do
-  defstruct [:content]
-
-  def new do
-    %__MODULE__{content: 5}
-  end
+  @moduledoc """
+  The code identifying the Batch Header record is 5.
+  """
+  use ExAch.Field, default_content: 5
 end

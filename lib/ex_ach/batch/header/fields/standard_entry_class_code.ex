@@ -7,20 +7,5 @@ defmodule ExAch.Batch.Header.Fields.StandardEntryClassCode do
   for corporate transactions, TEL (Telephone initiated entries), and WEB (Authorization received
   via the Internet).
   """
-
-  defstruct [:content]
-
-  @rules [
-    {:standard_entry_class_code, :inclusion, [:web, :ccd, :ppd, :ctx, :tel, :web]}
-  ]
-
-  def new(content) do
-    errors = ExAch.FieldValidator.validate(content, @rules)
-
-    if Enum.empty?(errors) do
-      {:ok, %__MODULE__{content: content}}
-    else
-      {:error, errors}
-    end
-  end
+  use ExAch.Field, specifications: [type: :atom, inclusion: [:web, :ccd, :ppd, :ctx, :tel]]
 end

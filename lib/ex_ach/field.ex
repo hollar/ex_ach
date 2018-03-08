@@ -1,6 +1,7 @@
 defmodule ExAch.Field do
   defmacro __using__(opts) do
     specifications = Keyword.get(opts, :specifications, [])
+    default_content = Keyword.get(opts, :default_content)
 
     quote do
       defstruct [:content]
@@ -27,6 +28,10 @@ defmodule ExAch.Field do
         else
           {:error, errors}
         end
+      end
+
+      def new do
+        %__MODULE__{content: unquote(default_content)}
       end
     end
   end

@@ -31,6 +31,12 @@ defmodule ExAch.FieldValidator do
     end
   end
 
+  defp do_validate(content, {field_name, :length, length}) when is_binary(content) do
+    if String.length(content) > length do
+      {field_name, :length, "Must be #{length} long"}
+    end
+  end
+
   defp do_validate(content, {field_name, :inclusion, list}) when is_list(list) do
     if !(content in list) do
       list_s =
@@ -42,14 +48,27 @@ defmodule ExAch.FieldValidator do
     end
   end
 
-  defp do_validate(content, {field_name, :type, :string}) do
+  defp do_validate(content, {field_name, :type, :string}) when is_integer(content) do
+    {field_name, :type, "Must be an alphanum string"}
+  end
+  defp do_validate(content, {field_name, :type, :string}) when is_binary(content) do
     if !Regex.match?(~r/^[0-9A-Za-z ]+$/, content) do
       {field_name, :format, "Must be alphanum"}
     end
   end
 
-  defp do_validate(%Date{} = _content, {_field_name, :type, :date}), do: nil
+  defp do_validate(%Date{}, {_field_name, :type, :date}), do: nil
   defp do_validate(_content, {field_name, :type, :date}) do
     {field_name, :type, "Must be a date"}
+  end
+
+  defp do_validate(content, {_field_name, :type, :integer}) when is_integer(content), do: nil
+  defp do_validate(_content, {field_name, :type, :integer}) do
+    {field_name, :type, "Must be an integer"}
+  end
+
+  defp do_validate(content, {_field_name, :type, :atom}) when is_atom(content), do: nil
+  defp do_validate(_content, {field_name, :type, :atom}) do
+    {field_name, :type, "Must be an atom"}
   end
 end
