@@ -69,10 +69,9 @@ defmodule ExAch.FileTest do
           trace_number
         )
 
-      batch_entries = [batch_entry]
-      {:ok, batch_control} = ExAch.Batch.Control.new(batch_entries)
-      {:ok, batch} = ExAch.Batch.new(batch_header, batch_entries, batch_control)
-      batches = [batch]
+      batch_entries = List.wrap(batch_entry)
+      {:ok, batch} = ExAch.Batch.new(batch_header, batch_entries)
+      batches = List.wrap(batch)
 
       {:ok, ach} = ExAch.File.new(file_header, batches)
 
