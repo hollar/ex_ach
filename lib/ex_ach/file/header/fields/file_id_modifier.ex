@@ -3,9 +3,6 @@ defmodule ExAch.File.Header.Fields.FileIdModifier do
   Code to distinguish among multiple input files. Label the first (or only) file "A", and continue
   in sequence (A-Z). If more than one file is delivered, they must have different modifiers.
   """
-  defstruct [:content]
 
-  def new(content) do
-    {:ok, %__MODULE__{content: content}}
-  end
+  use ExAch.Field, specifications: [type: :strict_alpha_num_string, length: 1]
 end

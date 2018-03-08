@@ -5,7 +5,7 @@ defmodule ExAch.Batch.Header.Fields.CompanyEntryDescription do
   """
 
   use ExAch.Field, specifications: [
-    type: :string,
+    type: :alpha_num_string,
     max_length: 10
   ]
 end

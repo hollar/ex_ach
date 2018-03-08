@@ -3,18 +3,32 @@ defmodule ExAch.FieldValidatorTest do
   alias ExAch.FieldValidator
 
   describe "validating string type" do
-    test "a non-string type returns an error" do
-      specifications = [{:field_name, :type, :string}]
+    test "a non alpha numeric string type returns an error" do
+      specifications = [{:field_name, :type, :alpha_num_string}]
       errors = FieldValidator.validate(123, specifications)
 
       assert errors == [{:field_name, :type, "Must be an alphanum string"}]
     end
 
-    test "a type of string does not returns error" do
-      specifications = [{:field_name, :type, :string}]
+    test "a type of alpha numeric string does not returns error" do
+      specifications = [{:field_name, :type, :alpha_num_string}]
       errors = FieldValidator.validate("string", specifications)
 
       assert Enum.empty?(errors)
+    end
+
+    test "a type of strict alpha numeric string does not returns error" do
+      specifications = [{:field_name, :type, :strict_alpha_num_string}]
+      errors = FieldValidator.validate("STR9", specifications)
+
+      assert Enum.empty?(errors)
+    end
+
+    test "a non allowed value of strict alpha numeric string returns error" do
+      specifications = [{:field_name, :type, :strict_alpha_num_string}]
+      errors = FieldValidator.validate("STR 9", specifications)
+
+      assert errors == [{:field_name, :type, "Must be capital letters or digits"}]
     end
   end
 

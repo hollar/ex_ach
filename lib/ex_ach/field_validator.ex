@@ -42,14 +42,24 @@ defmodule ExAch.FieldValidator do
     end
   end
 
-  defp do_validate(content, {field_name, :type, :string}) when is_binary(content) do
+  defp do_validate(content, {field_name, :type, :alpha_num_string}) when is_binary(content) do
     if !Regex.match?(~r/^[0-9A-Za-z ]+$/, content) do
       {field_name, :type, "Must be alphanum"}
     end
   end
 
-  defp do_validate(_content, {field_name, :type, :string}) do
+  defp do_validate(_content, {field_name, :type, :alpha_num_string}) do
     {field_name, :type, "Must be an alphanum string"}
+  end
+
+  defp do_validate(content, {field_name, :type, :strict_alpha_num_string}) when is_binary(content) do
+    if !Regex.match?(~r/^[0-9A-Z]+$/, content) do
+      {field_name, :type, "Must be capital letters or digits"}
+    end
+  end
+
+  defp do_validate(_content, {field_name, :type, :strict_alpha_num_string}) do
+    {field_name, :type, "Must be capital letters or digits"}
   end
 
   defp do_validate(%Date{}, {_field_name, :type, :date}), do: nil
