@@ -70,7 +70,8 @@ defmodule ExAch.FileTest do
         )
 
       batch_entries = [batch_entry]
-      {:ok, batch} = ExAch.Batch.new(batch_header, batch_entries)
+      {:ok, batch_control} = ExAch.Batch.Control.new(batch_entries)
+      {:ok, batch} = ExAch.Batch.new(batch_header, batch_entries, batch_control)
       batches = [batch]
 
       {:ok, ach} = ExAch.File.new(file_header, batches)
