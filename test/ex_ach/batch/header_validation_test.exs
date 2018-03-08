@@ -25,20 +25,20 @@ defmodule ExAch.Batch.HeaderValidationTest do
 
   describe "validating company_name" do
     test "an invalid value returns an error" do
-      assert {:error, [{:company_name, :max_length, "Must be less than 16 character"}]} =
+      assert {:error, [{:company_name, :max_length, "Must be less than 16 character(s)"}]} =
                CompanyName.new("company name too long")
     end
 
     test "an non alphanum character returns an error" do
-      assert {:error, [{:company_name, :format, "Must be alphanum"}]} =
+      assert {:error, [{:company_name, :type, "Must be alphanum"}]} =
                CompanyName.new("company_name")
     end
 
     test "two errors get accumulated" do
       {:error, errors} = CompanyName.new("company_name too long")
 
-      assert {:company_name, :format, "Must be alphanum"} in errors
-      assert {:company_name, :max_length, "Must be less than 16 character"} in errors
+      assert {:company_name, :type, "Must be alphanum"} in errors
+      assert {:company_name, :max_length, "Must be less than 16 character(s)"} in errors
     end
 
     test "valid value returns successfully" do
@@ -48,7 +48,7 @@ defmodule ExAch.Batch.HeaderValidationTest do
 
   describe "validating company_identification" do
     test "an invalid value returns an error" do
-      assert {:error, [{:company_identification, :length, "Must be 10 digits"}]} =
+      assert {:error, [{:company_identification, :length, "Must be 10 digit(s)"}]} =
                CompanyIdentification.new(12_345_678_900)
     end
 
@@ -83,7 +83,7 @@ defmodule ExAch.Batch.HeaderValidationTest do
   describe "validating company_entry_description" do
     test "an invalid value returns an error" do
       assert {:error,
-              [{:company_entry_description, :max_length, "Must be less than 10 character"}]} =
+              [{:company_entry_description, :max_length, "Must be less than 10 character(s)"}]} =
                CompanyEntryDescription.new("long description")
     end
 
@@ -117,7 +117,7 @@ defmodule ExAch.Batch.HeaderValidationTest do
     end
 
     test "an invalid value returns an error" do
-      assert {:error, [{:originating_dfi_identification, :max_length, "Must be less than 8 digits"}]} =
+      assert {:error, [{:originating_dfi_identification, :max_length, "Must be less than 8 digit(s)"}]} =
         OriginatingDfiIdentification.new(123456789)
     end
 
@@ -128,7 +128,7 @@ defmodule ExAch.Batch.HeaderValidationTest do
 
   describe "validating  batch_number" do
     test "an invalid value returns an error" do
-      assert {:error, [{:batch_number, :max_length, "Must be less than 7 digits"}]} =
+      assert {:error, [{:batch_number, :max_length, "Must be less than 7 digit(s)"}]} =
                BatchNumber.new(12_345_678)
     end
 
