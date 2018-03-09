@@ -4,10 +4,9 @@ defmodule ExAch.Batch.Control do
   All Entry Detail Records are hashed. Both Entry Detail Record and Addenda Record are included in the Entry/addenda counts.Batch Header and Batch Control are not included.
   """
 
-  alias ExAch.Batch.Entry
+  alias ExAch.Batch.{Entry, Header}
   alias ExAch.Batch.Control.Fields.{
     RecordTypeCode,
-    ServiceClassCode,
     EntryAddendaCount
   }
 
@@ -26,7 +25,7 @@ defmodule ExAch.Batch.Control do
   def new(header, entries) do
     control = %__MODULE__{
       record_type_code: RecordTypeCode.new(),
-      service_class_code: ServiceClassCode.new(header.service_class_code.content),
+      service_class_code: header.service_class_code,
       entry_addenda_count: EntryAddendaCount.new(entries)
     }
 

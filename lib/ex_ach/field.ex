@@ -19,10 +19,6 @@ defmodule ExAch.Field do
         end
       end
 
-      defp new([], :opaque, content), do: %__MODULE__{content: content}
-      defp new([], :input, content), do: {:ok, %__MODULE__{content: content}}
-      defp new(errors, _, _) when is_list(errors), do: {:error, errors}
-
       def new do
         %__MODULE__{content: unquote(value)}
       end
