@@ -78,7 +78,9 @@ defmodule ExAch.FileTest do
       assert ach.header == file_header
       assert ach.batches == batches
       first_batch = List.first(ach.batches)
+      assert first_batch.header == batch_header
       assert first_batch.entries == batch_entries
+      assert first_batch.control
     end
   end
 end
