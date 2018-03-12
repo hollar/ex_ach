@@ -14,19 +14,19 @@ defmodule ExAch.FieldValidator do
   end
 
   defp do_validate(content, {field_name, :max_length, length}) when is_integer(content) do
-    if String.length(to_string(content)) > length do
+    if integer_length(content) > length do
       {field_name, :max_length, "Must be less than or equal to #{length} digit(s)"}
     end
   end
 
   defp do_validate(content, {field_name, :length, length}) when is_integer(content) do
-    if String.length(to_string(content)) > length do
+    if integer_length(content) != length do
       {field_name, :length, "Must be #{length} digit(s)"}
     end
   end
 
   defp do_validate(content, {field_name, :length, length}) when is_binary(content) do
-    if String.length(content) > length do
+    if String.length(content) != length do
       {field_name, :length, "Must be #{length} character(s)"}
     end
   end
@@ -85,5 +85,11 @@ defmodule ExAch.FieldValidator do
 
   defp do_validate(_content, {field_name, :type, :atom}) do
     {field_name, :type, "Must be an atom"}
+  end
+
+  defp integer_length(value) do
+    value
+    |> to_string
+    |> String.length()
   end
 end
