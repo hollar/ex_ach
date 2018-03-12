@@ -35,4 +35,8 @@ defmodule ExAch.Field do
       end
     end
   end
+
+  def value(field) do
+    field.content
+  end
 end
