@@ -12,9 +12,11 @@ defmodule ExAch.FieldTest do
   end
 
   describe "validating content" do
-    {:error, errors} = DummyField.new("12")
-    assert is_list(errors)
-    assert Enum.count(errors) == 2
+    test "returns errors" do
+      {:error, errors} = DummyField.new("12")
+      assert is_list(errors)
+      assert Enum.count(errors) == 2
+    end
   end
 
   describe "creating a constructor with default value" do
