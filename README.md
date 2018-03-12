@@ -79,11 +79,46 @@ alias ExAch.Batch.Header
   )
 ```
 
+Create a batch entries
+```elixir
+alias ExAch.Batch
+
+# Required fields
+{:ok, transaction_code} = Batch.Entry.Fields.TransactionCode.new(22)
+{:ok, receiving_dfi_identification} = Batch.Entry.Fields.ReceivingDfiIdentification.new(TTTTAAAA)
+{:ok, check_digit} = Batch.Entry.Fields.CheckDigit.new(1)
+{:ok, dfi_account_number} = Batch.Entry.Fields.DfiAccountNumber.new(12345)
+{:ok, amount} = Batch.Entry.Fields.Amount.new(1000)
+{:ok, receiving_company_name} = Batch.Entry.Fields.ReceivingCompanyName.new("receiving company")
+{:ok, addenda_record_indicator} = Batch.Entry.Fields.AddendaRecordIndicator.new(0)
+{:ok, trace_number} = Batch.Entry.Fields.TraceNumber.new(333000)
+
+#Optional
+{:ok, discretionary_data} = Batch.Entry.Fields.ReceivingCompanyName.new("discretionary_data")
+{:ok, identification_number} = Batch.Entry.Fields.IdentificationNumber.new(1000)
+
+{:ok, batch_entry} =
+  ExAch.Batch.Entry.new(
+    transaction_code,
+    receiving_dfi_identification,
+    check_digit,
+    dfi_account_number,
+    amount,
+    receiving_company_name,
+    addenda_record_indicator,
+    trace_number,
+    discretionary_data: discretionary_data,
+    identification_number: identification_number
+  )
+
+entries = [batch_entry]
+```
+
 Create a batch
 ```elixir
 alias ExAch.Batch
 
-{:ok, batch} = ExAch.Batch.new(header)
+{:ok, batch} = ExAch.Batch.new(header, entries)
 ```
 
 create new ach file struct:
