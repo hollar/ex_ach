@@ -8,6 +8,7 @@ defmodule ExAch.File.HeaderTest do
     ImmediateOrigin,
     ReferenceCode,
     FileIdModifier,
+    FileCreationTime,
     ImmediateDestinationName,
     ImmediateOriginName
   }
@@ -43,12 +44,12 @@ defmodule ExAch.File.HeaderTest do
       assert ExAch.Field.value(file_header.record_size) == "094"
       assert ExAch.Field.value(file_header.blocking_factor) == 10
       assert ExAch.Field.value(file_header.format_code) == 1
+      assert %FileCreationTime{} = file_header.file_creation_time
 
       # Optional fields passed by user
-      assert file_header.file_creation_time
       assert ExAch.Field.value(file_header.immediate_destination_name) == "LaSalle Bank"
-      assert file_header.reference_code == reference_code
       assert ExAch.Field.value(file_header.immediate_origin_name) == "Hollar Inc"
+      assert file_header.reference_code == reference_code
     end
   end
 end
