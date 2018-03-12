@@ -4,13 +4,13 @@ defmodule ExAch.FieldValidatorTest do
 
   describe "validating string type" do
     test "non alpha numeric string type returns an error" do
-      specifications = [{:field_name, :type, :alpha_num_string}]
+      specifications = [{:field_name, :type, :alpha_numeric}]
       errors = FieldValidator.validate(123, specifications)
       assert errors == [{:field_name, :type, "Must be an alphanum string"}]
     end
 
     test "type of alpha numeric string does not returns error" do
-      specifications = [{:field_name, :type, :alpha_num_string}]
+      specifications = [{:field_name, :type, :alpha_numeric}]
       errors = FieldValidator.validate("string", specifications)
       assert Enum.empty?(errors)
     end

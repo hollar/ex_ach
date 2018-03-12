@@ -7,7 +7,7 @@ defmodule ExAch.Batch.Header.Fields.CompanyEntryDescription do
   @type t :: %__MODULE__{}
   use ExAch.Field,
     specifications: [
-      type: :alpha_num_string,
+      type: :alpha_numeric,
       max_length: 10
     ]
 end

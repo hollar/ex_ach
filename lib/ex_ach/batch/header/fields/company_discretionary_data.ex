@@ -5,5 +5,5 @@ defmodule ExAch.Batch.Header.Fields.CompanyDiscretionaryData do
   """
 
   @type t :: %__MODULE__{}
-  use ExAch.Field, specifications: [type: :alpha_num_string, max_length: 20]
+  use ExAch.Field, specifications: [type: :alpha_numeric, max_length: 20]
 end

@@ -6,7 +6,7 @@ defmodule ExAch.Batch.Entry.Fields.ReceivingDfiIdentification do
   @type t :: %__MODULE__{}
   use ExAch.Field,
     specifications: [
-      type: :alpha_num_string,
+      type: :alpha_numeric,
       max_length: 8
     ]
 end

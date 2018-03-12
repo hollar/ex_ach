@@ -6,7 +6,7 @@ defmodule ExAch.Batch.Entry.Fields.IdentificationNumber do
   @type t :: %__MODULE__{}
   use ExAch.Field,
     specifications: [
-      type: :alpha_num_string,
+      type: :alpha_numeric,
       max_length: 15
     ]
 end
