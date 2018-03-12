@@ -22,7 +22,7 @@ defmodule ExAch.Batch.HeaderTest do
       {:ok, service_class_code} = ServiceClassCode.new(220)
       {:ok, company_name} = CompanyName.new("CompanyName")
       {:ok, company_identification} = CompanyIdentification.new(1_112_223_334)
-      {:ok, standard_entry_class_code} = StandardEntryClassCode.new(:web)
+      {:ok, standard_entry_class_code} = StandardEntryClassCode.new(:ccd)
       {:ok, company_entry_description} = CompanyEntryDescription.new("DESC1")
       {:ok, effective_entry_date} = EffectiveEntryDate.new(~D[2000-01-01])
       {:ok, batch_number} = BatchNumber.new(1_234_567)

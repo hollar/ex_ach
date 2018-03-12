@@ -21,7 +21,7 @@ defmodule ExAch.FileTest do
       {:ok, service_class_code} = Batch.Header.Fields.ServiceClassCode.new(220)
       {:ok, company_name} = Batch.Header.Fields.CompanyName.new("CompanyName")
       {:ok, company_identification} = Batch.Header.Fields.CompanyIdentification.new(1_112_223_334)
-      {:ok, standard_entry_class_code} = Batch.Header.Fields.StandardEntryClassCode.new(:web)
+      {:ok, standard_entry_class_code} = Batch.Header.Fields.StandardEntryClassCode.new(:ccd)
       {:ok, company_entry_description} = Batch.Header.Fields.CompanyEntryDescription.new("DESC1")
       {:ok, effective_entry_date} = Batch.Header.Fields.EffectiveEntryDate.new(~D[2000-01-01])
       {:ok, batch_number} = Batch.Header.Fields.BatchNumber.new(1_234_567)

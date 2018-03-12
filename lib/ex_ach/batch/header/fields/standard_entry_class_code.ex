@@ -9,5 +9,5 @@ defmodule ExAch.Batch.Header.Fields.StandardEntryClassCode do
   """
 
   @type t :: %__MODULE__{}
-  use ExAch.Field, specifications: [type: :atom, inclusion: [:web, :ccd, :ppd, :ctx, :tel]]
+  use ExAch.Field, specifications: [type: :atom, inclusion: [:ccd]]
 end

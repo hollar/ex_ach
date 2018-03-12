@@ -67,7 +67,7 @@ defmodule ExAch.Batch.HeaderValidationTest do
     test "an invalid value returns an error" do
       {:error, errors} = StandardEntryClassCode.new(:code)
 
-      assert {:standard_entry_class_code, :inclusion, "Must be in [web,ccd,ppd,ctx,tel]"} in errors
+      assert {:standard_entry_class_code, :inclusion, "Must be in [ccd]"} in errors
     end
 
     test "an invalid type returns an error" do
@@ -77,7 +77,7 @@ defmodule ExAch.Batch.HeaderValidationTest do
     end
 
     test "valid value returns successfully" do
-      {:ok, %StandardEntryClassCode{content: :web}} = StandardEntryClassCode.new(:web)
+      {:ok, %StandardEntryClassCode{content: :ccd}} = StandardEntryClassCode.new(:ccd)
     end
   end
 
