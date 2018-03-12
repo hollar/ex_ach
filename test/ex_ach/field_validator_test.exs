@@ -3,14 +3,14 @@ defmodule ExAch.FieldValidatorTest do
   alias ExAch.FieldValidator
 
   describe "validating string type" do
-    test "a non alpha numeric string type returns an error" do
+    test "non alpha numeric string type returns an error" do
       specifications = [{:field_name, :type, :alpha_num_string}]
       errors = FieldValidator.validate(123, specifications)
 
       assert errors == [{:field_name, :type, "Must be an alphanum string"}]
     end
 
-    test "a type of alpha numeric string does not returns error" do
+    test "type of alpha numeric string does not returns error" do
       specifications = [{:field_name, :type, :alpha_num_string}]
       errors = FieldValidator.validate("string", specifications)
 
@@ -19,14 +19,14 @@ defmodule ExAch.FieldValidatorTest do
   end
 
   describe "validating file_id_modifier type" do
-    test "a type of strict alpha numeric string does not returns error" do
+    test "type of strict alpha numeric string does not returns error" do
       specifications = [{:field_name, :type, :file_id_modifier}]
       errors = FieldValidator.validate("A", specifications)
 
       assert Enum.empty?(errors)
     end
 
-    test "a non allowed value of strict alpha numeric string returns error" do
+    test "non allowed value of strict alpha numeric string returns error" do
       specifications = [{:field_name, :type, :file_id_modifier}]
       errors = FieldValidator.validate("s 9", specifications)
 
@@ -35,14 +35,14 @@ defmodule ExAch.FieldValidatorTest do
   end
 
   describe "validating atom type" do
-    test "a non-atom type returns an error" do
+    test "non-atom type returns an error" do
       specifications = [{:field_name, :type, :atom}]
       errors = FieldValidator.validate(123, specifications)
 
       assert errors == [{:field_name, :type, "Must be an atom"}]
     end
 
-    test "a type of atom returns does not return error" do
+    test "type of atom returns does not return error" do
       specifications = [{:field_name, :type, :atom}]
       errors = FieldValidator.validate(:atom, specifications)
 
@@ -99,14 +99,14 @@ defmodule ExAch.FieldValidatorTest do
   end
 
   describe "validating max_length" do
-    test "a string too long returns an error" do
+    test "string too long returns an error" do
       specifications = [{:field_name, :max_length, 3}]
       errors = FieldValidator.validate("1234", specifications)
 
       assert errors == [{:field_name, :max_length, "Must be less than 3 character(s)"}]
     end
 
-    test "a integer too long returns an error" do
+    test "integer too long returns an error" do
       specifications = [{:field_name, :max_length, 3}]
       errors = FieldValidator.validate(1234, specifications)
 
@@ -129,14 +129,14 @@ defmodule ExAch.FieldValidatorTest do
   end
 
   describe "validating length" do
-    test "a string too long returns an error" do
+    test "string too long returns an error" do
       specifications = [{:field_name, :length, 3}]
       errors = FieldValidator.validate("1234", specifications)
 
       assert errors == [{:field_name, :length, "Must be 3 character(s)"}]
     end
 
-    test "a integer too long returns an error" do
+    test "integer too long returns an error" do
       specifications = [{:field_name, :length, 3}]
       errors = FieldValidator.validate(1234, specifications)
 
