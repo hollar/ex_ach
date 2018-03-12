@@ -9,13 +9,13 @@ defmodule ExAch.FieldValidator do
 
   defp do_validate(content, {field_name, :max_length, length}) when is_binary(content) do
     if byte_size(content) > length do
-      {field_name, :max_length, "Must be less than #{length} character(s)"}
+      {field_name, :max_length, "Must be less than or equal to #{length} character(s)"}
     end
   end
 
   defp do_validate(content, {field_name, :max_length, length}) when is_integer(content) do
     if String.length(to_string(content)) > length do
-      {field_name, :max_length, "Must be less than #{length} digit(s)"}
+      {field_name, :max_length, "Must be less than or equal to #{length} digit(s)"}
     end
   end
 

@@ -90,13 +90,16 @@ defmodule ExAch.FieldValidatorTest do
     test "string too long returns an error" do
       specifications = [{:field_name, :max_length, 3}]
       errors = FieldValidator.validate("1234", specifications)
-      assert errors == [{:field_name, :max_length, "Must be less than 3 character(s)"}]
+
+      assert errors == [
+               {:field_name, :max_length, "Must be less than or equal to 3 character(s)"}
+             ]
     end
 
     test "integer too long returns an error" do
       specifications = [{:field_name, :max_length, 3}]
       errors = FieldValidator.validate(1234, specifications)
-      assert errors == [{:field_name, :max_length, "Must be less than 3 digit(s)"}]
+      assert errors == [{:field_name, :max_length, "Must be less than or equal to 3 digit(s)"}]
     end
 
     test "valid string does not return errors" do
