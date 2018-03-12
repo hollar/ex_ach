@@ -1,8 +1,9 @@
 defmodule ExAch.File.Header.Fields.ImmediateDestination do
   @moduledoc """
-  Bank transit routing number. For example, 71000505 for LaSalle
+  Rounting number of the ACH operator or receiving point to which the file is being transmitted.
+  The 10 character field begins with a blank in the first position.
   """
 
   @type t :: %__MODULE__{}
-  use ExAch.Field, specifications: [type: :alpha_num_string, max_length: 10]
+  use ExAch.Field, specifications: [type: :integer, length: 9]
 end

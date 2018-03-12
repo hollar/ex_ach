@@ -43,7 +43,8 @@ defmodule ExAch.MixProject do
   defp docs do
     [
       source_url: "https://github.com/hollar/ex_ach",
-      source_ref: "v#{@version}"
+      source_ref: "v#{@version}",
+      main: "ExAch"
     ]
   end
 

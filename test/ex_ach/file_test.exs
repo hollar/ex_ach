@@ -6,8 +6,8 @@ defmodule ExAch.FileTest do
   describe "creating an ach file" do
     test "creates file with header" do
       # File Header params
-      {:ok, immediate_destination} = File.Header.Fields.ImmediateDestination.new("b071000505")
-      {:ok, immediate_origin} = File.Header.Fields.ImmediateOrigin.new(1_234_567_890)
+      {:ok, immediate_destination} = File.Header.Fields.ImmediateDestination.new(071_000_505)
+      {:ok, immediate_origin} = File.Header.Fields.ImmediateOrigin.new(123_456_789)
       {:ok, file_id_modifier} = File.Header.Fields.FileIdModifier.new("1")
 
       {:ok, file_header} =
@@ -43,13 +43,19 @@ defmodule ExAch.FileTest do
 
       # Batch Entry params
       {:ok, transaction_code} = Batch.Entry.Fields.TransactionCode.new(22)
-      {:ok, receiving_dfi_identification} = Batch.Entry.Fields.ReceivingDfiIdentification.new("TTTTAAAA")
+
+      {:ok, receiving_dfi_identification} =
+        Batch.Entry.Fields.ReceivingDfiIdentification.new("TTTTAAAA")
+
       {:ok, check_digit} = Batch.Entry.Fields.CheckDigit.new(1)
       {:ok, dfi_account_number} = Batch.Entry.Fields.DfiAccountNumber.new("a12333")
       {:ok, amount} = Batch.Entry.Fields.Amount.new(1000)
-      {:ok, receiving_company_name} = Batch.Entry.Fields.ReceivingCompanyName.new("receiving company")
+
+      {:ok, receiving_company_name} =
+        Batch.Entry.Fields.ReceivingCompanyName.new("receiving company")
+
       {:ok, addenda_record_indicator} = Batch.Entry.Fields.AddendaRecordIndicator.new(0)
-      {:ok, trace_number} = Batch.Entry.Fields.TraceNumber.new(333000)
+      {:ok, trace_number} = Batch.Entry.Fields.TraceNumber.new(333_000)
 
       {:ok, batch_entry} =
         ExAch.Batch.Entry.new(
