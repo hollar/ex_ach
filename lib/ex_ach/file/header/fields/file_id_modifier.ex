@@ -5,5 +5,5 @@ defmodule ExAch.File.Header.Fields.FileIdModifier do
   """
 
   @type t :: %__MODULE__{}
-  use ExAch.Field, specifications: [type: :strict_alpha_num_string, length: 1]
+  use ExAch.Field, specifications: [type: :file_id_modifier]
 end

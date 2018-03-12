@@ -16,19 +16,21 @@ defmodule ExAch.FieldValidatorTest do
 
       assert Enum.empty?(errors)
     end
+  end
 
+  describe "validating file_id_modifier type" do
     test "a type of strict alpha numeric string does not returns error" do
-      specifications = [{:field_name, :type, :strict_alpha_num_string}]
-      errors = FieldValidator.validate("STR9", specifications)
+      specifications = [{:field_name, :type, :file_id_modifier}]
+      errors = FieldValidator.validate("A", specifications)
 
       assert Enum.empty?(errors)
     end
 
     test "a non allowed value of strict alpha numeric string returns error" do
-      specifications = [{:field_name, :type, :strict_alpha_num_string}]
-      errors = FieldValidator.validate("STR 9", specifications)
+      specifications = [{:field_name, :type, :file_id_modifier}]
+      errors = FieldValidator.validate("s 9", specifications)
 
-      assert errors == [{:field_name, :type, "Must be capital letters or digits"}]
+      assert errors == [{:field_name, :type, "Must be a letter or a number"}]
     end
   end
 
