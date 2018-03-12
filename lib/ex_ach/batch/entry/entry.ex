@@ -1,5 +1,4 @@
 defmodule ExAch.Batch.Entry do
-
   alias ExAch.Batch.Entry.Fields.{
     TransactionCode,
     ReceivingDfiIdentification,
@@ -32,27 +31,26 @@ defmodule ExAch.Batch.Entry do
   Create a batch entry structure
   """
   @spec new(
-    TransactionCode.t(),
-    ReceivingDfiIdentification.t(),
-    CheckDigit.t(),
-    DfiAccountNumber.t(),
-    Amount.t(),
-    ReceivingCompanyName.t(),
-    AddendaRecordIndicator.t(),
-    TraceNumber.t()
-  ) :: {:ok, t}
+          TransactionCode.t(),
+          ReceivingDfiIdentification.t(),
+          CheckDigit.t(),
+          DfiAccountNumber.t(),
+          Amount.t(),
+          ReceivingCompanyName.t(),
+          AddendaRecordIndicator.t(),
+          TraceNumber.t()
+        ) :: {:ok, t}
   def new(
-    %TransactionCode{} = transaction_code,
-    %ReceivingDfiIdentification{} = receiving_dfi_identification,
-    %CheckDigit{} = check_digit,
-    %DfiAccountNumber{} = dfi_account_number,
-    %Amount{} = amount,
-    %ReceivingCompanyName{} = receiving_company_name,
-    %AddendaRecordIndicator{} = addenda_record_indicator,
-    %TraceNumber{} = trace_number,
-    opts \\ []
-  ) do
-
+        %TransactionCode{} = transaction_code,
+        %ReceivingDfiIdentification{} = receiving_dfi_identification,
+        %CheckDigit{} = check_digit,
+        %DfiAccountNumber{} = dfi_account_number,
+        %Amount{} = amount,
+        %ReceivingCompanyName{} = receiving_company_name,
+        %AddendaRecordIndicator{} = addenda_record_indicator,
+        %TraceNumber{} = trace_number,
+        opts \\ []
+      ) do
     entry = %__MODULE__{
       transaction_code: transaction_code,
       receiving_dfi_identification: receiving_dfi_identification,
