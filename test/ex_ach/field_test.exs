@@ -5,10 +5,10 @@ defmodule ExAch.FieldTest do
     use ExAch.Field, default_content: 5, specifications: [type: :integer, length: 1]
   end
 
-  setup_all do
-    :dummy_field
-
-    :ok
+  describe "building the field name" do
+    test "uses the module name" do
+      assert ExAch.Field.field_name(DummyField) == :dummy_field
+    end
   end
 
   describe "validating content" do

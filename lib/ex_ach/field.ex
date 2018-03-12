@@ -4,19 +4,12 @@ defmodule ExAch.Field do
     default_content = Keyword.get(opts, :default_content)
 
     quote do
+      import ExAch.Field
       defstruct [:content]
 
       def specifications do
-        field_name =
-          __MODULE__
-          |> to_string
-          |> String.split(".")
-          |> List.last()
-          |> Macro.underscore()
-          |> String.to_existing_atom()
-
         Enum.map(unquote(specifications), fn {key, specification} ->
-          {field_name, key, specification}
+          {field_name(__MODULE__), key, specification}
         end)
       end
 
@@ -34,6 +27,15 @@ defmodule ExAch.Field do
         %__MODULE__{content: unquote(default_content)}
       end
     end
+  end
+
+  def field_name(module) do
+    module
+    |> to_string
+    |> String.split(".")
+    |> List.last()
+    |> Macro.underscore()
+    |> String.to_existing_atom()
   end
 
   def value(field) do
