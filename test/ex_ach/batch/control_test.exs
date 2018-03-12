@@ -2,21 +2,28 @@ defmodule ExAch.Batch.ControlTest do
   use ExUnit.Case
 
   alias ExAch.Batch.{Header, Entry, Control}
+
   alias ExAch.Batch.Control.Fields.{
     RecordTypeCode,
-    EntryAddendaCount
+    EntryAddendaCount,
+    EntryHash
   }
 
   setup do
     {:ok, header_service_class_code} = Header.Fields.ServiceClassCode.new(225)
     batch_header = %ExAch.Batch.Header{service_class_code: header_service_class_code}
-    batch_entries = List.wrap(%Entry{})
+    {:ok, receiving_dfi_identification} = Entry.Fields.ReceivingDfiIdentification.new(12_345_678)
+    entry = %Entry{receiving_dfi_identification: receiving_dfi_identification}
+    batch_entries = List.wrap(entry)
 
     [batch_header: batch_header, batch_entries: batch_entries]
   end
 
   describe "creating a batch control" do
-    test "batch control created successfully", %{batch_header: batch_header, batch_entries: batch_entries} do
+    test "batch control created successfully", %{
+      batch_header: batch_header,
+      batch_entries: batch_entries
+    } do
       {:ok, batch_control} = ExAch.Batch.Control.new(batch_header, batch_entries)
 
       assert %Control{} = batch_control
@@ -44,11 +51,11 @@ defmodule ExAch.Batch.ControlTest do
 
   describe "infering company_identification from the batch header" do
     test "company_identification is copied from header" do
-      {:ok, company_identification} = Header.Fields.CompanyIdentification.new(1234567890)
+      {:ok, company_identification} = Header.Fields.CompanyIdentification.new(1_234_567_890)
       header = %ExAch.Batch.Header{company_identification: company_identification}
 
       {:ok, batch_control} = Control.new(header, [])
-      assert batch_control.company_identification.content == 1234567890
+      assert batch_control.company_identification.content == 1_234_567_890
     end
   end
 
@@ -56,6 +63,19 @@ defmodule ExAch.Batch.ControlTest do
     test "a single entry returns 1", %{batch_header: batch_header, batch_entries: batch_entries} do
       {:ok, batch_control} = Control.new(batch_header, batch_entries)
       assert %EntryAddendaCount{content: 1} = batch_control.entry_addenda_count
+    end
+  end
+
+  describe "adding entry hash" do
+    test "adds an entry hash", %{batch_header: batch_header} do
+      {:ok, receiving_dfi_identification} =
+        ExAch.Batch.Entry.Fields.ReceivingDfiIdentification.new(0)
+
+      entry = %Entry{receiving_dfi_identification: receiving_dfi_identification}
+      batch_entries = List.wrap(entry)
+      {:ok, batch_control} = Control.new(batch_header, batch_entries)
+
+      assert %EntryHash{} = batch_control.entry_hash
     end
   end
 end

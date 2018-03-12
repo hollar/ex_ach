@@ -28,6 +28,8 @@ defmodule ExAch.Field do
           {field_name(__MODULE__), key, rule}
         end)
       end
+
+      defoverridable new: 1, new: 0
     end
   end
 

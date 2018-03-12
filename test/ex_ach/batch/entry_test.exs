@@ -18,7 +18,7 @@ defmodule ExAch.Batch.EntryTest do
     test "batch entry created successfully" do
       # Required fields
       {:ok, transaction_code} = TransactionCode.new(22)
-      {:ok, receiving_dfi_identification} = ReceivingDfiIdentification.new("TTTTAAAA")
+      {:ok, receiving_dfi_identification} = ReceivingDfiIdentification.new(12345)
       {:ok, check_digit} = CheckDigit.new(1)
       {:ok, dfi_account_number} = DfiAccountNumber.new("a12333")
       {:ok, amount} = Amount.new(1000)

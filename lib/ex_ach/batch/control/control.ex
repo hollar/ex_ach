@@ -5,16 +5,19 @@ defmodule ExAch.Batch.Control do
   """
 
   alias ExAch.Batch
+
   alias ExAch.Batch.Control.Fields.{
     RecordTypeCode,
-    EntryAddendaCount
+    EntryAddendaCount,
+    EntryHash
   }
 
   defstruct [
     :record_type_code,
     :service_class_code,
     :entry_addenda_count,
-    :company_identification
+    :company_identification,
+    :entry_hash
   ]
 
   @type t :: %__MODULE__{}
@@ -24,11 +27,14 @@ defmodule ExAch.Batch.Control do
   """
   @spec new(Batch.Header.t(), list(Batch.Entry.t())) :: {:ok, t()}
   def new(batch_header, entries) do
+    {:ok, entry_hash} = EntryHash.new(entries)
+
     control = %__MODULE__{
       record_type_code: RecordTypeCode.new(),
       service_class_code: batch_header.service_class_code,
       entry_addenda_count: EntryAddendaCount.new(entries),
-      company_identification: batch_header.company_identification
+      company_identification: batch_header.company_identification,
+      entry_hash: entry_hash
     }
 
     {:ok, control}
