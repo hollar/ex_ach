@@ -7,6 +7,7 @@ defmodule ExAch.Batch.Control do
   alias ExAch.Batch
 
   alias ExAch.Batch.Control.Fields.{
+    BatchNumber,
     RecordTypeCode,
     EntryAddendaCount,
     EntryHash,
@@ -22,7 +23,8 @@ defmodule ExAch.Batch.Control do
     :entry_hash,
     :total_debit_entry_dollar_amount,
     :message_authentication_code,
-    :originating_dfi_identification
+    :originating_dfi_identification,
+    :batch_number
   ]
 
   @type t :: %__MODULE__{}
@@ -43,7 +45,8 @@ defmodule ExAch.Batch.Control do
       entry_hash: entry_hash,
       total_debit_entry_dollar_amount: total_debit_entry_dollar_amount,
       message_authentication_code: MessageAuthenticationCode.new(),
-      originating_dfi_identification: batch_header.originating_dfi_identification
+      originating_dfi_identification: batch_header.originating_dfi_identification,
+      batch_number: BatchNumber.new(batch_header.batch_number)
     }
 
     {:ok, control}

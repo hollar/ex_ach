@@ -12,8 +12,28 @@ defmodule ExAch.Batch.ControlTest do
   }
 
   setup do
-    {:ok, header_service_class_code} = Header.Fields.ServiceClassCode.new(225)
-    batch_header = %ExAch.Batch.Header{service_class_code: header_service_class_code}
+    {:ok, service_class_code} = Header.Fields.ServiceClassCode.new(225)
+    {:ok, company_name} = Header.Fields.CompanyName.new("CompanyName")
+    {:ok, company_identification} = Header.Fields.CompanyIdentification.new(1_112_223_334)
+    {:ok, standard_entry_class_code} = Header.Fields.StandardEntryClassCode.new(:ccd)
+    {:ok, company_entry_description} = Header.Fields.CompanyEntryDescription.new("DESC1")
+    {:ok, effective_entry_date} = Header.Fields.EffectiveEntryDate.new(~D[2000-01-01])
+    {:ok, batch_number} = Header.Fields.BatchNumber.new(1_234_567)
+
+    {:ok, originating_dfi_identification} =
+      Header.Fields.OriginatingDfiIdentification.new("07100050")
+
+    {:ok, batch_header} =
+      Header.new(
+        service_class_code,
+        company_name,
+        company_identification,
+        standard_entry_class_code,
+        company_entry_description,
+        effective_entry_date,
+        batch_number,
+        originating_dfi_identification
+      )
 
     {:ok, transaction_code} = Entry.Fields.TransactionCode.new(27)
     {:ok, receiving_dfi_identification} = Entry.Fields.ReceivingDfiIdentification.new("12345678")
@@ -57,30 +77,29 @@ defmodule ExAch.Batch.ControlTest do
   end
 
   describe "infering service_class_code from the batch header" do
-    test "debit-only entries returns 225" do
+    test "debit-only entries returns 225", %{batch_header: batch_header} do
       {:ok, header_service_class_code} = Header.Fields.ServiceClassCode.new(225)
-      header = %ExAch.Batch.Header{service_class_code: header_service_class_code}
 
-      {:ok, batch_control} = Control.new(header, [])
+      batch_header = %{batch_header | service_class_code: header_service_class_code}
+
+      {:ok, batch_control} = Control.new(batch_header, [])
       assert batch_control.service_class_code.content == 225
     end
 
-    test "debit-only entries returns 200" do
-      {:ok, header_service_class_code} = Header.Fields.ServiceClassCode.new(200)
-      header = %ExAch.Batch.Header{service_class_code: header_service_class_code}
+    test "debit-only entries returns 200", %{batch_header: batch_header} do
+      {:ok, header_service_class_code} = Header.Fields.ServiceClassCode.new(220)
 
-      {:ok, batch_control} = Control.new(header, [])
-      assert batch_control.service_class_code.content == 200
+      batch_header = %{batch_header | service_class_code: header_service_class_code}
+
+      {:ok, batch_control} = Control.new(batch_header, [])
+      assert batch_control.service_class_code.content == 220
     end
   end
 
   describe "infering company_identification from the batch header" do
-    test "company_identification is copied from header" do
-      {:ok, company_identification} = Header.Fields.CompanyIdentification.new(1_234_567_890)
-      header = %ExAch.Batch.Header{company_identification: company_identification}
-
-      {:ok, batch_control} = Control.new(header, [])
-      assert batch_control.company_identification.content == 1_234_567_890
+    test "company_identification is copied from header", %{batch_header: batch_header} do
+      {:ok, batch_control} = Control.new(batch_header, [])
+      assert batch_control.company_identification.content == 1_112_223_334
     end
   end
 
@@ -107,14 +126,16 @@ defmodule ExAch.Batch.ControlTest do
   end
 
   describe "infering originating_dfi_identification from the batch header" do
-    test "" do
-      {:ok, originating_dfi_identification} =
-        Header.Fields.OriginatingDfiIdentification.new("12345678")
+    test "originating_dfi_identification is copied from header", %{batch_header: batch_header} do
+      {:ok, batch_control} = Control.new(batch_header, [])
+      assert Field.value(batch_control.originating_dfi_identification) == "07100050"
+    end
+  end
 
-      header = %ExAch.Batch.Header{originating_dfi_identification: originating_dfi_identification}
-
-      {:ok, batch_control} = Control.new(header, [])
-      assert Field.value(batch_control.originating_dfi_identification) == "12345678"
+  describe "infering batch_number from the batch header" do
+    test "batch_number is copied from header", %{batch_header: batch_header} do
+      {:ok, batch_control} = Control.new(batch_header, [])
+      assert Field.value(batch_control.batch_number) == 1_234_567
     end
   end
 end
