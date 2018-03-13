@@ -4,18 +4,19 @@ defmodule ExAch.Batch.Control.Fields.EntryHash do
 
   use ExAch.Field
 
-  alias ExAch.Batch
+  alias ExAch.{Batch, Field}
 
   @spec new(list(Batch.Entry.t())) :: {:ok, t()}
   def new(entries) do
     sum =
       entries
-      |> Enum.map(fn entry -> entry.receiving_dfi_identification.content end)
+      |> Enum.map(fn entry ->
+        String.to_integer(Field.value(entry.receiving_dfi_identification))
+      end)
       |> Enum.sum()
       |> to_string
       |> String.split_at(-10)
       |> elem(1)
-      |> String.to_integer()
 
     {:ok, %__MODULE__{content: sum}}
   end

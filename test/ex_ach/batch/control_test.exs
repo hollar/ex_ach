@@ -12,7 +12,7 @@ defmodule ExAch.Batch.ControlTest do
   setup do
     {:ok, header_service_class_code} = Header.Fields.ServiceClassCode.new(225)
     batch_header = %ExAch.Batch.Header{service_class_code: header_service_class_code}
-    {:ok, receiving_dfi_identification} = Entry.Fields.ReceivingDfiIdentification.new(12_345_678)
+    {:ok, receiving_dfi_identification} = Entry.Fields.ReceivingDfiIdentification.new("12345678")
     entry = %Entry{receiving_dfi_identification: receiving_dfi_identification}
     batch_entries = List.wrap(entry)
 
@@ -69,7 +69,7 @@ defmodule ExAch.Batch.ControlTest do
   describe "adding entry hash" do
     test "adds an entry hash", %{batch_header: batch_header} do
       {:ok, receiving_dfi_identification} =
-        ExAch.Batch.Entry.Fields.ReceivingDfiIdentification.new(0)
+        ExAch.Batch.Entry.Fields.ReceivingDfiIdentification.new("01234567")
 
       entry = %Entry{receiving_dfi_identification: receiving_dfi_identification}
       batch_entries = List.wrap(entry)

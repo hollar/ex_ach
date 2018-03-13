@@ -42,7 +42,7 @@ defmodule ExAch do
         ...> )
         ...> # Creating a batch entry
         ...> {:ok, transaction_code} = Batch.Entry.Fields.TransactionCode.new(22)
-        ...> {:ok, receiving_dfi_identification} = Batch.Entry.Fields.ReceivingDfiIdentification.new(12345678)
+        ...> {:ok, receiving_dfi_identification} = Batch.Entry.Fields.ReceivingDfiIdentification.new("12345678")
         ...> {:ok, check_digit} = Batch.Entry.Fields.CheckDigit.new(1)
         ...> {:ok, dfi_account_number} = Batch.Entry.Fields.DfiAccountNumber.new("53342")
         ...> {:ok, amount} = Batch.Entry.Fields.Amount.new(1000)

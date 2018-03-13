@@ -30,7 +30,10 @@ defmodule ExAch.BatchTest do
         )
 
       {:ok, transaction_code} = Entry.Fields.TransactionCode.new(22)
-      {:ok, receiving_dfi_identification} = Entry.Fields.ReceivingDfiIdentification.new(12345)
+
+      {:ok, receiving_dfi_identification} =
+        Entry.Fields.ReceivingDfiIdentification.new("12345678")
+
       {:ok, check_digit} = Entry.Fields.CheckDigit.new(1)
       {:ok, dfi_account_number} = Entry.Fields.DfiAccountNumber.new("a12333")
       {:ok, amount} = Entry.Fields.Amount.new(1000)

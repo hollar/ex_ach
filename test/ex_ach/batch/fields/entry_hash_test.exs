@@ -7,20 +7,20 @@ defmodule ExAch.Batch.EntryHashTest do
   describe "computing entry hash" do
     test "a sum under the limit returns the sum" do
       {:ok, receiving_dfi_identification} =
-        Entry.Fields.ReceivingDfiIdentification.new(12_345_678)
+        Entry.Fields.ReceivingDfiIdentification.new("12345678")
 
       entry = %Entry{receiving_dfi_identification: receiving_dfi_identification}
       batch_entries = List.wrap(entry)
       {:ok, entry_hash} = EntryHash.new(batch_entries)
 
-      assert %EntryHash{content: 12_345_678} = entry_hash
+      assert %EntryHash{content: "12345678"} = entry_hash
     end
 
     test "a sum over the limit gets truncated with the 10 rightmost digits" do
       batch_entries =
         Enum.reduce(1..1000, [], fn _i, acc ->
           {:ok, receiving_dfi_identification} =
-            Entry.Fields.ReceivingDfiIdentification.new(91_234_567)
+            Entry.Fields.ReceivingDfiIdentification.new("91234567")
 
           entry = %Entry{receiving_dfi_identification: receiving_dfi_identification}
 
@@ -29,7 +29,7 @@ defmodule ExAch.Batch.EntryHashTest do
 
       {:ok, entry_hash} = EntryHash.new(batch_entries)
 
-      assert %EntryHash{content: 1_234_567_000} = entry_hash
+      assert %EntryHash{content: "1234567000"} = entry_hash
     end
   end
 end
