@@ -7,16 +7,20 @@ defmodule ExAch.FieldValidator do
     |> Enum.reject(&is_nil/1)
   end
 
-  defp do_validate(content, {field_name, :format, regex}) do
+  defp do_validate(content, {field_name, :format, {regex, message}}) do
     case do_validate(content, {field_name, :type, :alpha_numeric}) do
       nil ->
         if !Regex.match?(regex, content) do
-          {field_name, :format, "Wrong format"}
+          {field_name, :format, message}
         end
 
       error ->
         error
     end
+  end
+
+  defp do_validate(content, {field_name, :format, regex}) do
+    do_validate(content, {field_name, :format, {regex, "Wrong format"}})
   end
 
   defp do_validate(content, {field_name, :max_length, length}) when is_binary(content) do

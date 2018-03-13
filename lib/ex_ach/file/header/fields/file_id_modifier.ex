@@ -4,6 +4,5 @@ defmodule ExAch.File.Header.Fields.FileIdModifier do
   in sequence (A-Z). If more than one file is delivered, they must have different modifiers.
   """
 
-  # use ExAch.Field, validation: [format: {~r/^[0-9A-Z]$/, "Must be a letter or digit"}]
-  use ExAch.Field, validation: [format: ~r/^[0-9A-Z]$/]
+  use ExAch.Field, validation: [format: {~r/^[0-9A-Z]$/, "Must be a letter or digit"}]
 end

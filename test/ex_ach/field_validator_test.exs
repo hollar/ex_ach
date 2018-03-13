@@ -171,5 +171,11 @@ defmodule ExAch.FieldValidatorTest do
       errors = FieldValidator.validate(9, validation_rules)
       assert errors == [{:field_name, :type, "Must be an alphanum string"}]
     end
+
+    test "non-matching format returns given error message" do
+      validation_rules = [{:field_name, :format, {~r/^[A-Z]$/, ":message:"}}]
+      errors = FieldValidator.validate("9", validation_rules)
+      assert errors == [{:field_name, :format, ":message:"}]
+    end
   end
 end
