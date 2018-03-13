@@ -4,7 +4,6 @@ defmodule ExAch.Batch.Entry.Fields.TraceNumber do
   identify the transaction in case of an inquiry.
   """
 
-  @type t :: %__MODULE__{}
   use ExAch.Field,
     specifications: [
       type: :integer,

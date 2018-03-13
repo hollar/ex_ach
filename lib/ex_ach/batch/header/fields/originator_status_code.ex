@@ -4,6 +4,5 @@ defmodule ExAch.Batch.Header.Fields.OriginatorStatusCode do
   which is bound by the rules of the ACH.
   """
 
-  @type t :: %__MODULE__{}
   use ExAch.Field, value: 1
 end

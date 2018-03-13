@@ -4,6 +4,5 @@ defmodule ExAch.Batch.Header.Fields.CompanyIdentification do
   unless multiple companies/divisions are provided in one transmission.
   """
 
-  @type t :: %__MODULE__{}
   use ExAch.Field, specifications: [type: :integer, length: 10]
 end

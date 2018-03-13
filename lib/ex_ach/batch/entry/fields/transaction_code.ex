@@ -15,7 +15,6 @@ defmodule ExAch.Batch.Entry.Fields.TransactionCode do
   39 - Zero dollar with remittance into a Savings Account
   """
 
-  @type t :: %__MODULE__{}
   use ExAch.Field,
     specifications: [
       type: :integer,

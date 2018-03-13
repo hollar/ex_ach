@@ -4,6 +4,5 @@ defmodule ExAch.Batch.Header.Fields.OriginatingDfiIdentification do
   07200080.
   """
 
-  @type t :: %__MODULE__{}
   use ExAch.Field, specifications: [type: :integer, max_length: 8]
 end

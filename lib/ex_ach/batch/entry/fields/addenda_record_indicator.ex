@@ -4,7 +4,6 @@ defmodule ExAch.Batch.Entry.Fields.AddendaRecordIndicator do
   transaction enter 1.
   """
 
-  @type t :: %__MODULE__{}
   use ExAch.Field,
     specifications: [
       type: :integer,

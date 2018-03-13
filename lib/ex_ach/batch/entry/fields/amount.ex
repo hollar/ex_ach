@@ -4,7 +4,6 @@ defmodule ExAch.Batch.Entry.Fields.Amount do
   for prenotes.
   """
 
-  @type t :: %__MODULE__{}
   use ExAch.Field,
     specifications: [
       type: :integer,

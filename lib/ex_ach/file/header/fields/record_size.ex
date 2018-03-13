@@ -3,6 +3,5 @@ defmodule ExAch.File.Header.Fields.RecordSize do
   Number of bytes per record. Enter 094
   """
 
-  @type t :: %__MODULE__{}
   use ExAch.Field, value: "094"
 end

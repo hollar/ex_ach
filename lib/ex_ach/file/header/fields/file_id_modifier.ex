@@ -4,6 +4,5 @@ defmodule ExAch.File.Header.Fields.FileIdModifier do
   in sequence (A-Z). If more than one file is delivered, they must have different modifiers.
   """
 
-  @type t :: %__MODULE__{}
   use ExAch.Field, specifications: [type: :file_id_modifier]
 end

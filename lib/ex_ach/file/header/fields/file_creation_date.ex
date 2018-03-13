@@ -3,6 +3,5 @@ defmodule ExAch.File.Header.Fields.FileCreationDate do
   The date you created the input file.
   """
 
-  @type t :: %__MODULE__{}
   use ExAch.Field, value: Date.utc_today()
 end

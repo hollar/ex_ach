@@ -4,6 +4,5 @@ defmodule ExAch.Batch.Header.Fields.CompanyDescriptiveDate do
   bank statement by the Receiving Financial Institution.
   """
 
-  @type t :: %__MODULE__{}
   use ExAch.Field, specifications: [type: :date]
 end

@@ -4,6 +4,5 @@ defmodule ExAch.File.Header.Fields.FileCreationTime do
   if you submit more than one per day. This field is optional
   """
 
-  @type t :: %__MODULE__{}
   use ExAch.Field, value: Time.utc_now()
 end

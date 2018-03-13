@@ -7,6 +7,8 @@ defmodule ExAch.Field do
       import ExAch.Field
       defstruct [:content]
 
+      @type t :: %__MODULE__{}
+
       def specifications do
         Enum.map(unquote(specifications), fn {key, specification} ->
           {field_name(__MODULE__), key, specification}

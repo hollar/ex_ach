@@ -10,6 +10,5 @@ defmodule ExAch.Batch.Header.Fields.StandardEntryClassCode do
   - WEB (Authorization received via the Internet).
   """
 
-  @type t :: %__MODULE__{}
   use ExAch.Field, specifications: [type: :atom, inclusion: [:ccd]]
 end

@@ -3,6 +3,5 @@ defmodule ExAch.File.Header.Fields.RecordTypeCode do
   The code identifying the File Header Record is 1.
   """
 
-  @type t :: %__MODULE__{}
   use ExAch.Field, value: 1
 end
