@@ -4,5 +4,9 @@ defmodule ExAch.Batch.Control.Fields.OriginatingDfiIdentification do
   07200080.
   """
 
-  use ExAch.Field, validation: [format: {~r/^\d{8}$/, "Must be 8 digits"}]
+  use ExAch.Field
+  alias ExAch.Batch.Header.Fields.OriginatingDfiIdentification
+
+  @spec new(OriginatingDfiIdentification.t()) :: t()
+  def new(%OriginatingDfiIdentification{content: odfi}), do: %__MODULE__{content: odfi}
 end

@@ -6,10 +6,9 @@ defmodule ExAch.Batch.Control.Fields.ServiceClassCode do
   225 - ACH Debits Only
   """
 
-  use ExAch.Field,
-    specifications: [
-      type: :integer,
-      inclusion: [200, 220, 225]
-    ],
-    field_type: :opaque
+  use ExAch.Field
+  alias ExAch.Batch.Header.Fields.ServiceClassCode
+
+  @spec new(ServiceClassCode.t()) :: t()
+  def new(%ServiceClassCode{content: code}), do: %__MODULE__{content: code}
 end

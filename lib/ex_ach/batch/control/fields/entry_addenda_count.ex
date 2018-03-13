@@ -10,7 +10,7 @@ defmodule ExAch.Batch.Control.Fields.EntryAddendaCount do
 
   @type t :: %__MODULE__{}
 
-  #TODO: it also includes number of addenda records processed as well as number of entries
+  # TODO: it also includes number of addenda records processed as well as number of entries
   @spec new(list(Batch.Entry.t())) :: t()
   def new(entries) do
     %__MODULE__{content: Enum.count(entries)}

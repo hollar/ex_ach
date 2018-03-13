@@ -10,12 +10,15 @@ defmodule ExAch.Batch.Control do
 
   alias ExAch.Batch.Control.Fields.{
     BatchNumber,
-    RecordTypeCode,
+    CompanyIdentification,
     EntryAddendaCount,
     EntryHash,
     MessageAuthenticationCode,
-    TotalDebitEntryDollarAmount,
-    TotalCreditEntryDollarAmount
+    OriginatingDfiIdentification,
+    RecordTypeCode,
+    ServiceClassCode,
+    TotalCreditEntryDollarAmount,
+    TotalDebitEntryDollarAmount
   }
 
   defstruct [
@@ -31,7 +34,18 @@ defmodule ExAch.Batch.Control do
     :batch_number
   ]
 
-  @type t :: %__MODULE__{}
+  @type t :: %__MODULE__{
+          batch_number: BatchNumber.t(),
+          company_identification: CompanyIdentification.t(),
+          entry_addenda_count: EntryAddendaCount.t(),
+          entry_hash: EntryHash.t(),
+          message_authentication_code: MessageAuthenticationCode.t(),
+          originating_dfi_identification: OriginatingDfiIdentification.t(),
+          record_type_code: RecordTypeCode.t(),
+          service_class_code: ServiceClassCode.t(),
+          total_credit_entry_dollar_amount: TotalCreditEntryDollarAmount.t(),
+          total_debit_entry_dollar_amount: TotalDebitEntryDollarAmount.t()
+        }
 
   @doc """
   Create a batch control record
@@ -44,14 +58,15 @@ defmodule ExAch.Batch.Control do
 
     control = %__MODULE__{
       record_type_code: RecordTypeCode.new(),
-      service_class_code: batch_header.service_class_code,
+      service_class_code: ServiceClassCode.new(batch_header.service_class_code),
       entry_addenda_count: EntryAddendaCount.new(entries),
-      company_identification: batch_header.company_identification,
+      company_identification: CompanyIdentification.new(batch_header.company_identification),
       entry_hash: entry_hash,
       total_debit_entry_dollar_amount: total_debit_entry_dollar_amount,
       total_credit_entry_dollar_amount: total_credit_entry_dollar_amount,
       message_authentication_code: MessageAuthenticationCode.new(),
-      originating_dfi_identification: batch_header.originating_dfi_identification,
+      originating_dfi_identification:
+        OriginatingDfiIdentification.new(batch_header.originating_dfi_identification),
       batch_number: BatchNumber.new(batch_header.batch_number)
     }
 
