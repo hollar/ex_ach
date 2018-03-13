@@ -1,4 +1,4 @@
-defmodule ExAch.Batch.EntryHashTest do
+defmodule ExAch.Batch.Control.Fields.EntryHashTest do
   use ExUnit.Case
 
   alias ExAch.Batch.Control.Fields.EntryHash
