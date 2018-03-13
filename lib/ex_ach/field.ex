@@ -1,18 +1,46 @@
 defmodule ExAch.Field do
-  @moduledoc false
+  defmacro __using__(opts) do
+    validation = Keyword.get(opts, :validation, [])
+    value = Keyword.get(opts, :value)
 
-  @type t :: %__MODULE__{}
+    quote do
+      import ExAch.Field
+      defstruct [:content]
 
-  defstruct [:name, :content, :length, :position, :required]
+      @type t :: %__MODULE__{}
 
-  @spec create(Keyword.t()) :: t
-  def create(param) do
-    %__MODULE__{
-      name: Keyword.get(param, :name),
-      content: Keyword.get(param, :content),
-      length: Keyword.get(param, :length),
-      position: Keyword.get(param, :position),
-      required: Keyword.get(param, :required, true)
-    }
+      def new(content) do
+        errors = ExAch.FieldValidator.validate(content, validation_rules())
+
+        if Enum.empty?(errors) do
+          {:ok, %__MODULE__{content: content}}
+        else
+          {:error, errors}
+        end
+      end
+
+      def new do
+        %__MODULE__{content: unquote(value)}
+      end
+
+      defp validation_rules do
+        Enum.map(unquote(validation), fn {key, rule} ->
+          {field_name(__MODULE__), key, rule}
+        end)
+      end
+    end
+  end
+
+  def field_name(module) do
+    module
+    |> to_string
+    |> String.split(".")
+    |> List.last()
+    |> Macro.underscore()
+    |> String.to_existing_atom()
+  end
+
+  def value(field) do
+    field.content
   end
 end

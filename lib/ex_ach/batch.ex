@@ -1,25 +1,14 @@
 defmodule ExAch.Batch do
-  alias ExAch.{BatchHeader, BatchHeaderParams}
-  defstruct [:header]
+  alias ExAch.Batch
+  defstruct [:header, :entries]
 
   @type t :: %__MODULE__{}
 
-  @spec new() :: t
-  def new do
-    %__MODULE__{}
-  end
-
-  @spec add_header(t, map) :: {:ok, t}
-  def add_header(batch, batch_header_params) do
-    header_params = BatchHeaderParams.new(batch_header_params)
-
-    case BatchHeaderParams.valid?(header_params) do
-      true ->
-        header = BatchHeader.add_header(BatchHeader.new(), header_params)
-        {:ok, %{batch | header: header}}
-
-      false ->
-        {:error, Vex.errors(header_params)}
-    end
+  @doc """
+  Creates a new Batch Header structure
+  """
+  @spec new(Batch.Header.t(), list(Batch.Entry.t())) :: {:ok, t}
+  def new(%Batch.Header{} = header, batch_entries) do
+    {:ok, %__MODULE__{header: header, entries: batch_entries}}
   end
 end
