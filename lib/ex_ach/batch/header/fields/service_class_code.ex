@@ -6,9 +6,5 @@ defmodule ExAch.Batch.Header.Fields.ServiceClassCode do
   225 - ACH Debits Only
   """
 
-  use ExAch.Field,
-    validation: [
-      type: :integer,
-      inclusion: [200, 220, 225]
-    ]
+  use ExAch.Field, validation: [type: :integer, inclusion: [200, 220, 225]]
 end

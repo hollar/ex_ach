@@ -4,9 +4,5 @@ defmodule ExAch.Batch.Header.Fields.CompanyName do
   prepared by the Receiving Financial Institution.
   """
 
-  use ExAch.Field,
-    validation: [
-      type: :alpha_numeric,
-      max_length: 16
-    ]
+  use ExAch.Field, validation: [type: :alpha_numeric, max_length: 16]
 end
