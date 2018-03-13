@@ -6,9 +6,7 @@ defmodule ExAch.Batch.Control.Fields.EntryHash do
 
   alias ExAch.Batch
 
-  @type t :: %__MODULE__{}
-
-  @spec new(list(Batch.Entry.t())) :: t()
+  @spec new(list(Batch.Entry.t())) :: {:ok, t()}
   def new(entries) do
     sum =
       entries

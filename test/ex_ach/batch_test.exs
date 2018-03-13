@@ -2,6 +2,7 @@ defmodule ExAch.BatchTest do
   use ExAch.TestCase
 
   alias ExAch.Batch
+  alias ExAch.Batch.Entry
 
   describe "creating a batch" do
     test "record created successfully" do
@@ -28,7 +29,27 @@ defmodule ExAch.BatchTest do
           originating_dfi_identification
         )
 
-      {:ok, batch_entry} = ExAch.Batch.Entry.new()
+      {:ok, transaction_code} = Entry.Fields.TransactionCode.new(22)
+      {:ok, receiving_dfi_identification} = Entry.Fields.ReceivingDfiIdentification.new(12345)
+      {:ok, check_digit} = Entry.Fields.CheckDigit.new(1)
+      {:ok, dfi_account_number} = Entry.Fields.DfiAccountNumber.new("a12333")
+      {:ok, amount} = Entry.Fields.Amount.new(1000)
+      {:ok, receiving_company_name} = Entry.Fields.ReceivingCompanyName.new("receiving company")
+      {:ok, addenda_record_indicator} = Entry.Fields.AddendaRecordIndicator.new(0)
+      {:ok, trace_number} = Entry.Fields.TraceNumber.new(333_000)
+
+      {:ok, batch_entry} =
+        ExAch.Batch.Entry.new(
+          transaction_code,
+          receiving_dfi_identification,
+          check_digit,
+          dfi_account_number,
+          amount,
+          receiving_company_name,
+          addenda_record_indicator,
+          trace_number
+        )
+
       batch_entries = List.wrap(batch_entry)
 
       {:ok, batch} = ExAch.Batch.new(batch_header, batch_entries)
