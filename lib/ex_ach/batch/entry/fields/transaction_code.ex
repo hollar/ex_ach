@@ -16,4 +16,7 @@ defmodule ExAch.Batch.Entry.Fields.TransactionCode do
       type: :integer,
       inclusion: [22, 23, 24, 27, 28, 29, 32, 33, 34, 37, 38, 39]
     ]
+
+  def debit?(%{content: code}) when code in [27, 28, 37, 38], do: true
+  def debit?(_field), do: false
 end

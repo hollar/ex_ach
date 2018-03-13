@@ -30,6 +30,7 @@ defmodule ExAch.Batch.Control do
   @spec new(Batch.Header.t(), list(Batch.Entry.t())) :: {:ok, t()}
   def new(batch_header, entries) do
     {:ok, entry_hash} = EntryHash.new(entries)
+    {:ok, total_debit_entry_dollar_amount} = TotalDebitEntryDollarAmount.new(entries)
 
     control = %__MODULE__{
       record_type_code: RecordTypeCode.new(),
@@ -37,7 +38,7 @@ defmodule ExAch.Batch.Control do
       entry_addenda_count: EntryAddendaCount.new(entries),
       company_identification: batch_header.company_identification,
       entry_hash: entry_hash,
-      total_debit_entry_dollar_amount: %TotalDebitEntryDollarAmount{}
+      total_debit_entry_dollar_amount: total_debit_entry_dollar_amount
     }
 
     {:ok, control}
