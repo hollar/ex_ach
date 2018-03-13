@@ -7,6 +7,18 @@ defmodule ExAch.FieldValidator do
     |> Enum.reject(&is_nil/1)
   end
 
+  defp do_validate(content, {field_name, :format, regex}) do
+    case do_validate(content, {field_name, :type, :alpha_numeric}) do
+      nil ->
+        if !Regex.match?(regex, content) do
+          {field_name, :format, "Wrong format"}
+        end
+
+      error ->
+        error
+    end
+  end
+
   defp do_validate(content, {field_name, :max_length, length}) when is_binary(content) do
     if byte_size(content) > length do
       {field_name, :max_length, "Must be less than or equal to #{length} character(s)"}
@@ -50,13 +62,6 @@ defmodule ExAch.FieldValidator do
 
   defp do_validate(_content, {field_name, :type, :alpha_numeric}) do
     {field_name, :type, "Must be an alphanum string"}
-  end
-
-  defp do_validate(content, {field_name, :type, :file_id_modifier})
-       when is_binary(content) do
-    if !Regex.match?(~r/^[0-9A-Z]$/, content) do
-      {field_name, :type, "Must be a letter or a number"}
-    end
   end
 
   defp do_validate(_content, {field_name, :type, :file_id_modifier}) do

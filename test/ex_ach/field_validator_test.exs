@@ -16,20 +16,6 @@ defmodule ExAch.FieldValidatorTest do
     end
   end
 
-  describe "validating file_id_modifier type" do
-    test "type of strict alpha numeric string does not returns error" do
-      validation_rules = [{:field_name, :type, :file_id_modifier}]
-      errors = FieldValidator.validate("A", validation_rules)
-      assert Enum.empty?(errors)
-    end
-
-    test "non allowed value of strict alpha numeric string returns error" do
-      validation_rules = [{:field_name, :type, :file_id_modifier}]
-      errors = FieldValidator.validate("s 9", validation_rules)
-      assert errors == [{:field_name, :type, "Must be a letter or a number"}]
-    end
-  end
-
   describe "validating atom type" do
     test "non-atom type returns an error" do
       validation_rules = [{:field_name, :type, :atom}]
@@ -164,6 +150,26 @@ defmodule ExAch.FieldValidatorTest do
       validation_rules = [{:field_name, :inclusion, [1, 2]}]
       errors = FieldValidator.validate(1, validation_rules)
       assert Enum.empty?(errors)
+    end
+  end
+
+  describe "validating format" do
+    test "matching format does not returns error" do
+      validation_rules = [{:field_name, :format, ~r/^[0-9A-Z]$/}]
+      errors = FieldValidator.validate("A", validation_rules)
+      assert Enum.empty?(errors)
+    end
+
+    test "non-matching format returns error" do
+      validation_rules = [{:field_name, :format, ~r/^[0-9A-Z]$/}]
+      errors = FieldValidator.validate("s 9", validation_rules)
+      assert errors == [{:field_name, :format, "Wrong format"}]
+    end
+
+    test "non string returns string type error" do
+      validation_rules = [{:field_name, :format, ~r/^[0-9A-Z]$/}]
+      errors = FieldValidator.validate(9, validation_rules)
+      assert errors == [{:field_name, :type, "Must be an alphanum string"}]
     end
   end
 end
