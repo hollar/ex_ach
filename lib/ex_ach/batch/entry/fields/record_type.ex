@@ -4,5 +4,5 @@ defmodule ExAch.Batch.Entry.Fields.RecordTypeCode do
   """
 
   @type t :: %__MODULE__{}
-  use ExAch.Field, default_content: 6
+  use ExAch.Field, value: 6
 end

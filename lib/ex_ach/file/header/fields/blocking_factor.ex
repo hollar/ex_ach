@@ -3,5 +3,5 @@ defmodule ExAch.File.Header.Fields.BlockingFactor do
   Block at 10
   """
   @type t :: %__MODULE__{}
-  use ExAch.Field, default_content: 10
+  use ExAch.Field, value: 10
 end

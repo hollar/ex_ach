@@ -2,7 +2,7 @@ defmodule ExAch.FieldTest do
   use ExUnit.Case
 
   defmodule DummyField do
-    use ExAch.Field, default_content: 5, specifications: [type: :integer, length: 1]
+    use ExAch.Field, value: 5, specifications: [type: :integer, length: 1]
   end
 
   describe "building the field name" do

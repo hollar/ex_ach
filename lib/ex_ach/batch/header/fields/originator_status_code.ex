@@ -5,5 +5,5 @@ defmodule ExAch.Batch.Header.Fields.OriginatorStatusCode do
   """
 
   @type t :: %__MODULE__{}
-  use ExAch.Field, default_content: 1
+  use ExAch.Field, value: 1
 end

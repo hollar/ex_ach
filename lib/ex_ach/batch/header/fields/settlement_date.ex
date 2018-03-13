@@ -4,5 +4,5 @@ defmodule ExAch.Batch.Header.Fields.SettlementDate do
   """
 
   @type t :: %__MODULE__{}
-  use ExAch.Field, default_content: ""
+  use ExAch.Field, value: ""
 end

@@ -4,5 +4,5 @@ defmodule ExAch.File.Header.Fields.FormatCode do
   """
 
   @type t :: %__MODULE__{}
-  use ExAch.Field, default_content: 1
+  use ExAch.Field, value: 1
 end

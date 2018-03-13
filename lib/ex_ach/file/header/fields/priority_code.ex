@@ -4,5 +4,5 @@ defmodule ExAch.File.Header.Fields.PriorityCode do
   """
 
   @type t :: %__MODULE__{}
-  use ExAch.Field, default_content: "01"
+  use ExAch.Field, value: "01"
 end

@@ -4,5 +4,5 @@ defmodule ExAch.File.Header.Fields.FileCreationDate do
   """
 
   @type t :: %__MODULE__{}
-  use ExAch.Field, default_content: Date.utc_today()
+  use ExAch.Field, value: Date.utc_today()
 end

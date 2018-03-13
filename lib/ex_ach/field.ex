@@ -1,7 +1,7 @@
 defmodule ExAch.Field do
   defmacro __using__(opts) do
     specifications = Keyword.get(opts, :specifications, [])
-    default_content = Keyword.get(opts, :default_content)
+    value = Keyword.get(opts, :value)
 
     quote do
       import ExAch.Field
@@ -24,7 +24,7 @@ defmodule ExAch.Field do
       end
 
       def new do
-        %__MODULE__{content: unquote(default_content)}
+        %__MODULE__{content: unquote(value)}
       end
     end
   end
