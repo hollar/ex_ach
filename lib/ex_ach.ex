@@ -2,8 +2,8 @@ defmodule ExAch do
   @moduledoc ~S"""
 
         iex> alias ExAch.{File, Batch}
-        ...> {:ok, immediate_destination} = File.Header.Fields.ImmediateDestination.new(171000505)
-        ...> {:ok, immediate_origin} = File.Header.Fields.ImmediateOrigin.new(123500512)
+        ...> {:ok, immediate_destination} = File.Header.Fields.ImmediateDestination.new("171000505")
+        ...> {:ok, immediate_origin} = File.Header.Fields.ImmediateOrigin.new("123500512")
         ...> {:ok, reference_code} = File.Header.Fields.ReferenceCode.new("refcode")
         ...> {:ok, file_id_modifier} = File.Header.Fields.FileIdModifier.new("1")
         ...> {:ok, immediate_origin_name} = File.Header.Fields.ImmediateOriginName.new("RBC ROYAL Bank")
