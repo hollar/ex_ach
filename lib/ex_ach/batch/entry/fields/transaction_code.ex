@@ -14,9 +14,12 @@ defmodule ExAch.Batch.Entry.Fields.TransactionCode do
   use ExAch.Field,
     validation: [
       type: :integer,
-      inclusion: [22, 23, 24, 27, 28, 29, 32, 33, 34, 37, 38, 39]
+      inclusion: [22, 23, 27, 28, 32, 33, 37, 38]
     ]
 
   def debit?(%{content: code}) when code in [27, 28, 37, 38], do: true
   def debit?(_field), do: false
+
+  def credit?(%{content: code}) when code in [22, 23, 32, 33], do: true
+  def credit?(_field), do: false
 end

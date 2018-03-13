@@ -89,4 +89,8 @@ defmodule ExAch.Batch.Entry do
   def debit?(entry) do
     TransactionCode.debit?(entry.transaction_code)
   end
+
+  def credit?(entry) do
+    TransactionCode.credit?(entry.transaction_code)
+  end
 end

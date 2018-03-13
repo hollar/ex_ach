@@ -125,6 +125,13 @@ defmodule ExAch.Batch.ControlTest do
     end
   end
 
+  describe "adding total credit entry dollar amount" do
+    test "adds the total credit", %{batch_header: batch_header, batch_entries: batch_entries} do
+      {:ok, batch_control} = Control.new(batch_header, batch_entries)
+      assert Field.value(batch_control.total_credit_entry_dollar_amount) == 0
+    end
+  end
+
   describe "infering originating_dfi_identification from the batch header" do
     test "originating_dfi_identification is copied from header", %{batch_header: batch_header} do
       {:ok, batch_control} = Control.new(batch_header, [])

@@ -1,4 +1,4 @@
-defmodule ExAch.Batch.Control.Fields.TotalDebitEntryDollarAmount do
+defmodule ExAch.Batch.Control.Fields.TotalCreditEntryDollarAmount do
   use ExAch.Field
 
   alias ExAch.{Batch, Field}
@@ -8,7 +8,7 @@ defmodule ExAch.Batch.Control.Fields.TotalDebitEntryDollarAmount do
   def new(entries) do
     sum =
       entries
-      |> Enum.filter(&Entry.debit?/1)
+      |> Enum.filter(&Entry.credit?/1)
       |> Enum.map(&Field.value(&1.amount))
       |> Enum.sum()
 
