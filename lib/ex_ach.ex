@@ -24,7 +24,7 @@ defmodule ExAch do
         ...> {:ok, company_entry_description} = Batch.Header.Fields.CompanyEntryDescription.new("DESC1")
         ...> {:ok, effective_entry_date} =  Batch.Header.Fields.EffectiveEntryDate.new(~D[2000-01-01])
         ...> {:ok, batch_number} = Batch.Header.Fields.BatchNumber.new(1)
-        ...> {:ok, originating_dfi_identification} = Batch.Header.Fields.OriginatingDfiIdentification.new(12345678)
+        ...> {:ok, originating_dfi_identification} = Batch.Header.Fields.OriginatingDfiIdentification.new("12345678")
         ...> {:ok, company_descriptive_date} = Batch.Header.Fields.CompanyDescriptiveDate.new(~D[2000-01-01])
         ...> {:ok, company_discretionary_data} = Batch.Header.Fields.CompanyDiscretionaryData.new("Data1")
         ...> {:ok, batch_header} =
