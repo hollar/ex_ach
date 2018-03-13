@@ -7,7 +7,8 @@ defmodule ExAch.Batch.ControlTest do
   alias ExAch.Batch.Control.Fields.{
     RecordTypeCode,
     EntryAddendaCount,
-    EntryHash
+    EntryHash,
+    MessageAuthenticationCode
   }
 
   setup do
@@ -48,7 +49,10 @@ defmodule ExAch.Batch.ControlTest do
       {:ok, batch_control} = ExAch.Batch.Control.new(batch_header, batch_entries)
 
       assert %Control{} = batch_control
-      assert batch_control.record_type_code == %RecordTypeCode{content: 8}
+      assert Field.module(batch_control.record_type_code) == RecordTypeCode
+      assert Field.value(batch_control.record_type_code) == 8
+      assert Field.module(batch_control.message_authentication_code) == MessageAuthenticationCode
+      assert Field.value(batch_control.message_authentication_code) == ""
     end
   end
 

@@ -10,6 +10,7 @@ defmodule ExAch.Batch.Control do
     RecordTypeCode,
     EntryAddendaCount,
     EntryHash,
+    MessageAuthenticationCode,
     TotalDebitEntryDollarAmount
   }
 
@@ -19,7 +20,8 @@ defmodule ExAch.Batch.Control do
     :entry_addenda_count,
     :company_identification,
     :entry_hash,
-    :total_debit_entry_dollar_amount
+    :total_debit_entry_dollar_amount,
+    :message_authentication_code
   ]
 
   @type t :: %__MODULE__{}
@@ -38,7 +40,8 @@ defmodule ExAch.Batch.Control do
       entry_addenda_count: EntryAddendaCount.new(entries),
       company_identification: batch_header.company_identification,
       entry_hash: entry_hash,
-      total_debit_entry_dollar_amount: total_debit_entry_dollar_amount
+      total_debit_entry_dollar_amount: total_debit_entry_dollar_amount,
+      message_authentication_code: MessageAuthenticationCode.new()
     }
 
     {:ok, control}

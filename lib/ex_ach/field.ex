@@ -45,4 +45,6 @@ defmodule ExAch.Field do
   def value(field) do
     field.content
   end
+
+  def module(%{__struct__: module}), do: module
 end
