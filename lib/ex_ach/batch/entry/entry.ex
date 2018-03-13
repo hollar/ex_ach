@@ -1,17 +1,31 @@
 defmodule ExAch.Batch.Entry do
   alias ExAch.Batch.Entry.Fields.{
-    TransactionCode,
-    ReceivingDfiIdentification,
-    CheckDigit,
-    DfiAccountNumber,
-    Amount,
-    ReceivingCompanyName,
     AddendaRecordIndicator,
+    Amount,
+    CheckDigit,
+    DiscretionaryData,
+    DfiAccountNumber,
+    IdentificationNumber,
+    ReceivingCompanyName,
+    ReceivingDfiIdentification,
+    RecordTypeCode,
     TraceNumber,
-    RecordTypeCode
+    TransactionCode
   }
 
-  @type t :: %__MODULE__{}
+  @type t :: %__MODULE__{
+          addenda_record_indicator: AddendaRecordIndicator.t(),
+          amount: Amount.t(),
+          check_digit: CheckDigit.t(),
+          dfi_account_number: DfiAccountNumber.t(),
+          discretionary_data: DiscretionaryData.t() | nil,
+          identification_number: IdentificationNumber.t() | nil,
+          receiving_company_name: ReceivingCompanyName.t(),
+          receiving_dfi_identification: ReceivingDfiIdentification.t(),
+          record_type_code: RecordTypeCode.t(),
+          trace_number: TraceNumber.t(),
+          transaction_code: TransactionCode.t()
+        }
 
   defstruct [
     :transaction_code,
@@ -29,6 +43,10 @@ defmodule ExAch.Batch.Entry do
 
   @doc """
   Create a batch entry structure
+
+  ## Options
+    * `:identification_number`
+    * `:discretionary_data`
   """
   @spec new(
           TransactionCode.t(),

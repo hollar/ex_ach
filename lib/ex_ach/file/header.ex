@@ -1,15 +1,18 @@
 defmodule ExAch.File.Header do
   alias ExAch.File.Header.Fields.{
-    ImmediateDestination,
-    ImmediateOrigin,
-    FileCreationDate,
-    FileIdModifier,
-    RecordTypeCode,
-    PriorityCode,
     BlockingFactor,
-    RecordSize,
+    FileCreationDate,
+    FileCreationTime,
+    FileIdModifier,
     FormatCode,
-    FileCreationTime
+    ImmediateDestination,
+    ImmediateDestinationName,
+    ImmediateOrigin,
+    ImmediateOriginName,
+    PriorityCode,
+    RecordSize,
+    RecordTypeCode,
+    ReferenceCode
   }
 
   defstruct [
@@ -28,10 +31,29 @@ defmodule ExAch.File.Header do
     :immediate_origin_name
   ]
 
-  @type t :: %__MODULE__{}
+  @type t :: %__MODULE__{
+          blocking_factor: BlockingFactor.t(),
+          file_creation_date: FileCreationDate.t(),
+          file_creation_time: FileCreationTime.t(),
+          file_id_modifier: FileIdModifier.t(),
+          format_code: FormatCode.t(),
+          immediate_destination: ImmediateDestination.t(),
+          immediate_destination_name: ImmediateDestinationName.t() | nil,
+          immediate_origin: ImmediateOrigin.t(),
+          immediate_origin_name: ImmediateOriginName.t() | nil,
+          priority_code: PriorityCode.t(),
+          record_size: RecordSize.t(),
+          record_type_code: RecordTypeCode.t(),
+          reference_code: ReferenceCode.t() | nil
+        }
 
   @doc """
   Creates a new File Header Structure.
+
+  ## Options
+    * `:immediate_destination_name`
+    * `:reference_code`
+    * `:immediate_origin_name`
   """
   @spec new(ImmediateDestination.t(), ImmediateOrigin.t(), FileIdModifier.t(), Keyword.t()) ::
           {:ok, t}

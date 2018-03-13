@@ -1,6 +1,8 @@
 defmodule ExAch.Batch.Header do
   alias ExAch.Batch.Header.Fields.{
     ServiceClassCode,
+    CompanyDescriptiveDate,
+    CompanyDiscretionaryData,
     CompanyName,
     CompanyIdentification,
     StandardEntryClassCode,
@@ -13,7 +15,21 @@ defmodule ExAch.Batch.Header do
     OriginatorStatusCode
   }
 
-  @type t :: %__MODULE__{}
+  @type t :: %__MODULE__{
+          batch_number: BatchNumber.t(),
+          company_descriptive_date: CompanyDescriptiveDate.t() | nil,
+          company_discretionary_data: CompanyDiscretionaryData.t() | nil,
+          company_entry_description: CompanyEntryDescription.t(),
+          company_identification: CompanyIdentification.t(),
+          company_name: CompanyName.t(),
+          effective_entry_date: EffectiveEntryDate.t(),
+          originating_dfi_identification: OriginatingDfiIdentification.t(),
+          originator_status_code: OriginatorStatusCode.t(),
+          record_type_code: RecordTypeCode.t(),
+          service_class_code: ServiceClassCode.t(),
+          settlement_date: SettlementDate.t(),
+          standard_entry_class_code: StandardEntryClassCode.t()
+        }
 
   defstruct [
     :service_class_code,
@@ -33,6 +49,10 @@ defmodule ExAch.Batch.Header do
 
   @doc """
   Create a batch header structure
+
+  ## Options
+    * `:company_descriptive_date`
+    * `:company_discretionary_data`
   """
   @spec new(
           ServiceClassCode.t(),
