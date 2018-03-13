@@ -21,7 +21,8 @@ defmodule ExAch.Batch.Control do
     :company_identification,
     :entry_hash,
     :total_debit_entry_dollar_amount,
-    :message_authentication_code
+    :message_authentication_code,
+    :originating_dfi_identification
   ]
 
   @type t :: %__MODULE__{}
@@ -41,7 +42,8 @@ defmodule ExAch.Batch.Control do
       company_identification: batch_header.company_identification,
       entry_hash: entry_hash,
       total_debit_entry_dollar_amount: total_debit_entry_dollar_amount,
-      message_authentication_code: MessageAuthenticationCode.new()
+      message_authentication_code: MessageAuthenticationCode.new(),
+      originating_dfi_identification: batch_header.originating_dfi_identification
     }
 
     {:ok, control}

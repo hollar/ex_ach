@@ -105,4 +105,16 @@ defmodule ExAch.Batch.ControlTest do
       assert Field.value(batch_control.total_debit_entry_dollar_amount) == 1000
     end
   end
+
+  describe "infering originating_dfi_identification from the batch header" do
+    test "" do
+      {:ok, originating_dfi_identification} =
+        Header.Fields.OriginatingDfiIdentification.new("12345678")
+
+      header = %ExAch.Batch.Header{originating_dfi_identification: originating_dfi_identification}
+
+      {:ok, batch_control} = Control.new(header, [])
+      assert Field.value(batch_control.originating_dfi_identification) == "12345678"
+    end
+  end
 end
