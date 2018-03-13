@@ -9,7 +9,8 @@ defmodule ExAch.Batch.Control do
   alias ExAch.Batch.Control.Fields.{
     RecordTypeCode,
     EntryAddendaCount,
-    EntryHash
+    EntryHash,
+    TotalDebitEntryDollarAmount
   }
 
   defstruct [
@@ -17,7 +18,8 @@ defmodule ExAch.Batch.Control do
     :service_class_code,
     :entry_addenda_count,
     :company_identification,
-    :entry_hash
+    :entry_hash,
+    :total_debit_entry_dollar_amount
   ]
 
   @type t :: %__MODULE__{}
@@ -34,7 +36,8 @@ defmodule ExAch.Batch.Control do
       service_class_code: batch_header.service_class_code,
       entry_addenda_count: EntryAddendaCount.new(entries),
       company_identification: batch_header.company_identification,
-      entry_hash: entry_hash
+      entry_hash: entry_hash,
+      total_debit_entry_dollar_amount: %TotalDebitEntryDollarAmount{}
     }
 
     {:ok, control}

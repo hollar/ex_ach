@@ -6,13 +6,15 @@ defmodule ExAch.Batch.ControlTest do
   alias ExAch.Batch.Control.Fields.{
     RecordTypeCode,
     EntryAddendaCount,
-    EntryHash
+    EntryHash,
+    TotalDebitEntryDollarAmount
   }
 
   setup do
     {:ok, header_service_class_code} = Header.Fields.ServiceClassCode.new(225)
     batch_header = %ExAch.Batch.Header{service_class_code: header_service_class_code}
     {:ok, receiving_dfi_identification} = Entry.Fields.ReceivingDfiIdentification.new("12345678")
+
     entry = %Entry{receiving_dfi_identification: receiving_dfi_identification}
     batch_entries = List.wrap(entry)
 
@@ -76,6 +78,13 @@ defmodule ExAch.Batch.ControlTest do
       {:ok, batch_control} = Control.new(batch_header, batch_entries)
 
       assert %EntryHash{} = batch_control.entry_hash
+    end
+  end
+
+  describe "adding total debit entry dollar amount" do
+    test "adds the total debit", %{batch_header: batch_header, batch_entries: batch_entries} do
+      {:ok, batch_control} = Control.new(batch_header, batch_entries)
+      assert %TotalDebitEntryDollarAmount{} = batch_control.total_debit_entry_dollar_amount
     end
   end
 end
