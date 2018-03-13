@@ -1,4 +1,8 @@
 defmodule ExAch.Batch.Control.Fields.TotalDebitEntryDollarAmount do
+  @moduledoc """
+  The Total Debit Entry Dollar Amount Field contains accumulated Entry Detail debit amounts
+  within the batch.
+  """
   use ExAch.Field
 
   alias ExAch.{Batch, Field}

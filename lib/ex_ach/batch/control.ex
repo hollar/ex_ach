@@ -1,7 +1,9 @@
 defmodule ExAch.Batch.Control do
   @moduledoc """
-  The Company/Batch Control Record contains the counts, hash totals and total dollar controls for the preceding Entries withing the batch.
-  All Entry Detail Records are hashed. Both Entry Detail Record and Addenda Record are included in the Entry/addenda counts.Batch Header and Batch Control are not included.
+  The Company/Batch Control Record contains the counts, hash totals and total dollar controls for
+  the preceding Entries withing the batch.
+  All Entry Detail Records are hashed. Both Entry Detail Record and Addenda Record are included
+  in the Entry/addenda counts.Batch Header and Batch Control are not included.
   """
 
   alias ExAch.Batch
