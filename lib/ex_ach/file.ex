@@ -13,7 +13,7 @@ defmodule ExAch.File do
     {:ok, %__MODULE__{header: header, batches: batches}}
   end
 
-  def to_string(ach) do
+  def to_string(_ach) do
     """
     101 171000505 1235005121803121611A094101IMM ROYAL BANK         BMO BANK                       |
     5220COMPANYNAME     DATA1               1112223334CCDDESC1     000101000101   1123456780000001|
