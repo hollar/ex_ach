@@ -4,7 +4,7 @@ defmodule ExAch.Batch.Entry.Fields.DfiAccountNumber do
   """
 
   use ExAch.Field,
-    specifications: [
+    validation: [
       type: :alpha_numeric,
       max_length: 17
     ]

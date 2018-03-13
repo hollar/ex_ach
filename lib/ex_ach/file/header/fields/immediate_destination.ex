@@ -4,5 +4,5 @@ defmodule ExAch.File.Header.Fields.ImmediateDestination do
   The 10 character field begins with a blank in the first position.
   """
 
-  use ExAch.Field, specifications: [type: :integer, length: 9]
+  use ExAch.Field, validation: [type: :integer, length: 9]
 end

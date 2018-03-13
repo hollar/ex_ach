@@ -16,7 +16,7 @@ defmodule ExAch.Batch.Entry.Fields.TransactionCode do
   """
 
   use ExAch.Field,
-    specifications: [
+    validation: [
       type: :integer,
       inclusion: [22, 23, 24, 27, 28, 29, 32, 33, 34, 37, 38, 39]
     ]

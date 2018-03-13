@@ -4,5 +4,5 @@ defmodule ExAch.Batch.Header.Fields.OriginatingDfiIdentification do
   07200080.
   """
 
-  use ExAch.Field, specifications: [type: :integer, max_length: 8]
+  use ExAch.Field, validation: [type: :integer, max_length: 8]
 end

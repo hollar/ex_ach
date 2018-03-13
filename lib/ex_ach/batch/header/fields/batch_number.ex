@@ -4,7 +4,7 @@ defmodule ExAch.Batch.Header.Fields.BatchNumber do
   """
 
   use ExAch.Field,
-    specifications: [
+    validation: [
       type: :integer,
       max_length: 7
     ]

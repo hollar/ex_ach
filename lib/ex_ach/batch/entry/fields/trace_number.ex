@@ -5,7 +5,7 @@ defmodule ExAch.Batch.Entry.Fields.TraceNumber do
   """
 
   use ExAch.Field,
-    specifications: [
+    validation: [
       type: :integer,
       max_length: 15
     ]

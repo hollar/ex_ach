@@ -7,7 +7,7 @@ defmodule ExAch.Batch.Header.Fields.ServiceClassCode do
   """
 
   use ExAch.Field,
-    specifications: [
+    validation: [
       type: :integer,
       inclusion: [200, 220, 225]
     ]

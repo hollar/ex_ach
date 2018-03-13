@@ -4,7 +4,7 @@ defmodule ExAch.Batch.Entry.Fields.DiscretionaryData do
   """
 
   use ExAch.Field,
-    specifications: [
+    validation: [
       type: :alpha_numeric,
       max_length: 2
     ]

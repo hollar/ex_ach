@@ -5,7 +5,7 @@ defmodule ExAch.Batch.Entry.Fields.AddendaRecordIndicator do
   """
 
   use ExAch.Field,
-    specifications: [
+    validation: [
       type: :integer,
       inclusion: [0, 1]
     ]

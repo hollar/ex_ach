@@ -5,7 +5,7 @@ defmodule ExAch.Batch.Header.Fields.CompanyName do
   """
 
   use ExAch.Field,
-    specifications: [
+    validation: [
       type: :alpha_numeric,
       max_length: 16
     ]

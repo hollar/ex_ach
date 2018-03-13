@@ -4,7 +4,7 @@ defmodule ExAch.Batch.Entry.Fields.CheckDigit do
   """
 
   use ExAch.Field,
-    specifications: [
+    validation: [
       type: :integer,
       length: 1
     ]
