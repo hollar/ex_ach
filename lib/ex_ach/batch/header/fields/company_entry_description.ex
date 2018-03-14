@@ -4,5 +4,5 @@ defmodule ExAch.Batch.Header.Fields.CompanyEntryDescription do
   Receiving Financial Institution. (i.e. Payroll).
   """
 
-  use ExAch.Field, validation: [type: :alpha_numeric, max_length: 10]
+  use ExAch.Field, validation: [type: :alphameric, max_length: 10]
 end

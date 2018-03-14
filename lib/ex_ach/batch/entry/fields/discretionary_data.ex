@@ -3,5 +3,5 @@ defmodule ExAch.Batch.Entry.Fields.DiscretionaryData do
   For your company's internal use if desired. No specific format is required
   """
 
-  use ExAch.Field, validation: [type: :alpha_numeric, max_length: 2]
+  use ExAch.Field, validation: [type: :alphameric, max_length: 2]
 end

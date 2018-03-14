@@ -3,5 +3,5 @@ defmodule ExAch.File.Header.Fields.ImmediateDestinationName do
   Optional field. For example, LaSalle Bank.
   """
 
-  use ExAch.Field, validation: [type: :alpha_numeric, max_length: 23]
+  use ExAch.Field, validation: [type: :alphameric, max_length: 23]
 end
