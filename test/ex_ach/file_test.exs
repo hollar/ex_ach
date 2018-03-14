@@ -73,14 +73,16 @@ defmodule ExAch.FileTest do
       {:ok, batch} = ExAch.Batch.new(batch_header, batch_entries)
       batches = List.wrap(batch)
 
-      {:ok, ach} = ExAch.File.new(file_header, batches)
+      {:ok, ach_file} = ExAch.File.new(file_header, batches)
 
-      assert ach.header == file_header
-      assert ach.batches == batches
-      first_batch = List.first(ach.batches)
+      assert ach_file.header == file_header
+      assert ach_file.batches == batches
+      first_batch = List.first(ach_file.batches)
       assert first_batch.header == batch_header
       assert first_batch.entries == batch_entries
       assert first_batch.control
+
+      assert %File.Control{} = ach_file.control
     end
   end
 end
