@@ -77,4 +77,11 @@ defmodule ExAch.File.ControlTest do
       assert Field.value(file_control.batch_count) == 1
     end
   end
+
+  describe "infering entry/addenda count" do
+    test "a single entry returns 1", %{batches: batches} do
+      {:ok, file_control} = ExAch.File.Control.new(batches)
+      assert Field.value(file_control.entry_addenda_count) == 1
+    end
+  end
 end
