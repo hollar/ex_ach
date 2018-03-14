@@ -10,7 +10,7 @@ defmodule ExAch.File.Control.Fields.EntryAddendaCount do
 
   @type t :: %__MODULE__{}
 
-  @spec new(list(Batch.t())) :: t()
+  @spec new(list(Batch.t())) :: {:ok, t()}
   def new(batches) do
     count =
       batches
