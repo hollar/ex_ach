@@ -62,14 +62,19 @@ defmodule ExAch.File.ControlTest do
   end
 
   describe "creating a file control" do
-    test "file control created successfully", %{
-      batches: batches
-    } do
+    test "file control created successfully", %{batches: batches} do
       {:ok, file_control} = ExAch.File.Control.new(batches)
 
       assert %Control{} = file_control
       assert Field.module(file_control.record_type_code) == RecordTypeCode
       assert Field.value(file_control.record_type_code) == 8
+    end
+  end
+
+  describe "infering batch count" do
+    test "a single entry returns 1", %{batches: batches} do
+      {:ok, file_control} = ExAch.File.Control.new(batches)
+      assert Field.value(file_control.batch_count) == 1
     end
   end
 end

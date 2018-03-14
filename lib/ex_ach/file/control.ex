@@ -8,14 +8,17 @@ defmodule ExAch.File.Control do
   alias ExAch.Batch
 
   alias ExAch.File.Control.Fields.{
+    BatchCount,
     RecordTypeCode
   }
 
   defstruct [
-    :record_type_code
+    :record_type_code,
+    :batch_count
   ]
 
   @type t :: %__MODULE__{
+          batch_count: BatchCount.t(),
           record_type_code: RecordTypeCode.t()
         }
 
@@ -23,9 +26,12 @@ defmodule ExAch.File.Control do
   Create a batch control record
   """
   @spec new(list(Batch.t())) :: {:ok, t()}
-  def new(_batches) do
+  def new(batches) do
+    {:ok, batch_count} = BatchCount.new(batches)
+
     control = %__MODULE__{
-      record_type_code: RecordTypeCode.new()
+      record_type_code: RecordTypeCode.new(),
+      batch_count: batch_count
     }
 
     {:ok, control}
