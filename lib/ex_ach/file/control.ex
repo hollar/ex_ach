@@ -12,7 +12,8 @@ defmodule ExAch.File.Control do
     EntryAddendaCount,
     EntryHash,
     RecordTypeCode,
-    TotalDebitEntryDollarAmountInFile
+    TotalDebitEntryDollarAmountInFile,
+    TotalCreditEntryDollarAmountInFile
   }
 
   defstruct [
@@ -20,14 +21,16 @@ defmodule ExAch.File.Control do
     :batch_count,
     :entry_addenda_count,
     :entry_hash,
-    :total_debit_entry_dollar_amount_in_file
+    :total_debit_entry_dollar_amount_in_file,
+    :total_credit_entry_dollar_amount_in_file
   ]
 
   @type t :: %__MODULE__{
           batch_count: BatchCount.t(),
           entry_hash: EntryHash.t(),
           record_type_code: RecordTypeCode.t(),
-          total_debit_entry_dollar_amount_in_file: TotalDebitEntryDollarAmountInFile.t()
+          total_debit_entry_dollar_amount_in_file: TotalDebitEntryDollarAmountInFile.t(),
+          total_credit_entry_dollar_amount_in_file: TotalCreditEntryDollarAmountInFile.t()
         }
 
   @doc """
@@ -42,12 +45,16 @@ defmodule ExAch.File.Control do
     {:ok, total_debit_entry_dollar_amount_in_file} =
       TotalDebitEntryDollarAmountInFile.new(batches)
 
+    {:ok, total_credit_entry_dollar_amount_in_file} =
+      TotalCreditEntryDollarAmountInFile.new(batches)
+
     control = %__MODULE__{
       record_type_code: RecordTypeCode.new(),
       batch_count: batch_count,
       entry_addenda_count: entry_addenda_count,
       entry_hash: entry_hash,
-      total_debit_entry_dollar_amount_in_file: total_debit_entry_dollar_amount_in_file
+      total_debit_entry_dollar_amount_in_file: total_debit_entry_dollar_amount_in_file,
+      total_credit_entry_dollar_amount_in_file: total_credit_entry_dollar_amount_in_file
     }
 
     {:ok, control}

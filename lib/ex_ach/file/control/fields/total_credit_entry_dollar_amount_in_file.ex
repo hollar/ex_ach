@@ -1,6 +1,6 @@
-defmodule ExAch.File.Control.Fields.TotalDebitEntryDollarAmountInFile do
+defmodule ExAch.File.Control.Fields.TotalCreditEntryDollarAmountInFile do
   @moduledoc """
-  Accumulated Batch Control Record debit totals within a specific File.
+  Accumulated Batch Control Record credit totals within a specific File.
   """
   use ExAch.Field
 
@@ -10,7 +10,7 @@ defmodule ExAch.File.Control.Fields.TotalDebitEntryDollarAmountInFile do
   def new(batches) do
     sum =
       batches
-      |> Enum.map(&Field.value(&1.control.total_debit_entry_dollar_amount))
+      |> Enum.map(&Field.value(&1.control.total_credit_entry_dollar_amount))
       |> Enum.sum()
 
     {:ok, %__MODULE__{content: sum}}

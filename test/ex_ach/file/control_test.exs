@@ -99,4 +99,11 @@ defmodule ExAch.File.ControlTest do
       assert Field.value(file_control.total_debit_entry_dollar_amount_in_file) == 1000
     end
   end
+
+  describe "adding total credit entry dollar amount in file" do
+    test "adds the total credit", %{batches: batches} do
+      {:ok, file_control} = ExAch.File.Control.new(batches)
+      assert Field.value(file_control.total_credit_entry_dollar_amount_in_file) == 0
+    end
+  end
 end
