@@ -10,7 +10,7 @@ defmodule ExAch.Batch.Control.Fields.EntryAddendaCount do
 
   @type t :: %__MODULE__{}
 
-  @spec new(list(Batch.Entry.t())) :: t()
+  @spec new(list(Batch.Entry.t())) :: {:ok, t()}
   def new(entries) do
     addenda_count =
       entries
@@ -20,6 +20,6 @@ defmodule ExAch.Batch.Control.Fields.EntryAddendaCount do
     entry_count = Enum.count(entries)
     count = entry_count + addenda_count
 
-    %__MODULE__{content: count}
+    {:ok, %__MODULE__{content: count}}
   end
 end

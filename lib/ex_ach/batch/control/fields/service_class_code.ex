@@ -9,6 +9,6 @@ defmodule ExAch.Batch.Control.Fields.ServiceClassCode do
   use ExAch.Field
   alias ExAch.Batch.Header.Fields.ServiceClassCode
 
-  @spec new(ServiceClassCode.t()) :: t()
-  def new(%ServiceClassCode{content: code}), do: %__MODULE__{content: code}
+  @spec new(ServiceClassCode.t()) :: {:ok, t()}
+  def new(%ServiceClassCode{content: code}), do: {:ok, %__MODULE__{content: code}}
 end

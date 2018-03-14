@@ -14,7 +14,7 @@ defmodule ExAch.Batch.Control.Fields.EntryAddendaCountTest do
       second_entry = %Entry{addendas: []}
       batch_entries = [first_entry, second_entry]
 
-      entry_addenda_count = EntryAddendaCount.new(batch_entries)
+      {:ok, entry_addenda_count} = EntryAddendaCount.new(batch_entries)
 
       assert ExAch.Field.value(entry_addenda_count) == 2
     end
@@ -23,7 +23,7 @@ defmodule ExAch.Batch.Control.Fields.EntryAddendaCountTest do
       entry = %Entry{addendas: [%DummyAddenda{}]}
       batch_entries = List.wrap(entry)
 
-      entry_addenda_count = EntryAddendaCount.new(batch_entries)
+      {:ok, entry_addenda_count} = EntryAddendaCount.new(batch_entries)
 
       assert ExAch.Field.value(entry_addenda_count) == 2
     end

@@ -55,19 +55,26 @@ defmodule ExAch.Batch.Control do
     {:ok, entry_hash} = EntryHash.new(entries)
     {:ok, total_debit_entry_dollar_amount} = TotalDebitEntryDollarAmount.new(entries)
     {:ok, total_credit_entry_dollar_amount} = TotalCreditEntryDollarAmount.new(entries)
+    {:ok, service_class_code} = ServiceClassCode.new(batch_header.service_class_code)
+
+    {:ok, originating_dfi_identification} =
+      OriginatingDfiIdentification.new(batch_header.originating_dfi_identification)
+
+    {:ok, entry_addenda_count} = EntryAddendaCount.new(entries)
+    {:ok, company_identification} = CompanyIdentification.new(batch_header.company_identification)
+    {:ok, batch_number} = BatchNumber.new(batch_header.batch_number)
 
     control = %__MODULE__{
       record_type_code: RecordTypeCode.new(),
-      service_class_code: ServiceClassCode.new(batch_header.service_class_code),
-      entry_addenda_count: EntryAddendaCount.new(entries),
-      company_identification: CompanyIdentification.new(batch_header.company_identification),
+      service_class_code: service_class_code,
+      entry_addenda_count: entry_addenda_count,
+      company_identification: company_identification,
       entry_hash: entry_hash,
       total_debit_entry_dollar_amount: total_debit_entry_dollar_amount,
       total_credit_entry_dollar_amount: total_credit_entry_dollar_amount,
       message_authentication_code: MessageAuthenticationCode.new(),
-      originating_dfi_identification:
-        OriginatingDfiIdentification.new(batch_header.originating_dfi_identification),
-      batch_number: BatchNumber.new(batch_header.batch_number)
+      originating_dfi_identification: originating_dfi_identification,
+      batch_number: batch_number
     }
 
     {:ok, control}
