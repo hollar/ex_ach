@@ -57,9 +57,9 @@ defmodule ExAch.BatchTest do
 
       {:ok, batch} = ExAch.Batch.new(batch_header, batch_entries)
 
-      assert batch.header
+      assert %Batch.Header{} = batch.header
       assert batch.entries
-      assert batch.control
+      assert %Batch.Control{} = batch.control
     end
   end
 end

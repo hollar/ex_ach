@@ -1,4 +1,4 @@
-defmodule ExAch.Batch.Control.Fields.EntryHash do
+defmodule ExAch.File.Control.Fields.EntryHash do
   @moduledoc """
   Company/Batth Control Record: The Entry Hash is the sum of all of the Receiving DFI
   Identification fields contained within the Entry Detail Records in a batch.
@@ -13,10 +13,10 @@ defmodule ExAch.Batch.Control.Fields.EntryHash do
 
   alias ExAch.{Batch, Field}
 
-  @spec new(list(Batch.Entry.t())) :: {:ok, t()}
-  def new(entries) do
+  @spec new(list(Batch.t())) :: {:ok, t()}
+  def new(batches) do
     sum =
-      entries
+      batches
       |> calculate_hash
       |> handle_overflow
 
@@ -25,8 +25,7 @@ defmodule ExAch.Batch.Control.Fields.EntryHash do
 
   defp calculate_hash(batches) do
     batches
-    |> Enum.map(&Field.value(&1.receiving_dfi_identification))
-    |> Enum.map(&String.to_integer/1)
+    |> Enum.map(&Field.value(&1.control.entry_hash))
     |> Enum.sum()
   end
 

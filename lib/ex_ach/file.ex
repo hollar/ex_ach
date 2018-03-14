@@ -1,5 +1,5 @@
 defmodule ExAch.File do
-  defstruct [:header, :batches]
+  defstruct [:header, :batches, :control]
 
   alias ExAch.{File, Batch}
 
@@ -10,7 +10,9 @@ defmodule ExAch.File do
   """
   @spec new(File.Header.t(), [Batch.t()]) :: {:ok, t}
   def new(%File.Header{} = header, batches) when is_list(batches) do
-    {:ok, %__MODULE__{header: header, batches: batches}}
+    {:ok, control} = File.Control.new(batches, header.blocking_factor)
+
+    {:ok, %__MODULE__{header: header, batches: batches, control: control}}
   end
 
   def to_string(_ach) do

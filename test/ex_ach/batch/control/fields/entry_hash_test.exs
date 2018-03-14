@@ -13,7 +13,7 @@ defmodule ExAch.Batch.Control.Fields.EntryHashTest do
       batch_entries = List.wrap(entry)
       {:ok, entry_hash} = EntryHash.new(batch_entries)
 
-      assert ExAch.Field.value(entry_hash) == "12345678"
+      assert ExAch.Field.value(entry_hash) == 12_345_678
     end
 
     test "a sum over the limit gets truncated with the 10 rightmost digits" do
@@ -29,7 +29,7 @@ defmodule ExAch.Batch.Control.Fields.EntryHashTest do
 
       {:ok, entry_hash} = EntryHash.new(batch_entries)
 
-      assert ExAch.Field.value(entry_hash) == "1234567000"
+      assert ExAch.Field.value(entry_hash) == 1_234_567_000
     end
   end
 end
