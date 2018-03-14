@@ -19,7 +19,6 @@ defmodule ExAch.Batch.Control.Fields.EntryHash do
       entries
       |> calculate_hash
       |> handle_overflow
-      |> to_string
 
     {:ok, %__MODULE__{content: sum}}
   end

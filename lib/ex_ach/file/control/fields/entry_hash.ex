@@ -19,7 +19,6 @@ defmodule ExAch.File.Control.Fields.EntryHash do
       batches
       |> calculate_hash
       |> handle_overflow
-      |> to_string
 
     {:ok, %__MODULE__{content: sum}}
   end
@@ -27,7 +26,6 @@ defmodule ExAch.File.Control.Fields.EntryHash do
   defp calculate_hash(batches) do
     batches
     |> Enum.map(&Field.value(&1.control.entry_hash))
-    |> Enum.map(&String.to_integer/1)
     |> Enum.sum()
   end
 
