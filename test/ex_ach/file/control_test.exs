@@ -6,8 +6,9 @@ defmodule ExAch.File.ControlTest do
   alias ExAch.File.Control
 
   alias ExAch.File.Control.Fields.{
-    RecordTypeCode,
-    EntryHash
+    BlockCount,
+    EntryHash,
+    RecordTypeCode
   }
 
   setup do
@@ -104,6 +105,14 @@ defmodule ExAch.File.ControlTest do
     test "adds the total credit", %{batches: batches} do
       {:ok, file_control} = ExAch.File.Control.new(batches)
       assert Field.value(file_control.total_credit_entry_dollar_amount_in_file) == 0
+    end
+  end
+
+  describe "adding block count" do
+    test "adds the number of blocks in the file", %{batches: batches} do
+      {:ok, file_control} = ExAch.File.Control.new(batches)
+      assert Field.module(file_control.block_count) == BlockCount
+      assert Field.value(file_control.block_count) == 1
     end
   end
 end

@@ -9,6 +9,7 @@ defmodule ExAch.File.Control do
 
   alias ExAch.File.Control.Fields.{
     BatchCount,
+    BlockCount,
     EntryAddendaCount,
     EntryHash,
     RecordTypeCode,
@@ -19,6 +20,7 @@ defmodule ExAch.File.Control do
   defstruct [
     :record_type_code,
     :batch_count,
+    :block_count,
     :entry_addenda_count,
     :entry_hash,
     :total_debit_entry_dollar_amount_in_file,
@@ -27,6 +29,7 @@ defmodule ExAch.File.Control do
 
   @type t :: %__MODULE__{
           batch_count: BatchCount.t(),
+          block_count: BlockCount.t(),
           entry_hash: EntryHash.t(),
           record_type_code: RecordTypeCode.t(),
           total_debit_entry_dollar_amount_in_file: TotalDebitEntryDollarAmountInFile.t(),
@@ -48,9 +51,12 @@ defmodule ExAch.File.Control do
     {:ok, total_credit_entry_dollar_amount_in_file} =
       TotalCreditEntryDollarAmountInFile.new(batches)
 
+    {:ok, block_count} = BlockCount.new(batches)
+
     control = %__MODULE__{
       record_type_code: RecordTypeCode.new(),
       batch_count: batch_count,
+      block_count: block_count,
       entry_addenda_count: entry_addenda_count,
       entry_hash: entry_hash,
       total_debit_entry_dollar_amount_in_file: total_debit_entry_dollar_amount_in_file,
