@@ -11,20 +11,23 @@ defmodule ExAch.File.Control do
     BatchCount,
     EntryAddendaCount,
     EntryHash,
-    RecordTypeCode
+    RecordTypeCode,
+    TotalDebitEntryDollarAmountInFile
   }
 
   defstruct [
     :record_type_code,
     :batch_count,
     :entry_addenda_count,
-    :entry_hash
+    :entry_hash,
+    :total_debit_entry_dollar_amount_in_file
   ]
 
   @type t :: %__MODULE__{
           batch_count: BatchCount.t(),
           entry_hash: EntryHash.t(),
-          record_type_code: RecordTypeCode.t()
+          record_type_code: RecordTypeCode.t(),
+          total_debit_entry_dollar_amount_in_file: TotalDebitEntryDollarAmountInFile.t()
         }
 
   @doc """
@@ -36,11 +39,15 @@ defmodule ExAch.File.Control do
     {:ok, entry_addenda_count} = EntryAddendaCount.new(batches)
     {:ok, entry_hash} = EntryHash.new(batches)
 
+    {:ok, total_debit_entry_dollar_amount_in_file} =
+      TotalDebitEntryDollarAmountInFile.new(batches)
+
     control = %__MODULE__{
       record_type_code: RecordTypeCode.new(),
       batch_count: batch_count,
       entry_addenda_count: entry_addenda_count,
-      entry_hash: entry_hash
+      entry_hash: entry_hash,
+      total_debit_entry_dollar_amount_in_file: total_debit_entry_dollar_amount_in_file
     }
 
     {:ok, control}
