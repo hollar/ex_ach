@@ -8,6 +8,6 @@ defmodule ExAch.File.Control.Fields.BatchCount do
 
   @spec new(list(Batch.t())) :: {:ok, t()}
   def new(batches) do
-    {:ok, %__MODULE__{content: length(batches)}}
+    {:ok, %__MODULE__{content: Enum.count(batches)}}
   end
 end
