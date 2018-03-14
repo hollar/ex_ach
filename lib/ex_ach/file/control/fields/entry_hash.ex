@@ -17,14 +17,21 @@ defmodule ExAch.File.Control.Fields.EntryHash do
   def new(batches) do
     sum =
       batches
-      |> Enum.map(fn batch ->
-        String.to_integer(Field.value(batch.control.entry_hash))
-      end)
-      |> Enum.sum()
+      |> calculate_hash
+      |> handle_overflow
       |> to_string
-      |> String.split_at(-10)
-      |> elem(1)
 
     {:ok, %__MODULE__{content: sum}}
+  end
+
+  defp calculate_hash(batches) do
+    batches
+    |> Enum.map(&Field.value(&1.control.entry_hash))
+    |> Enum.map(&String.to_integer/1)
+    |> Enum.sum()
+  end
+
+  defp handle_overflow(count) do
+    rem(count, 10_000_000_000)
   end
 end
