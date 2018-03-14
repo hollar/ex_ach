@@ -3,5 +3,5 @@ defmodule ExAch.File.Header.Fields.PriorityCode do
   The lower the number, the higher processing priority. Currently, only 01 is used.
   """
 
-  use ExAch.Field, value: "01"
+  use ExAch.Field, value: "01", render: "%2s"
 end

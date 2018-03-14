@@ -4,5 +4,5 @@ defmodule ExAch.File.Header.Fields.ImmediateOrigin do
   The 10 character field begins with a blank in the first position.
   """
 
-  use ExAch.Field, validation: [format: {~r/^\d{9}$/, "Must be 9 digits"}]
+  use ExAch.Field, validation: [format: {~r/^\d{9}$/, "Must be 9 digits"}], render: " %9s"
 end

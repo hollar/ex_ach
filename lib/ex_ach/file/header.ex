@@ -87,4 +87,24 @@ defmodule ExAch.File.Header do
 
     {:ok, header}
   end
+
+  @spec to_iodata(t()) :: iodata()
+  def to_iodata(header) do
+    [
+      header.record_type_code,
+      header.priority_code,
+      header.immediate_destination,
+      header.immediate_origin,
+      header.file_creation_date,
+      header.file_creation_time,
+      header.file_id_modifier,
+      header.record_size,
+      header.blocking_factor,
+      header.format_code,
+      header.immediate_destination_name,
+      header.immediate_origin_name,
+      header.reference_code
+    ]
+    |> Enum.map(&to_string/1)
+  end
 end

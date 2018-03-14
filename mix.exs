@@ -16,7 +16,8 @@ defmodule ExAch.MixProject do
       description: description(),
       package: package(),
       dialyzer: [plt_add_deps: :transitive, ignore_warnings: "dialyzer.ignore-warnings"],
-      preferred_cli_env: ["project.check": :test]
+      preferred_cli_env: ["project.check": :test],
+      consolidate_protocols: Mix.env() != :test
     ]
   end
 
@@ -36,7 +37,8 @@ defmodule ExAch.MixProject do
       {:dialyxir, "~> 0.5", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.16", only: :dev, runtime: false},
       {:earmark, "~> 1.2", only: :dev},
-      {:mix_test_watch, "~> 0.5", only: :dev, runtime: false}
+      {:mix_test_watch, "~> 0.5", only: :dev, runtime: false},
+      {:exprintf, "0.2.1"}
     ]
   end
 

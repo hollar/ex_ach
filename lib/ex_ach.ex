@@ -5,9 +5,9 @@ defmodule ExAch do
         ...> {:ok, immediate_destination} = File.Header.Fields.ImmediateDestination.new("171000505")
         ...> {:ok, immediate_origin} = File.Header.Fields.ImmediateOrigin.new("123500512")
         ...> {:ok, reference_code} = File.Header.Fields.ReferenceCode.new("refcode")
-        ...> {:ok, file_id_modifier} = File.Header.Fields.FileIdModifier.new("1")
-        ...> {:ok, immediate_origin_name} = File.Header.Fields.ImmediateOriginName.new("RBC ROYAL Bank")
+        ...> {:ok, file_id_modifier} = File.Header.Fields.FileIdModifier.new("A")
         ...> {:ok, immediate_destination_name} = File.Header.Fields.ImmediateDestinationName.new("RBC ROYAL Bank")
+        ...> {:ok, immediate_origin_name} = File.Header.Fields.ImmediateOriginName.new("BMO BANK")
         ...> {:ok, file_creation_date} = File.Header.Fields.FileCreationDate.new(~D[1999-12-31])
         ...> {:ok, file_header} = ExAch.File.Header.new(
         ...>   immediate_destination,
@@ -71,8 +71,8 @@ defmodule ExAch do
         ...> {:ok, batch} = ExAch.Batch.new(batch_header, entries)
         ...> # Create new ach file struct:
         ...> {:ok, ach} = ExAch.File.new(file_header, [batch])
-        ...> ExAch.File.to_iodata(ach)
-        ["101 171000505 1235005991231121611A094101IMM ROYAL BANK         BMO BANK                       ",
+        ...> ExAch.File.to_iodata(ach) |> Enum.map(&IO.iodata_to_binary/1)
+        ["101 171000505 1235005991231121611A094101RBC ROYAL Bank         BMO BANK               refcode ",
          "5220COMPANYNAME     DATA1               1112223334CCDDESC1     Jan 13000101   1123456780000001",
          "62212345678153342            00000010007777           RECEIVING COMPANY     A10000000000000001",
          "822000000100123456780000000000000000000010001112223334                         123456780000001",
