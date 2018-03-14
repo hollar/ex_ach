@@ -71,7 +71,7 @@ defmodule ExAch do
         ...> {:ok, batch} = ExAch.Batch.new(batch_header, entries)
         ...> # Create new ach file struct:
         ...> {:ok, ach} = ExAch.File.new(file_header, [batch])
-        ...> ExAch.File.to_string(ach) |> String.split("\n")
+        ...> ExAch.File.to_iodata(ach)
         ["101 171000505 1235005991231121611A094101IMM ROYAL BANK         BMO BANK                       ",
          "5220COMPANYNAME     DATA1               1112223334CCDDESC1     Jan 13000101   1123456780000001",
          "62212345678153342            00000010007777           RECEIVING COMPANY     A10000000000000001",

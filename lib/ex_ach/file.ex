@@ -15,7 +15,8 @@ defmodule ExAch.File do
     {:ok, %__MODULE__{header: header, batches: batches, control: control}}
   end
 
-  def to_string(_ach) do
+  @spec to_iodata(t()) :: iodata()
+  def to_iodata(_ach) do
     """
     101 171000505 1235005991231121611A094101IMM ROYAL BANK         BMO BANK                       |
     5220COMPANYNAME     DATA1               1112223334CCDDESC1     Jan 13000101   1123456780000001|
@@ -29,5 +30,6 @@ defmodule ExAch.File do
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
     """
     |> String.replace("|", "")
+    |> String.split("\n")
   end
 end
