@@ -83,7 +83,7 @@ defmodule ExAch.Batch.ControlTest do
       batch_header = %{batch_header | service_class_code: header_service_class_code}
 
       {:ok, batch_control} = Control.new(batch_header, [])
-      assert batch_control.service_class_code.content == 225
+      assert Field.value(batch_control.service_class_code) == 225
     end
 
     test "debit-only entries returns 200", %{batch_header: batch_header} do
@@ -92,29 +92,29 @@ defmodule ExAch.Batch.ControlTest do
       batch_header = %{batch_header | service_class_code: header_service_class_code}
 
       {:ok, batch_control} = Control.new(batch_header, [])
-      assert batch_control.service_class_code.content == 220
+      assert Field.value(batch_control.service_class_code) == 220
     end
   end
 
   describe "infering company_identification from the batch header" do
     test "company_identification is copied from header", %{batch_header: batch_header} do
       {:ok, batch_control} = Control.new(batch_header, [])
-      assert batch_control.company_identification.content == 1_112_223_334
+      assert Field.value(batch_control.company_identification) == 1_112_223_334
     end
   end
 
   describe "infering entry/addenda count" do
     test "a single entry returns 1", %{batch_header: batch_header, batch_entries: batch_entries} do
       {:ok, batch_control} = Control.new(batch_header, batch_entries)
-      assert %EntryAddendaCount{content: 1} = batch_control.entry_addenda_count
+      assert Field.value(batch_control.entry_addenda_count) == 1
+      assert Field.module(batch_control.entry_addenda_count) == EntryAddendaCount
     end
   end
 
   describe "adding entry hash" do
     test "adds an entry hash", %{batch_header: batch_header, batch_entries: batch_entries} do
       {:ok, batch_control} = Control.new(batch_header, batch_entries)
-
-      assert %EntryHash{} = batch_control.entry_hash
+      assert Field.module(batch_control.entry_hash) == EntryHash
     end
   end
 
