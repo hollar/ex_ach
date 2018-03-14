@@ -23,6 +23,10 @@ defmodule ExAch.Field do
         %__MODULE__{content: unquote(value)}
       end
 
+      def copy(field) do
+        {:ok, %__MODULE__{content: field.content}}
+      end
+
       defp validation_rules do
         Enum.map(unquote(validation), fn {key, rule} ->
           {field_name(__MODULE__), key, rule}

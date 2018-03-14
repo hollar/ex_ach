@@ -55,14 +55,17 @@ defmodule ExAch.Batch.Control do
     {:ok, entry_hash} = EntryHash.new(entries)
     {:ok, total_debit_entry_dollar_amount} = TotalDebitEntryDollarAmount.new(entries)
     {:ok, total_credit_entry_dollar_amount} = TotalCreditEntryDollarAmount.new(entries)
-    {:ok, service_class_code} = ServiceClassCode.new(batch_header.service_class_code)
+    {:ok, service_class_code} = ServiceClassCode.copy(batch_header.service_class_code)
 
     {:ok, originating_dfi_identification} =
-      OriginatingDfiIdentification.new(batch_header.originating_dfi_identification)
+      OriginatingDfiIdentification.copy(batch_header.originating_dfi_identification)
 
     {:ok, entry_addenda_count} = EntryAddendaCount.new(entries)
-    {:ok, company_identification} = CompanyIdentification.new(batch_header.company_identification)
-    {:ok, batch_number} = BatchNumber.new(batch_header.batch_number)
+
+    {:ok, company_identification} =
+      CompanyIdentification.copy(batch_header.company_identification)
+
+    {:ok, batch_number} = BatchNumber.copy(batch_header.batch_number)
 
     control = %__MODULE__{
       record_type_code: RecordTypeCode.new(),

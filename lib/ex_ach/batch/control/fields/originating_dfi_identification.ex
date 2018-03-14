@@ -5,8 +5,4 @@ defmodule ExAch.Batch.Control.Fields.OriginatingDfiIdentification do
   """
 
   use ExAch.Field
-  alias ExAch.Batch.Header.Fields.OriginatingDfiIdentification
-
-  @spec new(OriginatingDfiIdentification.t()) :: {:ok, t()}
-  def new(%OriginatingDfiIdentification{content: odfi}), do: {:ok, %__MODULE__{content: odfi}}
 end
