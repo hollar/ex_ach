@@ -6,7 +6,8 @@ defmodule ExAch.File.ControlTest do
   alias ExAch.File.Control
 
   alias ExAch.File.Control.Fields.{
-    RecordTypeCode
+    RecordTypeCode,
+    EntryHash
   }
 
   setup do
@@ -82,6 +83,13 @@ defmodule ExAch.File.ControlTest do
     test "a single entry returns 1", %{batches: batches} do
       {:ok, file_control} = ExAch.File.Control.new(batches)
       assert Field.value(file_control.entry_addenda_count) == 1
+    end
+  end
+
+  describe "adding entry hash" do
+    test "adds an entry hash", %{batches: batches} do
+      {:ok, file_control} = ExAch.File.Control.new(batches)
+      assert Field.module(file_control.entry_hash) == EntryHash
     end
   end
 end

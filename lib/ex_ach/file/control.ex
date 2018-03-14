@@ -9,18 +9,21 @@ defmodule ExAch.File.Control do
 
   alias ExAch.File.Control.Fields.{
     BatchCount,
-    RecordTypeCode,
-    EntryAddendaCount
+    EntryAddendaCount,
+    EntryHash,
+    RecordTypeCode
   }
 
   defstruct [
     :record_type_code,
     :batch_count,
-    :entry_addenda_count
+    :entry_addenda_count,
+    :entry_hash
   ]
 
   @type t :: %__MODULE__{
           batch_count: BatchCount.t(),
+          entry_hash: EntryHash.t(),
           record_type_code: RecordTypeCode.t()
         }
 
@@ -31,11 +34,13 @@ defmodule ExAch.File.Control do
   def new(batches) do
     {:ok, batch_count} = BatchCount.new(batches)
     {:ok, entry_addenda_count} = EntryAddendaCount.new(batches)
+    {:ok, entry_hash} = EntryHash.new(batches)
 
     control = %__MODULE__{
       record_type_code: RecordTypeCode.new(),
       batch_count: batch_count,
-      entry_addenda_count: entry_addenda_count
+      entry_addenda_count: entry_addenda_count,
+      entry_hash: entry_hash
     }
 
     {:ok, control}
