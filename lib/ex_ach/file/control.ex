@@ -6,6 +6,7 @@ defmodule ExAch.File.Control do
   """
 
   alias ExAch.Batch
+  alias ExAch.File.Header.Fields.BlockingFactor
 
   alias ExAch.File.Control.Fields.{
     BatchCount,
@@ -39,8 +40,8 @@ defmodule ExAch.File.Control do
   @doc """
   Create a batch control record
   """
-  @spec new(list(Batch.t())) :: {:ok, t()}
-  def new(batches) do
+  @spec new(list(Batch.t()), BlockingFactor.t()) :: {:ok, t()}
+  def new(batches, blocking_factor) do
     {:ok, batch_count} = BatchCount.new(batches)
     {:ok, entry_addenda_count} = EntryAddendaCount.new(batches)
     {:ok, entry_hash} = EntryHash.new(batches)
@@ -51,7 +52,7 @@ defmodule ExAch.File.Control do
     {:ok, total_credit_entry_dollar_amount_in_file} =
       TotalCreditEntryDollarAmountInFile.new(batches)
 
-    {:ok, block_count} = BlockCount.new(batches)
+    {:ok, block_count} = BlockCount.new(batches, blocking_factor)
 
     control = %__MODULE__{
       record_type_code: RecordTypeCode.new(),

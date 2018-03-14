@@ -4,6 +4,7 @@ defmodule ExAch.File.ControlTest do
   alias ExAch.{Batch, Field}
   alias ExAch.Batch.Entry
   alias ExAch.File.Control
+  alias ExAch.File.Header.Fields.BlockingFactor
 
   alias ExAch.File.Control.Fields.{
     BlockCount,
@@ -60,12 +61,17 @@ defmodule ExAch.File.ControlTest do
 
     {:ok, batch} = ExAch.Batch.new(batch_header, batch_entries)
 
-    [batches: [batch]]
+    blocking_factor = BlockingFactor.new()
+
+    [batches: [batch], blocking_factor: blocking_factor]
   end
 
   describe "creating a file control" do
-    test "file control created successfully", %{batches: batches} do
-      {:ok, file_control} = ExAch.File.Control.new(batches)
+    test "file control created successfully", %{
+      batches: batches,
+      blocking_factor: blocking_factor
+    } do
+      {:ok, file_control} = ExAch.File.Control.new(batches, blocking_factor)
 
       assert %Control{} = file_control
       assert Field.module(file_control.record_type_code) == RecordTypeCode
@@ -74,43 +80,46 @@ defmodule ExAch.File.ControlTest do
   end
 
   describe "infering batch count" do
-    test "a single entry returns 1", %{batches: batches} do
-      {:ok, file_control} = ExAch.File.Control.new(batches)
+    test "a single entry returns 1", %{batches: batches, blocking_factor: blocking_factor} do
+      {:ok, file_control} = ExAch.File.Control.new(batches, blocking_factor)
       assert Field.value(file_control.batch_count) == 1
     end
   end
 
   describe "infering entry/addenda count" do
-    test "a single entry returns 1", %{batches: batches} do
-      {:ok, file_control} = ExAch.File.Control.new(batches)
+    test "a single entry returns 1", %{batches: batches, blocking_factor: blocking_factor} do
+      {:ok, file_control} = ExAch.File.Control.new(batches, blocking_factor)
       assert Field.value(file_control.entry_addenda_count) == 1
     end
   end
 
   describe "adding entry hash" do
-    test "adds an entry hash", %{batches: batches} do
-      {:ok, file_control} = ExAch.File.Control.new(batches)
+    test "adds an entry hash", %{batches: batches, blocking_factor: blocking_factor} do
+      {:ok, file_control} = ExAch.File.Control.new(batches, blocking_factor)
       assert Field.module(file_control.entry_hash) == EntryHash
     end
   end
 
   describe "adding total debit entry dollar amount in file" do
-    test "adds the total debit", %{batches: batches} do
-      {:ok, file_control} = ExAch.File.Control.new(batches)
+    test "adds the total debit", %{batches: batches, blocking_factor: blocking_factor} do
+      {:ok, file_control} = ExAch.File.Control.new(batches, blocking_factor)
       assert Field.value(file_control.total_debit_entry_dollar_amount_in_file) == 1000
     end
   end
 
   describe "adding total credit entry dollar amount in file" do
-    test "adds the total credit", %{batches: batches} do
-      {:ok, file_control} = ExAch.File.Control.new(batches)
+    test "adds the total credit", %{batches: batches, blocking_factor: blocking_factor} do
+      {:ok, file_control} = ExAch.File.Control.new(batches, blocking_factor)
       assert Field.value(file_control.total_credit_entry_dollar_amount_in_file) == 0
     end
   end
 
   describe "adding block count" do
-    test "adds the number of blocks in the file", %{batches: batches} do
-      {:ok, file_control} = ExAch.File.Control.new(batches)
+    test "adds the number of blocks in the file", %{
+      batches: batches,
+      blocking_factor: blocking_factor
+    } do
+      {:ok, file_control} = ExAch.File.Control.new(batches, blocking_factor)
       assert Field.module(file_control.block_count) == BlockCount
       assert Field.value(file_control.block_count) == 1
     end
