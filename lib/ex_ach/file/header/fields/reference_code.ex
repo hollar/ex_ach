@@ -3,5 +3,5 @@ defmodule ExAch.File.Header.Fields.ReferenceCode do
   Optional field you may use to describe input file for internal accounting purposes.
   """
 
-  use ExAch.Field, validation: [type: :alpha_numeric, max_length: 8]
+  use ExAch.Field, validation: [type: :alphameric, max_length: 8]
 end

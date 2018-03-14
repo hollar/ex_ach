@@ -6,8 +6,8 @@ defmodule ExAch.FileTest do
   describe "creating an ach file" do
     test "creates file with header" do
       # File Header params
-      {:ok, immediate_destination} = File.Header.Fields.ImmediateDestination.new(171_000_505)
-      {:ok, immediate_origin} = File.Header.Fields.ImmediateOrigin.new(123_456_789)
+      {:ok, immediate_destination} = File.Header.Fields.ImmediateDestination.new("171000505")
+      {:ok, immediate_origin} = File.Header.Fields.ImmediateOrigin.new("123456789")
       {:ok, file_id_modifier} = File.Header.Fields.FileIdModifier.new("1")
 
       {:ok, file_header} =
@@ -27,7 +27,7 @@ defmodule ExAch.FileTest do
       {:ok, batch_number} = Batch.Header.Fields.BatchNumber.new(1_234_567)
 
       {:ok, originating_dfi_identification} =
-        Batch.Header.Fields.OriginatingDfiIdentification.new(7_100_050)
+        Batch.Header.Fields.OriginatingDfiIdentification.new("07100050")
 
       {:ok, batch_header} =
         ExAch.Batch.Header.new(
@@ -45,7 +45,7 @@ defmodule ExAch.FileTest do
       {:ok, transaction_code} = Batch.Entry.Fields.TransactionCode.new(22)
 
       {:ok, receiving_dfi_identification} =
-        Batch.Entry.Fields.ReceivingDfiIdentification.new("TTTTAAAA")
+        Batch.Entry.Fields.ReceivingDfiIdentification.new("12345678")
 
       {:ok, check_digit} = Batch.Entry.Fields.CheckDigit.new(1)
       {:ok, dfi_account_number} = Batch.Entry.Fields.DfiAccountNumber.new("a12333")
@@ -69,16 +69,18 @@ defmodule ExAch.FileTest do
           trace_number
         )
 
-      batch_entries = [batch_entry]
+      batch_entries = List.wrap(batch_entry)
       {:ok, batch} = ExAch.Batch.new(batch_header, batch_entries)
-      batches = [batch]
+      batches = List.wrap(batch)
 
       {:ok, ach} = ExAch.File.new(file_header, batches)
 
       assert ach.header == file_header
       assert ach.batches == batches
       first_batch = List.first(ach.batches)
+      assert first_batch.header == batch_header
       assert first_batch.entries == batch_entries
+      assert first_batch.control
     end
   end
 end

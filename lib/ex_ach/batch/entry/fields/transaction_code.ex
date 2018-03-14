@@ -1,23 +1,25 @@
 defmodule ExAch.Batch.Entry.Fields.TransactionCode do
   @moduledoc """
   Two digit code identifying the account type at the receiving financial institution:
-  22 - Deposit destined for a Checking Account
-  23 - Prenotification for a checking credit
-  24 - Zero dollar with remittance into a Checking Account
-  27 - Debit destined for a Checking Account
-  28 - Prenotification for a checking debit
-  29 - Zero dollar with remittance into a Checking Account
-  32 - Deposit destined for a Savings Account
-  33 - Pronotification for a savings credit
-  34 - Zero dollar with remittance into a Savings Account
-  37 - Debit designed for a Savings Account
-  38 - Prenotification for a Savings debit
-  39 - Zero dollar with remittance into a Savings Account
+  22 - Demand Account Automated Deposit (Credit)
+  23 - Demand Account Pre-notification of Demand Credit (zero-dollar)
+  27 - Demand Account Automated Payment (Debit)
+  28 - Demand Account Pre-notification of Demand Debit (zero-dollar)
+  32 - Savings Account Automated Deposit (Credit)
+  33 - Savings Account Pre-notification of Savings Credit (zerodollar)
+  37 - Savings Account Automated Payment (Debit)
+  38 - Savings Account Pre-notification of Savings Debit (zerodollar)
   """
 
   use ExAch.Field,
     validation: [
       type: :integer,
-      inclusion: [22, 23, 24, 27, 28, 29, 32, 33, 34, 37, 38, 39]
+      inclusion: [22, 23, 27, 28, 32, 33, 37, 38]
     ]
+
+  def debit?(%{content: code}) when code in [27, 28, 37, 38], do: true
+  def debit?(_field), do: false
+
+  def credit?(%{content: code}) when code in [22, 23, 32, 33], do: true
+  def credit?(_field), do: false
 end

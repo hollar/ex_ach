@@ -24,7 +24,8 @@ defmodule ExAch.Batch.Entry do
           receiving_dfi_identification: ReceivingDfiIdentification.t(),
           record_type_code: RecordTypeCode.t(),
           trace_number: TraceNumber.t(),
-          transaction_code: TransactionCode.t()
+          transaction_code: TransactionCode.t(),
+          addendas: list()
         }
 
   defstruct [
@@ -38,7 +39,8 @@ defmodule ExAch.Batch.Entry do
     :trace_number,
     :discretionary_data,
     :identification_number,
-    :record_type_code
+    :record_type_code,
+    :addendas
   ]
 
   @doc """
@@ -80,9 +82,18 @@ defmodule ExAch.Batch.Entry do
       trace_number: trace_number,
       discretionary_data: Keyword.get(opts, :discretionary_data),
       identification_number: Keyword.get(opts, :identification_number),
-      record_type_code: RecordTypeCode.new()
+      record_type_code: RecordTypeCode.new(),
+      addendas: []
     }
 
     {:ok, entry}
+  end
+
+  def debit?(entry) do
+    TransactionCode.debit?(entry.transaction_code)
+  end
+
+  def credit?(entry) do
+    TransactionCode.credit?(entry.transaction_code)
   end
 end

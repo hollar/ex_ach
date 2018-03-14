@@ -15,8 +15,8 @@ defmodule ExAch.File.HeaderTest do
 
   describe "creating file header" do
     test "file header created successfully" do
-      {:ok, immediate_destination} = ImmediateDestination.new(171_000_505)
-      {:ok, immediate_origin} = ImmediateOrigin.new(123_456_789)
+      {:ok, immediate_destination} = ImmediateDestination.new("171000505")
+      {:ok, immediate_origin} = ImmediateOrigin.new("123456789")
       {:ok, reference_code} = ReferenceCode.new("refcode")
       {:ok, file_id_modifier} = FileIdModifier.new("1")
       {:ok, immediate_destination_name} = ImmediateDestinationName.new("LaSalle Bank")
