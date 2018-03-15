@@ -3,5 +3,5 @@ defmodule ExAch.Batch.Control.Fields.RecordTypeCode do
   The code identifying the Batch Control record is 8.
   """
 
-  use ExAch.Field, value: 8, render: {:numeric, 1}
+  use ExAch.Field, value: "8", render: {:string, 1}
 end

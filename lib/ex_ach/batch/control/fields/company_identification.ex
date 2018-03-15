@@ -4,5 +4,5 @@ defmodule ExAch.Batch.Control.Fields.CompanyIdentification do
   unless multiple companies/divisions are provided in one transmission.
   """
 
-  use ExAch.Field
+  use ExAch.Field, render: {:string, 10}
 end

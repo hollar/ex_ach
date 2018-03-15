@@ -14,11 +14,10 @@ defmodule ExAch.Batch do
   end
 
   def to_iodata(batch) do
-    # [Batch.Header.to_io_data(batch.header), Enum.map(batch.entries, &Batch.Entry.to_iodata(&1))]
     [
       Batch.Header.to_iodata(batch.header),
       Enum.map(batch.entries, &Batch.Entry.to_iodata(&1)),
-      "822000000100123456780000000000000000000010001112223334                         123456780000001"
+      Batch.Control.to_iodata(batch.control)
     ]
   end
 end

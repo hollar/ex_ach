@@ -3,7 +3,7 @@ defmodule ExAch.Batch.Control.Fields.TotalCreditEntryDollarAmount do
   The Total Credit Entry Dollar Amount Field contains accumulated Entry Detail credit amounts
   within the batch.
   """
-  use ExAch.Field
+  use ExAch.Field, render: {:numeric, 12}
 
   alias ExAch.{Batch, Field}
   alias ExAch.Batch.Entry

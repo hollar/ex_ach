@@ -70,7 +70,7 @@ defmodule ExAch.Batch.ControlTest do
 
       assert %Control{} = batch_control
       assert Field.module(batch_control.record_type_code) == RecordTypeCode
-      assert Field.value(batch_control.record_type_code) == 8
+      assert Field.value(batch_control.record_type_code) == "8"
       assert Field.module(batch_control.message_authentication_code) == MessageAuthenticationCode
       assert Field.value(batch_control.message_authentication_code) == ""
     end

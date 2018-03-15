@@ -7,5 +7,5 @@ defmodule ExAch.Batch.Control.Fields.MessageAuthenticationCode do
   Standards Institute. The remaining eleven characters of this field are blank.
   """
 
-  use ExAch.Field, value: ""
+  use ExAch.Field, value: "", render: {:string, 19}
 end

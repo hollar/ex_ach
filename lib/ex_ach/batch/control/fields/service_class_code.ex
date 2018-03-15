@@ -6,5 +6,5 @@ defmodule ExAch.Batch.Control.Fields.ServiceClassCode do
   225 - ACH Debits Only
   """
 
-  use ExAch.Field
+  use ExAch.Field, render: {:numeric, 3}
 end

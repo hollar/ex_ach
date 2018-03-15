@@ -3,7 +3,7 @@ defmodule ExAch.Batch.Control.Fields.TotalDebitEntryDollarAmount do
   The Total Debit Entry Dollar Amount Field contains accumulated Entry Detail debit amounts
   within the batch.
   """
-  use ExAch.Field
+  use ExAch.Field, render: {:numeric, 12}
 
   alias ExAch.{Batch, Field}
   alias ExAch.Batch.Entry

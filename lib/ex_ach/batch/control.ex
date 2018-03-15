@@ -71,15 +71,33 @@ defmodule ExAch.Batch.Control do
       record_type_code: RecordTypeCode.new(),
       service_class_code: service_class_code,
       entry_addenda_count: entry_addenda_count,
-      company_identification: company_identification,
       entry_hash: entry_hash,
       total_debit_entry_dollar_amount: total_debit_entry_dollar_amount,
       total_credit_entry_dollar_amount: total_credit_entry_dollar_amount,
+      company_identification: company_identification,
       message_authentication_code: MessageAuthenticationCode.new(),
       originating_dfi_identification: originating_dfi_identification,
       batch_number: batch_number
     }
 
     {:ok, control}
+  end
+
+  def to_iodata(control) do
+    [
+      control.record_type_code,
+      control.service_class_code,
+      control.entry_addenda_count,
+      control.entry_hash,
+      control.total_debit_entry_dollar_amount,
+      control.total_credit_entry_dollar_amount,
+      control.company_identification,
+      control.message_authentication_code,
+      "      ",
+      control.originating_dfi_identification,
+      control.batch_number
+    ]
+    |> Enum.map(&to_string/1)
+    |> to_string()
   end
 end

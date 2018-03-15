@@ -4,5 +4,5 @@ defmodule ExAch.Batch.Control.Fields.OriginatingDfiIdentification do
   07200080.
   """
 
-  use ExAch.Field
+  use ExAch.Field, render: :ttttaaaa
 end
