@@ -28,7 +28,7 @@ defmodule ExAch.Batch.HeaderTest do
       {:ok, originating_dfi_identification} = OriginatingDfiIdentification.new("07200080")
 
       # #Optional
-      {:ok, company_descriptive_date} = CompanyDescriptiveDate.new(~D[2000-01-01])
+      {:ok, company_descriptive_date} = CompanyDescriptiveDate.new("Jan 13")
       {:ok, company_discretionary_data} = CompanyDiscretionaryData.new("Data1")
 
       {:ok, batch_header} =
