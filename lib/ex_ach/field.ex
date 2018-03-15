@@ -4,11 +4,11 @@ defmodule ExAch.Field do
   defmacro __using__(opts) do
     validation = Keyword.get(opts, :validation, [])
     value = Keyword.get(opts, :value)
-    rendering_options = Keyword.get(opts, :render)
+    rendering_options = Keyword.get(opts, :render, {:string, 0})
 
     quote do
       import ExAch.Field
-      defstruct [:content]
+      defstruct [:content, :render]
 
       @type t :: %__MODULE__{}
 
@@ -16,18 +16,18 @@ defmodule ExAch.Field do
         errors = ExAch.FieldValidator.validate(content, validation_rules())
 
         if Enum.empty?(errors) do
-          {:ok, %__MODULE__{content: content}}
+          {:ok, %__MODULE__{content: content, render: unquote(rendering_options)}}
         else
           {:error, errors}
         end
       end
 
       def new do
-        %__MODULE__{content: unquote(value)}
+        %__MODULE__{content: unquote(value), render: unquote(rendering_options)}
       end
 
       def copy(field) do
-        {:ok, %__MODULE__{content: field.content}}
+        {:ok, %__MODULE__{content: field.content, render: unquote(rendering_options)}}
       end
 
       defp validation_rules do
@@ -38,40 +38,18 @@ defmodule ExAch.Field do
 
       defoverridable new: 1, new: 0
 
+      def rendering_options do
+        unquote(rendering_options)
+      end
+
       defimpl String.Chars, for: __MODULE__ do
         def to_string(field) do
           format = unquote(rendering_options)
 
-          string =
+          _ =
             field
             |> ExAch.Field.value()
-
-          print(string, format)
-        end
-
-        def print(%Date{} = _date, _format) do
-          date = ~D[2018-03-12]
-          args = [rem(date.year, 100), date.month, date.day]
-          ExPrintf.sprintf("%02d%02d%02d", args)
-        end
-
-        def print(%Time{} = _time, _format), do: "1611"
-
-        def print(value, nil) do
-          "#{value}"
-        end
-
-        def print(value, format) when is_number(value) do
-          ExPrintf.sprintf(format, [value])
-        end
-
-        def print(value, format) when is_binary(value) do
-          list =
-            value
-            |> Kernel.to_string()
-            |> List.wrap()
-
-          ExPrintf.sprintf(format, list)
+            |> ExAch.Field.Renderer.render(format)
         end
       end
     end

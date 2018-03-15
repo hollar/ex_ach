@@ -6,5 +6,5 @@ defmodule ExAch.File.Header.Fields.FileIdModifier do
 
   use ExAch.Field,
     validation: [format: {~r/^[0-9A-Z]$/, "Must be a letter or digit"}],
-    render: "%1s"
+    render: {:string, 1}
 end

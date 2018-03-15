@@ -3,5 +3,5 @@ defmodule ExAch.File.Header.Fields.FormatCode do
   Currently there is only 1 code. Enter 1.
   """
 
-  use ExAch.Field, value: 1
+  use ExAch.Field, value: 1, render: {:string, 1}
 end
