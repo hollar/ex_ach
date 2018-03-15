@@ -1,4 +1,6 @@
 defmodule ExAch.File.Header do
+  use ExAch.Record
+
   alias ExAch.File.Header.Fields.{
     BlockingFactor,
     FileCreationDate,
@@ -14,6 +16,8 @@ defmodule ExAch.File.Header do
     RecordTypeCode,
     ReferenceCode
   }
+
+  alias ExAch.Field
 
   defstruct [
     :immediate_destination,
@@ -38,13 +42,13 @@ defmodule ExAch.File.Header do
           file_id_modifier: FileIdModifier.t(),
           format_code: FormatCode.t(),
           immediate_destination: ImmediateDestination.t(),
-          immediate_destination_name: ImmediateDestinationName.t() | nil,
+          immediate_destination_name: ImmediateDestinationName.t() | Field.Optional.t(),
           immediate_origin: ImmediateOrigin.t(),
-          immediate_origin_name: ImmediateOriginName.t() | nil,
+          immediate_origin_name: ImmediateOriginName.t() | Field.Optional.t(),
           priority_code: PriorityCode.t(),
           record_size: RecordSize.t(),
           record_type_code: RecordTypeCode.t(),
-          reference_code: ReferenceCode.t() | nil
+          reference_code: ReferenceCode.t() | Field.Optional.t()
         }
 
   @doc """
@@ -74,9 +78,9 @@ defmodule ExAch.File.Header do
       record_size: RecordSize.new(),
       blocking_factor: BlockingFactor.new(),
       format_code: FormatCode.new(),
-      immediate_destination_name: Keyword.get(opts, :immediate_destination_name),
-      reference_code: Keyword.get(opts, :reference_code),
-      immediate_origin_name: Keyword.get(opts, :immediate_origin_name)
+      immediate_destination_name: assign_optional(opts, ImmediateDestinationName),
+      reference_code: assign_optional(opts, ReferenceCode),
+      immediate_origin_name: assign_optional(opts, ImmediateOriginName)
     }
 
     {:ok, header}

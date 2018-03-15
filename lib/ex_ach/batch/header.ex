@@ -1,4 +1,6 @@
 defmodule ExAch.Batch.Header do
+  use ExAch.Record
+
   alias ExAch.Batch.Header.Fields.{
     ServiceClassCode,
     CompanyDescriptiveDate,
@@ -17,8 +19,8 @@ defmodule ExAch.Batch.Header do
 
   @type t :: %__MODULE__{
           batch_number: BatchNumber.t(),
-          company_descriptive_date: CompanyDescriptiveDate.t() | nil,
-          company_discretionary_data: CompanyDiscretionaryData.t() | nil,
+          company_descriptive_date: CompanyDescriptiveDate.t() | Field.Optional.t(),
+          company_discretionary_data: CompanyDiscretionaryData.t() | Field.Optional.t(),
           company_entry_description: CompanyEntryDescription.t(),
           company_identification: CompanyIdentification.t(),
           company_name: CompanyName.t(),
@@ -85,8 +87,8 @@ defmodule ExAch.Batch.Header do
       effective_entry_date: effective_entry_date,
       batch_number: batch_number,
       originating_dfi_identification: originating_dfi_identification,
-      company_descriptive_date: Keyword.get(opts, :company_descriptive_date),
-      company_discretionary_data: Keyword.get(opts, :company_discretionary_data),
+      company_descriptive_date: assign_optional(opts, CompanyDescriptiveDate),
+      company_discretionary_data: assign_optional(opts, CompanyDiscretionaryData),
       record_type_code: RecordTypeCode.new(),
       settlement_date: SettlementDate.new(),
       originator_status_code: OriginatorStatusCode.new()

@@ -1,4 +1,6 @@
 defmodule ExAch.Batch.Entry do
+  use ExAch.Record
+
   alias ExAch.Batch.Entry.Fields.{
     AddendaRecordIndicator,
     Amount,
@@ -18,8 +20,8 @@ defmodule ExAch.Batch.Entry do
           amount: Amount.t(),
           check_digit: CheckDigit.t(),
           dfi_account_number: DfiAccountNumber.t(),
-          discretionary_data: DiscretionaryData.t() | nil,
-          identification_number: IdentificationNumber.t() | nil,
+          discretionary_data: DiscretionaryData.t() | Field.Optional.t(),
+          identification_number: IdentificationNumber.t() | Field.Optional.t(),
           receiving_company_name: ReceivingCompanyName.t(),
           receiving_dfi_identification: ReceivingDfiIdentification.t(),
           record_type_code: RecordTypeCode.t(),
@@ -80,8 +82,8 @@ defmodule ExAch.Batch.Entry do
       receiving_company_name: receiving_company_name,
       addenda_record_indicator: addenda_record_indicator,
       trace_number: trace_number,
-      discretionary_data: Keyword.get(opts, :discretionary_data),
-      identification_number: Keyword.get(opts, :identification_number),
+      discretionary_data: assign_optional(opts, DiscretionaryData),
+      identification_number: assign_optional(opts, IdentificationNumber),
       record_type_code: RecordTypeCode.new(),
       addendas: []
     }
