@@ -3,5 +3,5 @@ defmodule ExAch.Batch.Entry.Fields.DfiAccountNumber do
   Receiver's account number at their financial institution. Left justify
   """
 
-  use ExAch.Field, validation: [type: :alphameric, max_length: 17]
+  use ExAch.Field, validation: [type: :alphameric, max_length: 17], render: {:string, 17}
 end

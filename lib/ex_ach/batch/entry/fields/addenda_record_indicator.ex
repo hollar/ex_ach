@@ -4,5 +4,5 @@ defmodule ExAch.Batch.Entry.Fields.AddendaRecordIndicator do
   transaction enter 1.
   """
 
-  use ExAch.Field, validation: [type: :integer, inclusion: [0, 1]]
+  use ExAch.Field, validation: [type: :integer, inclusion: [0, 1]], render: {:numeric, 1}
 end

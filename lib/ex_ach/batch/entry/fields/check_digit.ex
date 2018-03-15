@@ -3,5 +3,5 @@ defmodule ExAch.Batch.Entry.Fields.CheckDigit do
   The ninth digit of the receiving financial institution's transit routing number.
   """
 
-  use ExAch.Field, validation: [type: :integer, length: 1]
+  use ExAch.Field, validation: [type: :integer, length: 1], render: {:numeric, 1}
 end

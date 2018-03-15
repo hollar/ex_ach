@@ -4,5 +4,5 @@ defmodule ExAch.Batch.Entry.Fields.Amount do
   for prenotes.
   """
 
-  use ExAch.Field, validation: [type: :integer, max_length: 10]
+  use ExAch.Field, validation: [type: :integer, max_length: 10], render: {:numeric, 10}
 end

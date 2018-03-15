@@ -3,5 +3,5 @@ defmodule ExAch.Batch.Entry.Fields.ReceivingCompanyName do
   Name of receiver
   """
 
-  use ExAch.Field, validation: [type: :alphameric, max_length: 22]
+  use ExAch.Field, validation: [type: :alphameric, max_length: 22], render: {:string, 22}
 end

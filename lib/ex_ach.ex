@@ -50,7 +50,7 @@ defmodule ExAch do
         ...> {:ok, check_digit} = Batch.Entry.Fields.CheckDigit.new(1)
         ...> {:ok, dfi_account_number} = Batch.Entry.Fields.DfiAccountNumber.new("53342")
         ...> {:ok, amount} = Batch.Entry.Fields.Amount.new(1000)
-        ...> {:ok, receiving_company_name} = Batch.Entry.Fields.ReceivingCompanyName.new("receiving company")
+        ...> {:ok, receiving_company_name} = Batch.Entry.Fields.ReceivingCompanyName.new("RECEIVING COMPANY")
         ...> {:ok, addenda_record_indicator} = Batch.Entry.Fields.AddendaRecordIndicator.new(0)
         ...> {:ok, trace_number} = Batch.Entry.Fields.TraceNumber.new(1)
         ...> {:ok, discretionary_data} = Batch.Entry.Fields.DiscretionaryData.new("A1")

@@ -4,5 +4,5 @@ defmodule ExAch.Batch.Entry.Fields.TraceNumber do
   identify the transaction in case of an inquiry.
   """
 
-  use ExAch.Field, validation: [type: :integer, max_length: 15]
+  use ExAch.Field, validation: [type: :integer, max_length: 15], render: {:numeric, 15}
 end
