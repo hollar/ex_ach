@@ -75,7 +75,7 @@ defmodule ExAch.File.ControlTest do
 
       assert %Control{} = file_control
       assert Field.module(file_control.record_type_code) == RecordTypeCode
-      assert Field.value(file_control.record_type_code) == 8
+      assert Field.value(file_control.record_type_code) == "9"
     end
   end
 

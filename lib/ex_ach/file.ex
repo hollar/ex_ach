@@ -19,7 +19,6 @@ defmodule ExAch.File do
   def to_iodata(ach) do
     foo =
       """
-      9000001000001000000010012345678000000000000000000001000                                       |
       9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999|
       9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999|
       9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999|
@@ -29,7 +28,11 @@ defmodule ExAch.File do
       |> String.replace("|", "")
       |> String.split("\n")
 
-    ([File.Header.to_iodata(ach.header), Enum.map(ach.batches, &Batch.to_iodata(&1))] ++ foo)
+    ([
+       File.Header.to_iodata(ach.header),
+       Enum.map(ach.batches, &Batch.to_iodata(&1)),
+       File.Control.to_iodata(ach.control)
+     ] ++ foo)
     |> List.flatten()
   end
 end

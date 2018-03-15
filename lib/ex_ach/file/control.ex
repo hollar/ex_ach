@@ -4,6 +4,7 @@ defmodule ExAch.File.Control do
   Batch Control Records in the File. This Record also contains counts of the number of blocks and
   the number of batches within the File (or batched data Transmitted to a single destination).
   """
+  use ExAch.Record
 
   alias ExAch.Batch
   alias ExAch.File.Header.Fields.BlockingFactor
@@ -65,5 +66,20 @@ defmodule ExAch.File.Control do
     }
 
     {:ok, control}
+  end
+
+  def to_iodata(control) do
+    [
+      control.record_type_code,
+      control.batch_count,
+      control.block_count,
+      control.entry_addenda_count,
+      control.entry_hash,
+      control.total_debit_entry_dollar_amount_in_file,
+      control.total_credit_entry_dollar_amount_in_file,
+      reserved_field(39)
+    ]
+    |> Enum.map(&to_string/1)
+    |> to_string()
   end
 end

@@ -2,7 +2,7 @@ defmodule ExAch.File.Control.Fields.TotalCreditEntryDollarAmountInFile do
   @moduledoc """
   Accumulated Batch Control Record credit totals within a specific File.
   """
-  use ExAch.Field
+  use ExAch.Field, render: {:numeric, 12}
 
   alias ExAch.{Batch, Field}
 

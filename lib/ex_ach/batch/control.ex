@@ -5,6 +5,7 @@ defmodule ExAch.Batch.Control do
   All Entry Detail Records are hashed. Both Entry Detail Record and Addenda Record are included
   in the Entry/addenda counts.Batch Header and Batch Control are not included.
   """
+  use ExAch.Record
 
   alias ExAch.Batch
 
@@ -93,7 +94,7 @@ defmodule ExAch.Batch.Control do
       control.total_credit_entry_dollar_amount,
       control.company_identification,
       control.message_authentication_code,
-      "      ",
+      reserved_field(6),
       control.originating_dfi_identification,
       control.batch_number
     ]

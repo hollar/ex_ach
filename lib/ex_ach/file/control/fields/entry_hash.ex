@@ -9,7 +9,7 @@ defmodule ExAch.File.Control.Fields.EntryHash do
   rightmost 10 characters.
   """
 
-  use ExAch.Field
+  use ExAch.Field, render: {:numeric, 10}
 
   alias ExAch.{Batch, Field}
 

@@ -4,11 +4,9 @@ defmodule ExAch.File.Control.Fields.EntryAddendaCount do
   height positions; right justify and use leading zeros
   """
 
-  defstruct [:content]
+  use ExAch.Field, render: {:numeric, 8}
 
   alias ExAch.{Batch, Field}
-
-  @type t :: %__MODULE__{}
 
   @spec new(list(Batch.t())) :: {:ok, t()}
   def new(batches) do

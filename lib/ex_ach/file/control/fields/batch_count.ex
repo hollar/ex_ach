@@ -2,7 +2,7 @@ defmodule ExAch.File.Control.Fields.BatchCount do
   @moduledoc """
   The value of this ﬁeld must be equal to the number of Company/Batch Header Records in the File.
   """
-  use ExAch.Field
+  use ExAch.Field, render: {:numeric, 6}
 
   alias ExAch.Batch
 
