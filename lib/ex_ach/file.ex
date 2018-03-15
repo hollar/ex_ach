@@ -1,7 +1,7 @@
 defmodule ExAch.File do
   defstruct [:header, :batches, :control]
 
-  alias ExAch.{File, Batch}
+  alias ExAch.{File, Batch, Field}
 
   @type t :: %__MODULE__{}
 
@@ -17,22 +17,28 @@ defmodule ExAch.File do
 
   @spec to_iodata(t()) :: iodata()
   def to_iodata(ach) do
-    foo =
-      """
-      9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999|
-      9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999|
-      9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999|
-      9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999|
-      9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
-      """
-      |> String.replace("|", "")
-      |> String.split("\n")
-
-    ([
-       File.Header.to_iodata(ach.header),
-       Enum.map(ach.batches, &Batch.to_iodata(&1)),
-       File.Control.to_iodata(ach.control)
-     ] ++ foo)
+    [
+      File.Header.to_iodata(ach.header),
+      Enum.map(ach.batches, &Batch.to_iodata(&1)),
+      File.Control.to_iodata(ach.control)
+    ]
     |> List.flatten()
+    |> fill_last_block(ach)
+  end
+
+  defp fill_last_block(iodata, ach) do
+    blocking_factor = Field.value(ach.header.blocking_factor)
+    line_count = line_count(ach)
+    record_size = Field.value(ach.header.record_size)
+
+    ExAch.Block.fill(iodata, line_count, blocking_factor, record_size)
+  end
+
+  @spec line_count(t()) :: integer
+  def line_count(ach) do
+    batch_count = Field.value(ach.control.batch_count)
+    entry_addenda_count = Field.value(ach.control.entry_addenda_count)
+
+    Enum.sum([batch_count * 2, entry_addenda_count, 2])
   end
 end

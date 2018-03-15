@@ -10,10 +10,9 @@ defmodule ExAch.File.Control.Fields.BlockCount do
   @spec new(list(Batch.t()), BlockingFactor.t()) :: {:ok, t()}
   def new(batches, blocking_factor) do
     blocking_factor = Field.value(blocking_factor)
-    minimum_file_block_count = 2
+    minimum_count = 2
 
-    count =
-      round((minimum_file_block_count + total_entry_addenda_count(batches)) / blocking_factor)
+    count = round((minimum_count + total_entry_addenda_count(batches)) / blocking_factor)
 
     {:ok, %__MODULE__{content: count}}
   end
