@@ -106,5 +106,6 @@ defmodule ExAch.File.Header do
       header.reference_code
     ]
     |> Enum.map(&to_string/1)
+    |> to_string()
   end
 end

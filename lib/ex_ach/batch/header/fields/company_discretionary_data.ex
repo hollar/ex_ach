@@ -4,5 +4,5 @@ defmodule ExAch.Batch.Header.Fields.CompanyDiscretionaryData do
   No specific format is required. It's an optional field
   """
 
-  use ExAch.Field, validation: [type: :alphameric, max_length: 20]
+  use ExAch.Field, validation: [type: :alphameric, max_length: 20], render: {:string, 20}
 end

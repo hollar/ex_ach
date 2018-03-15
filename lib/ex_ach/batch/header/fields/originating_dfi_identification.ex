@@ -4,5 +4,5 @@ defmodule ExAch.Batch.Header.Fields.OriginatingDfiIdentification do
   07200080.
   """
 
-  use ExAch.Field, validation: [format: {~r/^\d{8}$/, "Must be 8 digits"}]
+  use ExAch.Field, validation: [format: {~r/^\d{8}$/, "Must be 8 digits"}], render: :ttttaaaa
 end

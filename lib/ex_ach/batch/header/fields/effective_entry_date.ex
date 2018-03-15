@@ -3,5 +3,5 @@ defmodule ExAch.Batch.Header.Fields.EffectiveEntryDate do
   Date transactions are to be posted to the participants’ account
   """
 
-  use ExAch.Field, validation: [type: :date]
+  use ExAch.Field, validation: [type: :date], render: :yymmdd
 end

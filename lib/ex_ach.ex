@@ -22,7 +22,7 @@ defmodule ExAch do
         ...> )
         ...> # Creating a batch header
         ...> {:ok, service_class_code} = Batch.Header.Fields.ServiceClassCode.new(220)
-        ...> {:ok, company_name} = Batch.Header.Fields.CompanyName.new("CompanyName")
+        ...> {:ok, company_name} = Batch.Header.Fields.CompanyName.new("COMPANYNAME")
         ...> {:ok, company_identification} = Batch.Header.Fields.CompanyIdentification.new(1112223334)
         ...> {:ok, standard_entry_class_code} = Batch.Header.Fields.StandardEntryClassCode.new(:ccd)
         ...> {:ok, company_entry_description} = Batch.Header.Fields.CompanyEntryDescription.new("DESC1")
@@ -30,7 +30,7 @@ defmodule ExAch do
         ...> {:ok, batch_number} = Batch.Header.Fields.BatchNumber.new(1)
         ...> {:ok, originating_dfi_identification} = Batch.Header.Fields.OriginatingDfiIdentification.new("12345678")
         ...> {:ok, company_descriptive_date} = Batch.Header.Fields.CompanyDescriptiveDate.new("Jan 13")
-        ...> {:ok, company_discretionary_data} = Batch.Header.Fields.CompanyDiscretionaryData.new("Data1")
+        ...> {:ok, company_discretionary_data} = Batch.Header.Fields.CompanyDiscretionaryData.new("DATA1")
         ...> {:ok, batch_header} =
         ...> ExAch.Batch.Header.new(
         ...>   service_class_code,
@@ -73,7 +73,7 @@ defmodule ExAch do
         ...> {:ok, batch} = ExAch.Batch.new(batch_header, entries)
         ...> # Create new ach file struct:
         ...> {:ok, ach} = ExAch.File.new(file_header, [batch])
-        ...> ExAch.File.to_iodata(ach) |> Enum.map(&IO.iodata_to_binary/1)
+        ...> ExAch.File.to_iodata(ach)
         ["101 171000505 1235005129912311314A094101RBC ROYAL Bank         BMO BANK               refcode ",
          "5220COMPANYNAME     DATA1               1112223334CCDDESC1     Jan 13000101   1123456780000001",
          "62212345678153342            00000010007777           RECEIVING COMPANY     A10000000000000001",

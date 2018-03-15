@@ -79,21 +79,42 @@ defmodule ExAch.Batch.Header do
         opts \\ []
       ) do
     header = %__MODULE__{
+      record_type_code: RecordTypeCode.new(),
       service_class_code: service_class_code,
       company_name: company_name,
+      company_discretionary_data: assign_optional(opts, CompanyDiscretionaryData),
       company_identification: company_identification,
       standard_entry_class_code: standard_entry_class_code,
       company_entry_description: company_entry_description,
-      effective_entry_date: effective_entry_date,
-      batch_number: batch_number,
-      originating_dfi_identification: originating_dfi_identification,
       company_descriptive_date: assign_optional(opts, CompanyDescriptiveDate),
-      company_discretionary_data: assign_optional(opts, CompanyDiscretionaryData),
-      record_type_code: RecordTypeCode.new(),
+      effective_entry_date: effective_entry_date,
+      # TODO: convert to optional the settlement date
       settlement_date: SettlementDate.new(),
-      originator_status_code: OriginatorStatusCode.new()
+      originator_status_code: OriginatorStatusCode.new(),
+      originating_dfi_identification: originating_dfi_identification,
+      batch_number: batch_number
     }
 
     {:ok, header}
+  end
+
+  def to_iodata(header) do
+    [
+      header.record_type_code,
+      header.service_class_code,
+      header.company_name,
+      header.company_discretionary_data,
+      header.company_identification,
+      header.standard_entry_class_code,
+      header.company_entry_description,
+      header.company_descriptive_date,
+      header.effective_entry_date,
+      header.settlement_date,
+      header.originator_status_code,
+      header.originating_dfi_identification,
+      header.batch_number
+    ]
+    |> Enum.map(&to_string/1)
+    |> to_string()
   end
 end

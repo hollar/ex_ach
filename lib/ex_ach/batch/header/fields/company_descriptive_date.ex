@@ -7,5 +7,5 @@ defmodule ExAch.Batch.Header.Fields.CompanyDescriptiveDate do
   "Jan 13," "JAN 11," etc.
   """
 
-  use ExAch.Field, validation: [type: :alphameric]
+  use ExAch.Field, validation: [type: :alphameric], render: {:string, 6}
 end

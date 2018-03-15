@@ -3,5 +3,5 @@ defmodule ExAch.Batch.Header.Fields.RecordTypeCode do
   The code identifying the Batch Header record is 5.
   """
 
-  use ExAch.Field, value: 5
+  use ExAch.Field, value: "5", render: {:string, 1}
 end

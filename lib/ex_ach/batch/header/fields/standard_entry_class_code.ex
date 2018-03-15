@@ -10,5 +10,5 @@ defmodule ExAch.Batch.Header.Fields.StandardEntryClassCode do
   - WEB (Authorization received via the Internet).
   """
 
-  use ExAch.Field, validation: [type: :atom, inclusion: [:ccd]]
+  use ExAch.Field, validation: [type: :atom, inclusion: [:ccd]], render: {:string, 3}
 end

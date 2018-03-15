@@ -4,5 +4,5 @@ defmodule ExAch.Batch.Header.Fields.OriginatorStatusCode do
   which is bound by the rules of the ACH.
   """
 
-  use ExAch.Field, value: 1
+  use ExAch.Field, value: "1", render: {:string, 1}
 end

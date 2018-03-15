@@ -3,5 +3,5 @@ defmodule ExAch.Batch.Header.Fields.SettlementDate do
   Leave this field blank
   """
 
-  use ExAch.Field, value: ""
+  use ExAch.Field, value: "", render: {:string, 3}
 end

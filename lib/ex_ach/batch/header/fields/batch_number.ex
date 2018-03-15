@@ -3,5 +3,5 @@ defmodule ExAch.Batch.Header.Fields.BatchNumber do
   Number batches sequentially.
   """
 
-  use ExAch.Field, validation: [type: :integer, max_length: 7]
+  use ExAch.Field, validation: [type: :integer, max_length: 7], render: {:numeric, 7}
 end
