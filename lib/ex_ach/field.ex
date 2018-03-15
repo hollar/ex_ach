@@ -1,4 +1,6 @@
 defmodule ExAch.Field do
+  alias ExAch.Field
+
   defmacro __using__(opts) do
     validation = Keyword.get(opts, :validation, [])
     value = Keyword.get(opts, :value)
@@ -45,6 +47,8 @@ defmodule ExAch.Field do
     |> Macro.underscore()
     |> String.to_existing_atom()
   end
+
+  def value(%Field.Optional{}), do: nil
 
   def value(field) do
     field.content
