@@ -8,6 +8,7 @@ defmodule ExAch.File.HeaderTest do
     ImmediateOrigin,
     ReferenceCode,
     FileIdModifier,
+    FileCreationDate,
     FileCreationTime,
     ImmediateDestinationName,
     ImmediateOriginName
@@ -23,6 +24,8 @@ defmodule ExAch.File.HeaderTest do
       {:ok, file_id_modifier} = FileIdModifier.new("1")
       {:ok, immediate_destination_name} = ImmediateDestinationName.new("LaSalle Bank")
       {:ok, immediate_origin_name} = ImmediateOriginName.new("Hollar Inc")
+      {:ok, file_creation_date} = FileCreationDate.new(~D[2001-01-01])
+      {:ok, file_creation_time} = FileCreationTime.new(~T[23:24:00])
 
       {:ok, file_header} =
         Header.new(
@@ -31,7 +34,9 @@ defmodule ExAch.File.HeaderTest do
           file_id_modifier,
           immediate_destination_name: immediate_destination_name,
           immediate_origin_name: immediate_origin_name,
-          reference_code: reference_code
+          reference_code: reference_code,
+          file_creation_date: file_creation_date,
+          file_creation_time: file_creation_time
         )
 
       # Mandatory fields required to be passed by user
@@ -46,7 +51,8 @@ defmodule ExAch.File.HeaderTest do
       assert Field.value(file_header.record_size) == "094"
       assert Field.value(file_header.blocking_factor) == 10
       assert Field.value(file_header.format_code) == 1
-      assert %FileCreationTime{} = file_header.file_creation_time
+      assert Field.value(file_header.file_creation_date) == ~D[2001-01-01]
+      assert Field.value(file_header.file_creation_time) == ~T[23:24:00]
 
       # Optional fields passed by user
       assert Field.value(file_header.immediate_destination_name) == "LaSalle Bank"
@@ -69,6 +75,7 @@ defmodule ExAch.File.HeaderTest do
       assert Field.module(file_header.immediate_destination_name) == Field.Optional
       assert Field.module(file_header.immediate_origin_name) == Field.Optional
       assert Field.module(file_header.reference_code) == Field.Optional
+      assert Field.module(file_header.file_creation_time) == Field.Optional
     end
   end
 end

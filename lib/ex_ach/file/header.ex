@@ -38,7 +38,7 @@ defmodule ExAch.File.Header do
   @type t :: %__MODULE__{
           blocking_factor: BlockingFactor.t(),
           file_creation_date: FileCreationDate.t(),
-          file_creation_time: FileCreationTime.t(),
+          file_creation_time: FileCreationTime.t() | Field.Optional.t(),
           file_id_modifier: FileIdModifier.t(),
           format_code: FormatCode.t(),
           immediate_destination: ImmediateDestination.t(),
@@ -67,20 +67,22 @@ defmodule ExAch.File.Header do
         %FileIdModifier{} = file_id_modifier,
         opts \\ []
       ) do
+    file_creation_date = Keyword.get(opts, :file_creation_date, FileCreationDate.new())
+
     header = %__MODULE__{
-      immediate_destination: immediate_destination,
-      immediate_origin: immediate_origin,
-      file_creation_date: FileCreationDate.new(),
-      file_id_modifier: file_id_modifier,
       record_type_code: RecordTypeCode.new(),
       priority_code: PriorityCode.new(),
-      file_creation_time: FileCreationTime.new(),
+      immediate_destination: immediate_destination,
+      immediate_origin: immediate_origin,
+      file_creation_date: file_creation_date,
+      file_creation_time: assign_optional(opts, FileCreationTime),
+      file_id_modifier: file_id_modifier,
       record_size: RecordSize.new(),
       blocking_factor: BlockingFactor.new(),
       format_code: FormatCode.new(),
       immediate_destination_name: assign_optional(opts, ImmediateDestinationName),
-      reference_code: assign_optional(opts, ReferenceCode),
-      immediate_origin_name: assign_optional(opts, ImmediateOriginName)
+      immediate_origin_name: assign_optional(opts, ImmediateOriginName),
+      reference_code: assign_optional(opts, ReferenceCode)
     }
 
     {:ok, header}
