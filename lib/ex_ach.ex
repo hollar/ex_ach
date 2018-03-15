@@ -25,7 +25,7 @@ defmodule ExAch do
         ...> {:ok, effective_entry_date} =  Batch.Header.Fields.EffectiveEntryDate.new(~D[2000-01-01])
         ...> {:ok, batch_number} = Batch.Header.Fields.BatchNumber.new(1)
         ...> {:ok, originating_dfi_identification} = Batch.Header.Fields.OriginatingDfiIdentification.new("12345678")
-        ...> {:ok, company_descriptive_date} = Batch.Header.Fields.CompanyDescriptiveDate.new(~D[2000-01-01])
+        ...> {:ok, company_descriptive_date} = Batch.Header.Fields.CompanyDescriptiveDate.new("Jan 13")
         ...> {:ok, company_discretionary_data} = Batch.Header.Fields.CompanyDiscretionaryData.new("Data1")
         ...> {:ok, batch_header} =
         ...> ExAch.Batch.Header.new(
@@ -71,7 +71,7 @@ defmodule ExAch do
         ...> {:ok, ach} = ExAch.File.new(file_header, [batch])
         ...> ExAch.File.to_string(ach) |> String.split("\n")
         ["101 171000505 1235005121803121611A094101IMM ROYAL BANK         BMO BANK                       ",
-         "5220COMPANYNAME     DATA1               1112223334CCDDESC1     000101000101   1123456780000001",
+         "5220COMPANYNAME     DATA1               1112223334CCDDESC1     Jan 13000101   1123456780000001",
          "62212345678153342            00000010007777           RECEIVING COMPANY     A10000000000000001",
          "822000000100123456780000000000000000000010001112223334                         123456780000001",
          "9000001000001000000010012345678000000000000000000001000                                       ",
